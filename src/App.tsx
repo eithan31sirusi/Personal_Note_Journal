@@ -1,13 +1,16 @@
 import React from "react";
 
+import { MainContainer } from "./components/layout/MainContainer";
+
 import FlipBook from "./components/common/flip-book/FlipBook";
+import CustomTextArea from "./components/common/custom-textArea/CustomTextArea";
 
 function App() {
   return (
-    <div className="App">
+    <MainContainer appDirection={true}>
       <h1>Jurnal</h1>
-      <FlipBook/>
-    </div>
+      <CustomTextArea maxLength={1599}/>
+    </MainContainer>
   );
 }
 

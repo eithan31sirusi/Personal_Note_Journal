@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
+import {
+  FlipBookContainer,
+  PageContainer,
+  PageTextContainer,
+} from "./FlipBook.styled";
+
 import DragonA from "../../../assets/svg/page-decrations/text-decration/DragonB";
 
-import "./FlipBook.styled.css";
+import "./FlipBook.styled.ts";
 
 interface FlipBookProps {
   title?: string;
@@ -60,14 +66,14 @@ const FlipBook: React.FC<FlipBookProps> = ({
   const flipPrevPage = () => {};
 
   return (
-    <div className="flip-book_container">
+    <FlipBookContainer>
       <button onClick={flipPrevPage} className="prev-btn">
         אחורה
       </button>
 
       <div id="book" className="book">
         <div id="p1">
-          <div className="page">
+          <PageContainer>
             <div className="page-header">
               <p className="page-date">{text.length}</p>
             </div>
@@ -75,20 +81,20 @@ const FlipBook: React.FC<FlipBookProps> = ({
             <div id="f1" className="page-content">
               <h1 className="page-title">{title}</h1>
               <div>
-                <div style={{ width:"150px",float:"right", margin:"0 0 5px 5px"}}>
-                <DragonA />
-                </div>
+                <PageTextContainer imgFloatDirection={true}>
+                  <DragonA />
+                </PageTextContainer>
                 <p className="page-text">{text}</p>
               </div>
             </div>
             <p className="current-page">{currentPage}</p>
-          </div>
+          </PageContainer>
         </div>
       </div>
       <button className="next-btn" onClick={flipNextPage}>
         קדימה
       </button>
-    </div>
+    </FlipBookContainer>
   );
 };
 
