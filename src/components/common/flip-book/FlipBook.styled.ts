@@ -47,7 +47,9 @@ export const FlipBookContainer = styled.div`
 
   .page-date {
     font-size: 1rem;
-    font-family: "Courier New", Courier, monospace;
+    font-weight: 600;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   }
 
   .page-text-align,
@@ -81,7 +83,7 @@ export const FlipBookContainer = styled.div`
 
   .page-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     margin: 0 1rem;
   }

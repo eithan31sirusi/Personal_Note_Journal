@@ -8,6 +8,8 @@ import {
 // modal context
 import { ModalContext } from "../../../setup/context/modalContext";
 
+import { getCurrentDate } from "../../../helpers/getCurrentDate";
+
 import DragonA from "../../../assets/svg/page-decrations/text-decration/DragonB";
 
 import "./FlipBook.styled.ts";
@@ -41,36 +43,7 @@ const FlipBook: React.FC<FlipBookProps> = ({
   // state for getting the date of the page
   const [pageDate, setPageDate] = useState<any>(false);
 
-  const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
-
-  const text = `               לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס
-מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף גולר מונפרר סוברט
-לורם שבצק יהול, לכנוץ בעריר גק ליץ, ושבעגט ליבם סולגק. בראיט
-ולחת צורק מונחף, בגורמי מגמש. תרבנך וסתעד לכנו סתשם השמה - לתכי
-מורגם בורק? לתיג ישבעס. קולהע צופעט למרקוח איבן איף, ברומץ כלרשט
-מיחוצים. קלאצי קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף
-לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית. סת אלמנקום
-ניסי נון ניבאה. דס איאקוליס וולופטה דיאם. וסטיבולום אט דולור,
-קראס אגת לקטוס וואל אאוגו וסטיבולום סוליסי טידום בעליק. הועניב
-היושבב שערש שמחויט - שלושע ותלברו חשלו שעותלשך וחאית נובש ערששף.
-זותה מנק הבקיץ אפאח דלאמת יבש, כאנה ניצאחו נמרגי שהכים תוק, הדש
-שנרא התידם הכייר וק. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן
-קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון
-בלרק - וענוף לורם איפסום דולור סיט אמט, לפרומי בלוף קינץ תתיח
-לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה
-שיצמה ברורק. קונדימנטום קורוס בליקרה, נונסטי קלובר בריקנה סטום,
-לפריקך תצטריק לרטי. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן
-הועניב היושבב שערש שמחויט - שלושע ותלברו חשלו שעותלשך וחאית נובש
-ערששף. זותה מנק הבקיץ אפאח דלאמת יבש, כאנה ניצאחו נמרגי שהכים
-שיצמה ברורק. קונדימנטום קורוס בליקרה, נונסטי קלובר בריקנה סטום,
-לפריקך תצטריק לרטי. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן
-הועניב היושבב שערש שמחויט - שלושע ותלברו חשלו שעותלשך וחאית נובש
-ערששף. זותה מנק הבקיץ אפאח דלאמת יבש, כאנה ניצאחו נמרגי שהכים
-שיצמה ברורק. קונדימנטום קורוס בליקרה, נונסטי קלובר בריקנה סטום,
-לפריקך תצטריק לרטי. נולום ארווס סאפיאן - פוסיליס קוויס, אקווזמן
-
-
-`;
+  const { setIsModalOpen } = useContext(ModalContext);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -91,7 +64,7 @@ const FlipBook: React.FC<FlipBookProps> = ({
       <div id="book" className="book">
         <PageContainer>
           <div className="page-header">
-            <p className="page-date">{text.length}</p>
+            <p className="page-date">{getCurrentDate()}</p>
           </div>
 
           <div id="f1" className="page-content">
@@ -108,9 +81,7 @@ const FlipBook: React.FC<FlipBookProps> = ({
                 <DragonA />
               </PageSymbolContainer>
               <pre onClick={openModal}>
-                <p className="page-text" >
-                  {paragraph}
-                </p>
+                <p className="page-text">{paragraph}</p>
               </pre>
             </div>
           </div>

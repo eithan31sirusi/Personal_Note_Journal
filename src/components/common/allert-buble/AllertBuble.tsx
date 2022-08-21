@@ -22,7 +22,7 @@ const AllertBuble: React.FC<IProps> = ({
   return (
     <AllertBubleContainer>
       <span style={{ textAlign: "center" }}>
-        <p>ייתכן ויש שינויים שלא ישמרו, האם לסגור?{text}</p>
+        <p>{text}</p>
       </span>
 
       <BtnContainer>

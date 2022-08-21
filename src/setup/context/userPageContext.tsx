@@ -1,7 +1,8 @@
 import React, { createContext, useState } from "react";
 
+
 // interface for context for is modal open
-interface TextAreaContextInterface {
+interface userPageContextInterface {
   userWirtingData?: any;
   setUserWirtingData?: any;
   // user page object
@@ -9,28 +10,30 @@ interface TextAreaContextInterface {
   // user wirting data object
 }
 
-type TextAreaContextProviderProps = {
+type userPageContextProviderProps = {
   children: React.ReactNode;
 };
 
 // user page object
 
 // create context for is modal open
-export const TextAreaContext = createContext<TextAreaContextInterface>({
+export const UserPageContext = createContext<userPageContextInterface>({
   setUserWirtingData: () => {},
-  userWirtingData: [{
-    pageNumber: 0,
-    title: "",
-    paragraph: "",
-    simbole: <></>,
-    date: new Date(), 
-  }],
+  userWirtingData: [
+    {
+      pageNumber: 0,
+      title: "",
+      paragraph: "",
+      simbole: <></>,
+      date: new Date(),
+    },
+  ],
 });
 
 // provider for context for is modal open and exporting the value
-export const TextAreaContextProvider = ({
+export const UserPageContextProvider = ({
   children,
-}: TextAreaContextProviderProps) => {
+}: userPageContextProviderProps) => {
   // user wirting data object
   const [userWirtingData, setUserWirtingData] = useState([{}]);
 
@@ -39,10 +42,10 @@ export const TextAreaContextProvider = ({
     setUserWirtingData,
   };
   return (
-    <TextAreaContext.Provider value={value}>
+    <UserPageContext.Provider value={value}>
       {children}
-    </TextAreaContext.Provider>
+    </UserPageContext.Provider>
   );
 };
 
-export default TextAreaContext;
+export default UserPageContext;

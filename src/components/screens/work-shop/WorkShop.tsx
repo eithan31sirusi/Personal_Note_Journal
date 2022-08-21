@@ -5,8 +5,9 @@ import ModalBox from "../../common/modal-box/ModalBox";
 import AllertBuble from "../../common/allert-buble/AllertBuble";
 // import context from
 import { ModalContext } from "../../../setup/context/modalContext";
-import { TextAreaContext } from "../../../setup/context/textAreaContext";
+import { UserPageContext } from "../../../setup/context/userPageContext";
 import DragonA from "../../../assets/svg/page-decrations/text-decration/DragonA";
+import SelectionDropDown from "../../common/selection-drop-down/SelectionDropDown";
 
 /*     // page number
     pageNumber: 0,
@@ -22,7 +23,7 @@ interface IProps {}
 
 const WorkShop: React.FC<IProps> = ({}) => {
   // textarea context
-  const { userWirtingData, setUserWirtingData } = useContext(TextAreaContext);
+  const { userWirtingData, setUserWirtingData } = useContext(UserPageContext);
 
   console.log(userWirtingData);
 
@@ -55,13 +56,9 @@ const WorkShop: React.FC<IProps> = ({}) => {
 
   // use the context to get the value of the context with type script
   const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
-  // modal state
-  console.log(isModalOpen, "111111111111");
 
   const closeModal = () => {
-    console.log("222", isModalOpen);
     setIsModalOpen(false);
-    console.log("2222", isModalOpen);
   };
 
   return (
@@ -110,6 +107,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
               onCancel={() => {
                 setIsAlertBuble(false);
               }}
+              text="ייתכן ויש שינויים שלא ישמרו, האם לסגור?"
               onDiscard={() => {
                 setTextAreaValue(Text);
                 setIsAlertBuble(false);
@@ -119,6 +117,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
           ) : null}
         </ModalBox>
       ) : null}
+      <SelectionDropDown />
     </div>
   );
 };
