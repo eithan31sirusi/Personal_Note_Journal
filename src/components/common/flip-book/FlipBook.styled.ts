@@ -50,7 +50,8 @@ export const FlipBookContainer = styled.div`
     font-family: "Courier New", Courier, monospace;
   }
 
-  .page-text {
+  .page-text-align,
+  pre {
     text-align: "justify";
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
       "Lucida Sans Unicode", Geneva, Verdana, sans-serif;

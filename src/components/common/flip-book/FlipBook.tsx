@@ -107,10 +107,11 @@ const FlipBook: React.FC<FlipBookProps> = ({
               <PageSymbolContainer imgFloatDirection={true}>
                 <DragonA />
               </PageSymbolContainer>
-
-              <p className="page-text" onClick={openModal}>
-                {paragraph}
-              </p>
+              <pre onClick={openModal}>
+                <p className="page-text" >
+                  {paragraph}
+                </p>
+              </pre>
             </div>
           </div>
           <p className="current-page">{page}</p>

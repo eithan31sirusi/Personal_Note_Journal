@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import FlipBook from "../../common/flip-book/FlipBook";
 import CustomTextArea from "../../common/custom-textArea/CustomTextArea";
 import ModalBox from "../../common/modal-box/ModalBox";
+import AllertBuble from "../../common/allert-buble/AllertBuble";
 // import context from
 import { ModalContext } from "../../../setup/context/modalContext";
 import { TextAreaContext } from "../../../setup/context/textAreaContext";
@@ -30,6 +31,8 @@ const WorkShop: React.FC<IProps> = ({}) => {
   // state to get the text area value from child component
   const [textAreaValue, setTextAreaValue] = useState("");
   const [Text, setText] = useState<any>("");
+  // state for the alert bubble
+  const [isAlertBuble, setIsAlertBuble] = useState(false);
 
   // function to extrect the text area value
   const getTextAreaValue = (txtAreaVal: any) => {
@@ -68,10 +71,11 @@ const WorkShop: React.FC<IProps> = ({}) => {
       <button onClick={addNewPage}>add page</button>
       {isModalOpen ? (
         <ModalBox
+          clickMode={true}
           onSave={() => {
             setText(textAreaValue);
             // if textAreaValue is not empty add it to the Text state
-        /*     if (Text !== "") {
+            /*     if (Text !== "") {
               setText((prevState: any) => {
                 return prevState + textAreaValue;
               });
@@ -81,7 +85,14 @@ const WorkShop: React.FC<IProps> = ({}) => {
             closeModal();
           }}
           onCancel={() => {
-            closeModal();
+            if (!textAreaValue) {
+              closeModal();
+              setTextAreaValue(textAreaValue);
+
+              setIsAlertBuble(false);
+            } else {
+              setIsAlertBuble(true);
+            }
           }}
           onClose={() => {
             closeModal();
@@ -94,6 +105,18 @@ const WorkShop: React.FC<IProps> = ({}) => {
             }}
             value={textAreaValue}
           />
+          {isAlertBuble ? (
+            <AllertBuble
+              onCancel={() => {
+                setIsAlertBuble(false);
+              }}
+              onDiscard={() => {
+                setTextAreaValue(Text);
+                setIsAlertBuble(false);
+                closeModal();
+              }}
+            />
+          ) : null}
         </ModalBox>
       ) : null}
     </div>

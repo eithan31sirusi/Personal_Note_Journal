@@ -8,6 +8,7 @@ import Xbtn from "../../../assets/svg/buttons/Xbtn";
 
 import { ModalContext } from "../../../setup/context/modalContext";
 
+import AllertBuble from "../allert-buble/AllertBuble";
 import {
   ModalDarkBackground,
   ModalBoxContainer,
@@ -27,6 +28,8 @@ interface ModalBoxProps {
   // SAVE PARAGRAH GREE NBUTTON
   onSave?: () => void;
   isOpen?: boolean;
+  // click mode to open the isClickMode
+  clickMode?: boolean;
 }
 
 const ModalBox: React.FC<ModalBoxProps> = ({
@@ -38,29 +41,39 @@ const ModalBox: React.FC<ModalBoxProps> = ({
   onCancel,
   children,
   onSave,
+  clickMode,
 }) => {
   // state to add custombutton group to the modal footer
-  const [isClickMode, setIsClickMode] = useState([]);
-
-
+  const [isClickMode, setIsClickMode] = useState(false);
 
   return (
     <div>
       <ModalBoxContainer>
         <ModalHeader>
-          <span>{title}</span>{" "}
-          <span onClick={onClose} style={{ width: "22px", cursor: "pointer" }}>
-            <Xbtn />
-          </span>
+          <span>{title}</span>
+          {!clickMode ? (
+            <span
+              onClick={onClose}
+              style={{ width: "22px", cursor: "pointer" }}
+            >
+              <Xbtn />
+            </span>
+          ) : null}
         </ModalHeader>
         <ModalBody>{children}</ModalBody>
 
-        {isClickMode ? (
+        {clickMode ? (
           <ModalFooter>
-            <span onClick={onSave} style={{ width: "100px", cursor: "pointer" }}>
-              <GreenWaxBtn  />
+            <span
+              onClick={onSave}
+              style={{ width: "100px", cursor: "pointer" }}
+            >
+              <GreenWaxBtn />
             </span>
-            <span onClick={onCancel} style={{ width: "100px", cursor: "pointer" }}>
+            <span
+              onClick={onCancel}
+              style={{ width: "100px", cursor: "pointer" }}
+            >
               <RedWaxBtn />
             </span>
           </ModalFooter>

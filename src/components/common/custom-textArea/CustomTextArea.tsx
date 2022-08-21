@@ -28,7 +28,7 @@ const CustomTextArea: React.FC<IProps> = ({
     if (value) {
       setInpValue(value);
     }
-  } , [value]);
+  }, [value]);
 
   const onInputChange = (inputValue: string): void => {
     setInpValue(inputValue);
@@ -36,7 +36,6 @@ const CustomTextArea: React.FC<IProps> = ({
   };
 
   // function to get the textarea prev value and sho it in the textarea
-
 
   // use effect for ref focus
   useEffect(() => {
@@ -52,7 +51,8 @@ const CustomTextArea: React.FC<IProps> = ({
         rows={rows}
         cols={cols}
         maxLength={maxLength}
-      ></textarea>
+      >
+      </textarea>
     </TextAreaContainer>
   );
 };
