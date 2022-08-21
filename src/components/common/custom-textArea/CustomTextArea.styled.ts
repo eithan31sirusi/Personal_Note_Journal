@@ -19,6 +19,7 @@ export const TextAreaContainer = styled.div<PageTextContainerProps>`
   overflow: auto;
   /* direction ltr rtl acoording to languge styled component function*/
   direction: ${({ textDirection }) => (textDirection ? "rtl" : "ltr")};
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.7);
 
   textarea {
     background: url(${animalSkinImg});

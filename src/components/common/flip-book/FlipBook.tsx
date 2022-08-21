@@ -1,32 +1,47 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   FlipBookContainer,
   PageContainer,
-  PageTextContainer,
+  PageSymbolContainer,
 } from "./FlipBook.styled";
+
+// modal context
+import { ModalContext } from "../../../setup/context/modalContext";
 
 import DragonA from "../../../assets/svg/page-decrations/text-decration/DragonB";
 
 import "./FlipBook.styled.ts";
+import BlackArrowBtnRight from "../../../assets/svg/buttons/BlackArrowBtnRight";
+import BlackArrowBtnLeft from "../../../assets/svg/buttons/BlackArrowBtnLeft";
 
 interface FlipBookProps {
   title?: string;
-  pages?: string[];
-  userText?: string;
-  currentPage?: number;
+  page?: number;
+  paragraph?: string;
+  simbole?: React.FC;
   onPageChange?: (page: number) => void;
-  currentDate?: any;
+  openModal?: () => void;
 }
 
 const FlipBook: React.FC<FlipBookProps> = ({
   title = "פרק 1",
-  pages,
-  currentDate,
-  currentPage = "1",
+  paragraph,
+  page = "1",
+  simbole,
 }) => {
-  // is filped state
-  const [isCoverFliped, setIsCoverFliped] = useState(false);
-  const [isPageFliped, setIsPageFliped] = useState(false);
+  const [Text, setText] = useState<any>("");
+  // state for getting the title of the page
+  const [pageTitle, setPageTitle] = useState<any>(false);
+  // state for getting the paragraph of the page
+  const [pageParagraph, setPageParagraph] = useState<any>(false);
+  // state for getting the simbole of the page
+  const [pageSimbole, setPageSimbole] = useState<any>(false);
+  // state for getting the page number of the page
+  const [pageNumber, setPageNumber] = useState<any>(false);
+  // state for getting the date of the page
+  const [pageDate, setPageDate] = useState<any>(false);
+
+  const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
 
   const text = `               לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס
 מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף גולר מונפרר סוברט
@@ -57,9 +72,11 @@ const FlipBook: React.FC<FlipBookProps> = ({
 
 `;
 
-  const openBook = () => {};
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
-  const closeBook = () => {};
+  // click function to get the value from the modal and set it to the state
 
   const flipNextPage = () => {};
 
@@ -67,33 +84,41 @@ const FlipBook: React.FC<FlipBookProps> = ({
 
   return (
     <FlipBookContainer>
-      <button onClick={flipPrevPage} className="prev-btn">
-        אחורה
-      </button>
+      <span style={{ width: "80px", cursor: "pointer" }}>
+        <BlackArrowBtnRight />
+      </span>
 
       <div id="book" className="book">
-        <div id="p1">
-          <PageContainer>
-            <div className="page-header">
-              <p className="page-date">{text.length}</p>
-            </div>
+        <PageContainer>
+          <div className="page-header">
+            <p className="page-date">{text.length}</p>
+          </div>
 
-            <div id="f1" className="page-content">
-              <h1 className="page-title">{title}</h1>
-              <div>
-                <PageTextContainer imgFloatDirection={true}>
-                  <DragonA />
-                </PageTextContainer>
-                <p className="page-text">{text}</p>
-              </div>
+          <div id="f1" className="page-content">
+            <label className="custom-field" aria-label="הכנס כותרת">
+              <input
+                maxLength={25}
+                type="text"
+                placeholder="הכנס כותרת"
+                onChange={(e) => setPageTitle(e.target.value)}
+              />
+            </label>
+            <div>
+              <PageSymbolContainer imgFloatDirection={true}>
+                <DragonA />
+              </PageSymbolContainer>
+
+              <p className="page-text" onClick={openModal}>
+                {paragraph}
+              </p>
             </div>
-            <p className="current-page">{currentPage}</p>
-          </PageContainer>
-        </div>
+          </div>
+          <p className="current-page">{page}</p>
+        </PageContainer>
       </div>
-      <button className="next-btn" onClick={flipNextPage}>
-        קדימה
-      </button>
+      <span style={{ width: "80px", cursor: "pointer" }}>
+        <BlackArrowBtnLeft />
+      </span>
     </FlipBookContainer>
   );
 };

@@ -1,30 +1,54 @@
-import React from "react";
-
+import { useEffect, useRef, useState } from "react";
 import { TextAreaContainer } from "./CustomTextArea.styled";
 
-interface CustomTextAreaProps {
+interface IProps {
   label?: string;
-  value?: string;
-  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
-  onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
+  getValue?: (value: string) => void;
   placeholder?: string;
   rows?: number;
   cols?: number;
   maxLength?: number;
   disabled?: boolean;
   error?: string;
+  value?: any;
 }
 
-const CustomTextArea: React.FC<CustomTextAreaProps> = ({
+const CustomTextArea: React.FC<IProps> = ({
   rows,
   cols,
   maxLength,
+  getValue,
+  value,
 }) => {
+  const inputRef: any = useRef(null);
+
+  const [inpValue, setInpValue] = useState<string>("");
+  // state to set the value of the text area
+  useEffect(() => {
+    if (value) {
+      setInpValue(value);
+    }
+  } , [value]);
+
+  const onInputChange = (inputValue: string): void => {
+    setInpValue(inputValue);
+    getValue && getValue(inputValue);
+  };
+
+  // function to get the textarea prev value and sho it in the textarea
+
+
+  // use effect for ref focus
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   return (
     <TextAreaContainer textDirection={true}>
       <textarea
-
+        value={value}
+        onChange={(e) => onInputChange(e.target.value)}
+        ref={inputRef}
         rows={rows}
         cols={cols}
         maxLength={maxLength}

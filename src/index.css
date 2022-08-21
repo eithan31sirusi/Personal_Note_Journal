@@ -1,17 +1,4 @@
 body {
   background: url("./assets//images/desk.jpg") no-repeat center center fixed;
   background-size: 100%, contain;
-  font-size: 24px;
-  direction: rtl;
-  outline: dashed 1px black;
-  /* Center child horizontally*/
-  display: flex;
-  justify-content: center;
-  text-align: center;
-
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
