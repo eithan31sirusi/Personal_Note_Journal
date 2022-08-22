@@ -14,8 +14,6 @@ interface IProps {
   selectSvgComponent?: any;
   svgItems?: any;
   setSvgItems?: any;
-  svgComponent?: any;
-  setSvgComponent?: any;
 }
 
 // function to set the svg component according to the selected value
@@ -23,12 +21,8 @@ const selectSvgComponent = (selectedValue: any) => {
   let svgComponent = svgParagraphDecortion.filter(
     (item: any) => item.value === selectedValue
   );
-  // store the reasult in order to pull the svg component from the array
-  
-  console.log(svgComponent[0].svg, "svgComponent");
+// sendind the svg component according to the selected value widthout rewritting the whole function
 
-  // sendind the svg component according to the selected value widthout rewritting the svgParagraphDecortion array
-  return svgComponent[0].svg;
 };
 
 export const SelectDropDwonContext = createContext<IProps>({
@@ -40,15 +34,13 @@ export const SelectDropDwonContext = createContext<IProps>({
   selectSvgComponent: selectSvgComponent,
   svgItems: [],
   setSvgItems: () => {},
-  svgComponent: "",
-  setSvgComponent: () => {},
 });
 
 export const SelectDropDwonContextProvider = ({ children }: IProps) => {
   const [selectedValue, setSelectedValue] = useState<any | undefined>("");
   const [isOpen, setIsOpen] = useState<any>(false);
   const [svgItems, setSvgItems] = useState(svgParagraphDecortion);
-  const [svgComponent, setSvgComponent] = useState<any | undefined>(undefined);
+  console.log(svgItems, "svgItems");
 
   const value = {
     selectedValue,
@@ -59,8 +51,6 @@ export const SelectDropDwonContextProvider = ({ children }: IProps) => {
     selectSvgComponent,
     setSvgItems,
     svgItems,
-    setSvgComponent,
-    svgComponent,
   };
   return (
     <SelectDropDwonContext.Provider value={value}>

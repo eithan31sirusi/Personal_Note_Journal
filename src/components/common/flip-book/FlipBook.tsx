@@ -11,6 +11,8 @@ import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonCont
 
 import { getCurrentDate } from "../../../helpers/getCurrentDate";
 
+import SelectionDropDown from "../../common/selection-drop-down/SelectionDropDown";
+
 import DragonA from "../../../assets/svg/page-decrations/text-decration/DragonB";
 
 import "./FlipBook.styled.ts";
@@ -45,12 +47,17 @@ const FlipBook: React.FC<FlipBookProps> = ({
   const [pageDate, setPageDate] = useState<any>(false);
 
   const { setIsModalOpen } = useContext(ModalContext);
-  const { svgComponent } = useContext(SelectDropDwonContext);
+ 
 
   const openModal = () => {
     setIsModalOpen(true);
   };
 
+/*   // useEffect to get selected svg component from the context
+  useEffect(() => {
+    setPageSimbole(svgComponent);
+  }, [svgComponent]);
+ */
   // click function to get the value from the modal and set it to the state
 
   const flipNextPage = () => {};
@@ -81,13 +88,15 @@ const FlipBook: React.FC<FlipBookProps> = ({
             </label>
             <div>
               <PageSymbolContainer imgFloatDirection={true}>
-                {svgComponent ? svgComponent[0].svg : alert("no svg")}
+                {pageSimbole}ss
               </PageSymbolContainer>
+
               <pre onClick={openModal}>
                 <p className="page-text">{paragraph}</p>
               </pre>
             </div>
           </div>
+          <SelectionDropDown />
           <p className="current-page">{page}</p>
         </PageContainer>
       </div>

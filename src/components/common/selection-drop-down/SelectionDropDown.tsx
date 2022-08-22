@@ -7,10 +7,8 @@ import { DropDownContainer, DropDownSelect } from "./SelectionDropDown.styled";
 interface IProps {
   children?: React.ReactNode;
   text?: string;
-
   // on change function
   onChange?: (e: any) => void;
-
   // array of options
   options?: any;
   // default value
@@ -26,8 +24,10 @@ const SelectionDropDown: React.FC<IProps> = ({
 
   onChange,
 }) => {
+
+    const [selectSvgComponent, setSelectSvgComponent] = useState<any | undefined>("");
   // context for select drop down
-  const { selectedValue, setSelectedValue, svgItems, selectSvgComponent } =
+  const { selectedValue, setSelectedValue, svgItems,  } =
     useContext(SelectDropDwonContext);
 
   return (
@@ -37,7 +37,9 @@ const SelectionDropDown: React.FC<IProps> = ({
         id="textdecoration"
         onChange={(e: any) => {
           setSelectedValue && setSelectedValue(e.target.value);
-          selectSvgComponent(e.target.value);
+          setSelectSvgComponent(setSelectedValue);
+          console.log(selectSvgComponent, "selectSvgComponent");
+          
         }}
         value={selectedValue}
       >

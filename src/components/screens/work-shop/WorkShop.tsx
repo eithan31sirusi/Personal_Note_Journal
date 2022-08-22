@@ -7,7 +7,7 @@ import AllertBuble from "../../common/allert-buble/AllertBuble";
 import { ModalContext } from "../../../setup/context/modalContext";
 import { UserPageContext } from "../../../setup/context/userPageContext";
 import DragonA from "../../../assets/svg/page-decrations/text-decration/DragonA";
-import SelectionDropDown from "../../common/selection-drop-down/SelectionDropDown";
+
 
 /*     // page number
     pageNumber: 0,
@@ -34,11 +34,6 @@ const WorkShop: React.FC<IProps> = ({}) => {
   const [Text, setText] = useState<any>("");
   // state for the alert bubble
   const [isAlertBuble, setIsAlertBuble] = useState(false);
-
-  // function to extrect the text area value
-  const getTextAreaValue = (txtAreaVal: any) => {
-    setTextAreaValue(txtAreaVal);
-  };
 
   // function to add new page to the user wirting data
   const addNewPage = () => {
@@ -117,7 +112,6 @@ const WorkShop: React.FC<IProps> = ({}) => {
           ) : null}
         </ModalBox>
       ) : null}
-      <SelectionDropDown />
     </div>
   );
 };
