@@ -5,8 +5,16 @@ import KngihtB from "../../assets/svg/page-decrations/text-decration/KnightB";
 import KngihtC from "../../assets/svg/page-decrations/text-decration/KnightC";
 import KngihtD from "../../assets/svg/page-decrations/text-decration/KnightD";
 
+// arry of objects interface
+interface PageDecoration {
+  id: any;
+  value: any;
+  label: any;
+  svg: React.FC<any>;
+}
+
 // array of objects to hold the svg and the text to be displayed on the page
-const svgParagraphDecortion = [
+const svgParagraphDecortion: PageDecoration[] = [
   {
     id: "dragonA",
     svg: DragonA,

@@ -1,4 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
 import React, { createContext, useState } from "react";
 import svgParagraphDecortion from "../../setup/config/svgParagraphDecortion";
 
@@ -12,18 +11,24 @@ interface IProps {
   isOpen?: boolean;
   setIsOpen?: (e: any) => void;
   svgParagraphDecortion?: any;
-  // filter the svgParagraphDecortion array  and stored filterd result in svgComponent
-  svgComponent?: any;
-  setSvgComponent?: (e: any) => void;
+  selectSvgComponent?: any;
   svgItems?: any;
-  setSvgItems?: any | undefined;
-  selectSvgComponent: any;
-  filter?: any;
-  setFilter?: (e: any) => void;
+  setSvgItems?: any;
+  svgComponent?: any;
+  setSvgComponent?: any;
 }
 
-type DropDwonContextProviderProps = {
-  children: React.ReactNode;
+// function to set the svg component according to the selected value
+const selectSvgComponent = (selectedValue: any) => {
+  let svgComponent = svgParagraphDecortion.filter(
+    (item: any) => item.value === selectedValue
+  );
+  // store the reasult in order to pull the svg component from the array
+  
+  console.log(svgComponent[0].svg, "svgComponent");
+
+  // sendind the svg component according to the selected value widthout rewritting the svgParagraphDecortion array
+  return svgComponent[0].svg;
 };
 
 export const SelectDropDwonContext = createContext<IProps>({
@@ -32,39 +37,18 @@ export const SelectDropDwonContext = createContext<IProps>({
   isOpen: false,
   setIsOpen: () => {},
   svgParagraphDecortion: svgParagraphDecortion,
-  selectSvgComponent: () => {},
+  selectSvgComponent: selectSvgComponent,
   svgItems: [],
   setSvgItems: () => {},
-  svgComponent: [],
+  svgComponent: "",
   setSvgComponent: () => {},
-  filter: "",
-  setFilter: () => {},
 });
 
-export const SelectDropDwonContextProvider = ({
-  children,
-}: DropDwonContextProviderProps) => {
+export const SelectDropDwonContextProvider = ({ children }: IProps) => {
   const [selectedValue, setSelectedValue] = useState<any | undefined>("");
   const [isOpen, setIsOpen] = useState<any>(false);
   const [svgItems, setSvgItems] = useState(svgParagraphDecortion);
-  // state for the filterd result
-
-  const [svgComponent, setSvgComponent] = useState(svgParagraphDecortion);
-  const [filter, setFilter] = useState("");
-  console.log(svgItems, "svgItems");
-
-  // function to set the svg component according to the selected value
-  const selectSvgComponent = (selectedValue: any) => {
-    setFilter(selectedValue);
-    const svgFilterd = svgParagraphDecortion.filter(({ label }) =>
-      label.includes(filter)
-    );
-
-    // set the additional state here
-    setSvgComponent(svgFilterd);
-    console.log(svgFilterd, "svgComponent");
-    return svgFilterd;
-  };
+  const [svgComponent, setSvgComponent] = useState<any | undefined>(undefined);
 
   const value = {
     selectedValue,
@@ -77,8 +61,6 @@ export const SelectDropDwonContextProvider = ({
     svgItems,
     setSvgComponent,
     svgComponent,
-    setFilter,
-    filter,
   };
   return (
     <SelectDropDwonContext.Provider value={value}>

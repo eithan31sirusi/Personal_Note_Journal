@@ -10,7 +10,7 @@ interface IProps {
 
   // on change function
   onChange?: (e: any) => void;
-  getSelectedVal?: (val: any) => void;
+
   // array of options
   options?: any;
   // default value
@@ -23,24 +23,12 @@ interface IProps {
 const SelectionDropDown: React.FC<IProps> = ({
   children,
   text,
-  getSelectedVal,
+
   onChange,
 }) => {
   // context for select drop down
-  const {
-    selectedValue,
-    setSelectedValue,
-    setSvgItems,
-    svgItems,
-    selectSvgComponent,
-  } = useContext(SelectDropDwonContext);
-
-  // use effect to get the selected value and set the svg component
-  useEffect(() => {
-    if (selectedValue) {
-      setSvgItems(selectSvgComponent(selectedValue));
-    }
-  }, [selectedValue]);
+  const { selectedValue, setSelectedValue, svgItems, selectSvgComponent } =
+    useContext(SelectDropDwonContext);
 
   return (
     <DropDownContainer>
@@ -50,9 +38,6 @@ const SelectionDropDown: React.FC<IProps> = ({
         onChange={(e: any) => {
           setSelectedValue && setSelectedValue(e.target.value);
           selectSvgComponent(e.target.value);
-          getSelectedVal && getSelectedVal(e.target.value);
-          console.log(selectedValue, "selectedValue");
-          console.log(svgItems, "svgItems");
         }}
         value={selectedValue}
       >

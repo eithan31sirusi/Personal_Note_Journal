@@ -7,6 +7,7 @@ import {
 
 // modal context
 import { ModalContext } from "../../../setup/context/modalContext";
+import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonContext";
 
 import { getCurrentDate } from "../../../helpers/getCurrentDate";
 
@@ -44,6 +45,7 @@ const FlipBook: React.FC<FlipBookProps> = ({
   const [pageDate, setPageDate] = useState<any>(false);
 
   const { setIsModalOpen } = useContext(ModalContext);
+  const { svgComponent } = useContext(SelectDropDwonContext);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -54,6 +56,7 @@ const FlipBook: React.FC<FlipBookProps> = ({
   const flipNextPage = () => {};
 
   const flipPrevPage = () => {};
+  // setting the svg component to the page simbole state
 
   return (
     <FlipBookContainer>
@@ -78,7 +81,7 @@ const FlipBook: React.FC<FlipBookProps> = ({
             </label>
             <div>
               <PageSymbolContainer imgFloatDirection={true}>
-                <DragonA />
+                {svgComponent ? svgComponent[0].svg : alert("no svg")}
               </PageSymbolContainer>
               <pre onClick={openModal}>
                 <p className="page-text">{paragraph}</p>
