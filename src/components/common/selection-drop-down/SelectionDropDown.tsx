@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useContext } from "react";
+import {svgParagraphDecortion} from "../../../setup/config/svgParagraphDecortion";
 
 import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonContext";
 
@@ -27,8 +28,7 @@ const SelectionDropDown: React.FC<IProps> = ({
   onChange,
 }) => {
   // context for select drop down
-  const { selectedValue, setSelectedValue, svgItems, selectSvgComponent } =
-    useContext(SelectDropDwonContext);
+  const { selectedValue, setSelectedValue } = useContext(SelectDropDwonContext);
 
   return (
     <DropDownContainer>
@@ -37,11 +37,11 @@ const SelectionDropDown: React.FC<IProps> = ({
         id="textdecoration"
         onChange={(e: any) => {
           setSelectedValue && setSelectedValue(e.target.value);
-          selectSvgComponent(e.target.value);
+          console.log(selectedValue);
         }}
         value={selectedValue}
       >
-        {svgItems.map((item: any) => {
+        {svgParagraphDecortion.map((item: any) => {
           return (
             <option value={item.value} key={item.id}>
               {item.label}

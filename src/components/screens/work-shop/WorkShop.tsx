@@ -117,7 +117,6 @@ const WorkShop: React.FC<IProps> = ({}) => {
           ) : null}
         </ModalBox>
       ) : null}
-      <SelectionDropDown />
     </div>
   );
 };
