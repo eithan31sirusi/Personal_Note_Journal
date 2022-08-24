@@ -20,18 +20,19 @@ const AllertBuble: React.FC<IProps> = ({
   onCancel,
 }) => {
   return (
-    <AllertBubleContainer>
-      <span style={{ textAlign: "center" }}>
-        <p>{text}</p>
-      </span>
-
-      <BtnContainer>
-        <AllertBubleApprovalBtn onClick={onDiscard}>
-          השלך
-        </AllertBubleApprovalBtn>
-        <AllertBubleCloseBtn onClick={onCancel}>ביטול</AllertBubleCloseBtn>
-      </BtnContainer>
-    </AllertBubleContainer>
+    <>
+      <AllertBubleContainer>
+        <span style={{ textAlign: "center" }}>
+          <p>{text}</p>
+        </span>
+        <BtnContainer>
+          <AllertBubleApprovalBtn onClick={onDiscard}>
+            השלך
+          </AllertBubleApprovalBtn>
+          <AllertBubleCloseBtn onClick={onCancel}>ביטול</AllertBubleCloseBtn>
+        </BtnContainer>{" "}
+      </AllertBubleContainer>{" "}
+    </>
   );
 };
 

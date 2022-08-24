@@ -13,7 +13,7 @@ import OldFatherTime from "../../assets/svg/page-decrations/text-decration/OldFa
 import Pegasus from "../../assets/svg/page-decrations/text-decration/Pegasus";
 import Senmurv from "../../assets/svg/page-decrations/text-decration/Senmurv";
 import Prince from "../../assets/svg/page-decrations/text-decration/Prince";
-import DefaultSVG from "../../assets/svg/page-decrations/text-decration/DefaultSVG";  
+import DefaultSVG from "../../assets/svg/page-decrations/text-decration/DefaultSVG";
 
 // arry of objects interface
 interface PageDecoration {
@@ -105,7 +105,8 @@ export const svgParagraphDecortion: PageDecoration[] = [
 
 export const outPutSelectedSVG = (
   selectedSVG: any,
-  setState: any | undefined
+  setState: any | undefined,
+  defaultSVG: any
 ) => {
   switch (selectedSVG) {
     case "DragonA":
@@ -153,10 +154,13 @@ export const outPutSelectedSVG = (
     case "Prince":
       setState(Prince);
       break;
-      
 
     default:
-      setState(DefaultSVG);
+      if (defaultSVG) {
+        setState(defaultSVG);
+      } else {
+        setState("");
+      }
       break;
   }
 };

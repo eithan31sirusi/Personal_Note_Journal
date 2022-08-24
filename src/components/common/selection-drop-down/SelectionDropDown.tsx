@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useContext } from "react";
-import {svgParagraphDecortion} from "../../../setup/config/svgParagraphDecortion";
+import { svgParagraphDecortion } from "../../../setup/config/svgParagraphDecortion";
 
 import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonContext";
 
@@ -22,13 +22,11 @@ interface IProps {
 }
 
 const SelectionDropDown: React.FC<IProps> = ({
-  children,
-  text,
-
-  onChange,
 }) => {
   // context for select drop down
-  const { selectedValue, setSelectedValue } = useContext(SelectDropDwonContext);
+  const { selectedValue, setSelectedValue, setIsOpen } = useContext(
+    SelectDropDwonContext
+  );
 
   return (
     <DropDownContainer>
@@ -38,6 +36,7 @@ const SelectionDropDown: React.FC<IProps> = ({
         onChange={(e: any) => {
           setSelectedValue && setSelectedValue(e.target.value);
           console.log(selectedValue);
+          setIsOpen && setIsOpen(false);
         }}
         value={selectedValue}
       >

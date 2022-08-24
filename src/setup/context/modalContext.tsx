@@ -11,9 +11,7 @@ type ModalContextProviderProps = {
 };
 // state to add area content to the flip book paragraph
 
-
 // function to add text area content in to the flip book paragraph
-
 
 // create context for is modal open
 export const ModalContext = createContext<ModalContextInterface>({
@@ -26,16 +24,10 @@ export const ModalContextProvider = ({
   children,
 }: ModalContextProviderProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [textAreaValue, setTextAreaValue] = useState ("");
 
-  const addAreaContent = (txtAreaVal: any) => {
-    setTextAreaValue(txtAreaVal);
-  }
-  
   const value = {
     isModalOpen,
     setIsModalOpen,
-    addAreaContent
   };
   return (
     <ModalContext.Provider value={value}>{children}</ModalContext.Provider>

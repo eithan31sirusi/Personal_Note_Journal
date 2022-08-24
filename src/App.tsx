@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { MainContainer } from "./components/layout/MainContainer";
 
-import FlipBook from "./components/common/flip-book/FlipBook";
-import CustomTextArea from "./components/common/custom-textArea/CustomTextArea";
-import ModalBox from "./components/common/modal-box/ModalBox";
-import GreenWaxBtn from "./assets/svg/buttons/GreenWaxBtn";
-import RedWaxBtn from "./assets/svg/buttons/RedWaxBtn";
-import YellowWaxBtn from "./assets/svg/buttons/YellowWaxBtn";
 import WorkShop from "./components/screens/work-shop/WorkShop";
+import JurnalScreen from "./components/screens/jurnal-screen/JurnalScreen";
+import UserPageContext from "./setup/context/userPageContext";
 
 function App() {
+  const { userWirtingData } = useContext(UserPageContext);
   return (
     <MainContainer appDirection={true}>
+      {userWirtingData.map((item: any, index: number) => {
+        return (
+          <JurnalScreen
+            key={index}
+            paragraph={item.paragraph}
+            date={item.date}
+            title={item.title}
+            pageNumber={item.pageNumber}
+            symbole={item.symbole}
+          />
+        );
+      })}
       <WorkShop />
     </MainContainer>
   );

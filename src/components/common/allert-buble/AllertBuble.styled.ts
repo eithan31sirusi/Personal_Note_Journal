@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+
+
 export const AllertBubleContainer = styled.div`
   width: 450px;
   color: #000000;

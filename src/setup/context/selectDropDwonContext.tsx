@@ -1,20 +1,18 @@
 import React, { createContext, useState } from "react";
 
-
 interface IProps {
   children?: React.ReactNode;
   // the selected value
-  selectedValue?: string;
+  selectedValue?: any;
   // on change function
   setSelectedValue?: (e: any) => void;
   // is the dropdown open
-  isOpen?: boolean;
-  setIsOpen?: (e: any) => void;
-
+  isOpen?: any;
+  setIsOpen?: any;
 }
 
 export const SelectDropDwonContext = createContext<IProps>({
-  selectedValue: "",
+  selectedValue: () => {},
   setSelectedValue: () => {},
   isOpen: false,
   setIsOpen: () => {},
@@ -29,7 +27,6 @@ export const SelectDropDwonContextProvider = ({ children }: IProps) => {
     setSelectedValue,
     isOpen,
     setIsOpen,
-
   };
   return (
     <SelectDropDwonContext.Provider value={value}>

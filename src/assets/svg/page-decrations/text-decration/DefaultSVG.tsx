@@ -46,13 +46,13 @@ const DefaultSVG = () => {
         rx="7.81"
         fill="none"
         stroke="#1e3250"
-        stroke-width="0.2"
+        strokeWidth="0.2"
       />
       <text
         direction="rtl"
         transform="translate(90.53 95.51) rotate(41.97)  "
-        font-size="12"
-        font-family="LucidaSansUnicode, Lucida Sans Unicode"
+        fontSize="12"
+        fontFamily="LucidaSansUnicode, Lucida Sans Unicode"
       >
        לחץ כדי להוסיף סמל
       </text>
