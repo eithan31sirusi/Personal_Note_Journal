@@ -1,71 +1,70 @@
-import {
-  FlipBookContainer,
-  PageContainer,
-  PageSymbolContainer,
-} from "./JurnalScreen.styled";
+import React, { useContext, useEffect, useState } from "react";
 
-import BlackArrowBtnLeft from "../../../assets/svg/buttons/BlackArrowBtnLeft";
-import BlackArrowBtnRight from "../../../assets/svg/buttons/BlackArrowBtnRight";
-import { outPutSelectedSVG } from "../../../setup/config/svgParagraphDecortion";
-import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
-interface IProps {
-  paragraph?: string;
-  onPageChange?: (page: number) => void;
-  date?: string;
-  title?: string;
-  pageNumber?: number;
-  symbole?: any;
-}
+import JurnalSinglePage from "../../common/jurnal-single-page/JurnalSinglePage";
 
-const JurnalScreen: React.FC<IProps> = ({
-  paragraph,
-  onPageChange,
-  date,
-  title,
-  pageNumber,
-  symbole,
-}) => {
+import UserPageContext from "../../../setup/context/userPageContext";
 
+interface IProps {}
 
-// state to render the svg component according to the selected value switch case
-    const [pageSimbole, setPageSimbole] = useState<any>("");
+const JurnalScreen: React.FC<IProps> = ({}) => {
+  const { userWirtingData } = useContext(UserPageContext);
+  const [items, setItems] = useState([]);
+  let history = useHistory();
 
-    useEffect(() => {
-        outPutSelectedSVG(symbole, setPageSimbole,false);
-        console.log(typeof pageSimbole);
-      }, []);
-    
+  // useeffect to get all data from the userWirtingData
+  useEffect(() => {
+    console.log(userWirtingData, "jurnal");
+    const items = JSON.parse(localStorage.getItem("userWirtingData") || "[]");
+    if (items !== null) {
+      setItems(items);
+    }
+
+    console.log(items, "items");
+  }, [userWirtingData]);
+
   return (
-    <FlipBookContainer>
-      <span style={{ width: "80px", cursor: "pointer" }}>
-        <BlackArrowBtnRight />
-      </span>
-      <div id="book" className="book">
-        <PageContainer>
-          <div className="page-header">
-            <p className="page-date">{date}</p>
-          </div>
-
-          <div id="f1" className="page-content">
-            <h1>{title}</h1>
-            <div>
-              <PageSymbolContainer imgFloatDirection={true}>
-                {pageSimbole}
-              </PageSymbolContainer>
-              <pre>
-                <p className="page-text-align">{paragraph}</p>
-              </pre>
-            </div>
-          </div>
-          <p className="current-page">{pageNumber}</p>
-        </PageContainer>
-      </div>
-      ;
-      <span style={{ width: "80px", cursor: "pointer" }}>
-        <BlackArrowBtnLeft />
-      </span>
-    </FlipBookContainer>
+    <>
+      {
+        // if the userWirtingData is empty render the message else render the data
+        items.length === 0 ? (
+          <>
+            <h1 style={{ fontSize: "5rem", color: "red" }}>התחל לכתוב</h1>
+            <button
+              style={{
+                backgroundColor: "green",
+                color: "white",
+                fontSize: "2rem",
+                padding: "1rem",
+                borderRadius: "5px",
+                margin: "1rem",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                // use react router dom to navigate to the workshop screen
+                history.push("/workshop");
+              }}
+            >
+              התחל לכתוב
+            </button>
+          </>
+        ) : (
+          items.map((item: any, index: number) => {
+            return (
+              <JurnalSinglePage
+                key={index}
+                paragraph={item.paragraph}
+                date={item.date}
+                title={item.title}
+                pageNumber={item.pageNumber}
+                symbole={item.symbole}
+              />
+            );
+          })
+        )
+      }
+    </>
   );
 };
 

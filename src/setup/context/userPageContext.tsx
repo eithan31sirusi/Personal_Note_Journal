@@ -28,7 +28,7 @@ export const UserPageContextProvider = ({
   children,
 }: userPageContextProviderProps) => {
   // user wirting data object
-  const [userWirtingData, setUserWirtingData] = useState([{}]);
+  const [userWirtingData, setUserWirtingData] = useState([]);
   const [textAreaValue, setTextAreaValue] = useState("");
   const [inputValue, setInputValue] = useState("");
 

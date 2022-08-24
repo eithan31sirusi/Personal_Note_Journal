@@ -48,6 +48,8 @@ const WorkShop: React.FC<IProps> = ({}) => {
       },
     ]);
     console.log(userWirtingData);
+    localStorage.setItem("userWirtingData", JSON.stringify(userWirtingData));
+    console.log(localStorage.getItem("userWirtingData"), "local");
   };
 
   const closeModal = () => {
@@ -57,7 +59,13 @@ const WorkShop: React.FC<IProps> = ({}) => {
   // use effect to set the page number to the state
   useEffect(() => {
     setPageNumber(userWirtingData.length + 1);
+
     console.log(userWirtingData, "userWirtingData");
+  }, [userWirtingData]);
+
+  // use effect to render all the data from the userWirtingData
+  useEffect(() => {
+    console.log(userWirtingData, "userWirtingData2");
   }, [userWirtingData]);
 
   return (
