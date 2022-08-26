@@ -14,7 +14,6 @@ export const MainContainer = styled.div<MainContainerProps>`
   justify-content: center;
   width: 100%;
   height: 100%;
-  overflow: auto;
   /* direction ltr rtl acoording to languge styled component function*/
   direction: ${({ appDirection }) => (appDirection ? "rtl" : "ltr")};
 `;

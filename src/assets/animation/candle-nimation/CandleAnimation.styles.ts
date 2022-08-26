@@ -54,7 +54,7 @@ export const CandleBody = styled.div`
     SeaShell,
     WhiteSmoke,
     Silver 50%,
-    rgba(0, 0, 0, 0.6)
+    rgba(0, 0, 0, 1)
   );
   box-shadow: inset 2em -3em 5em rgba(0, 0, 0, 0.4), inset 2em 0em 5em;
   border-radius: 10em /4em;
@@ -72,7 +72,7 @@ export const CandleBody = styled.div`
     border-radius: 50%;
     box-sizing: border-box;
     background: radial-gradient(#444444, White, SeaShell, WhiteSmoke, Silver);
-    filter: opacity(0.4);
+    filter: opacity(0.6);
   }
 `;
 
@@ -86,7 +86,7 @@ export const CandleStick = styled.div`
 
 export const CandleFlame = styled.div`
   position: absolute;
-  right: 5em;
+  right: 6.2em;
   width: 2.4em;
 
   &::after {

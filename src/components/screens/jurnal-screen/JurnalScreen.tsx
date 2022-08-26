@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import JurnalSinglePage from "../../common/jurnal-single-page/JurnalSinglePage";
 
 import UserPageContext from "../../../setup/context/userPageContext";
-import FeatherQuil from "../../../assets/svg/page-decrations/bottom-decration/FeatherQuil";
+import FeatherQuil from "../../../assets/svg/buttons/FeatherQuil";
 
 interface IProps {}
 

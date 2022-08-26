@@ -3,12 +3,13 @@ import FlipBook from "../../common/flip-book/FlipBook";
 import CustomTextArea from "../../common/custom-textArea/CustomTextArea";
 import ModalBox from "../../common/modal-box/ModalBox";
 import AllertBuble from "../../common/allert-buble/AllertBuble";
+import CandleAnimation from "../../../assets/animation/candle-nimation/CandleAnimation.component";
 
 import { ModalContext } from "../../../setup/context/modalContext";
 import { UserPageContext } from "../../../setup/context/userPageContext";
 
 import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonContext";
-import FeatherQuil from "../../../assets/svg/page-decrations/bottom-decration/FeatherQuil";
+import FeatherQuil from "../../../assets/svg/buttons/FeatherQuil";
 
 interface IProps {}
 
@@ -73,9 +74,6 @@ const WorkShop: React.FC<IProps> = ({}) => {
 
   return (
     <div>
-      <div style={{width:"100px", borderRadius:"50%",transform:"translate(10rem,12rem)"}}>
-        <FeatherQuil />
-      </div>
       <button onClick={addNewPage}>add page</button>
       <FlipBook paragraph={Text} />
 
@@ -123,6 +121,21 @@ const WorkShop: React.FC<IProps> = ({}) => {
           ) : null}
         </ModalBox>
       ) : null}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          transform: "translateY(-10rem)",
+        }}
+      >
+        <span style={{ transform: "translate(10rem,0)" }}>
+          <CandleAnimation />
+        </span>
+        <span style={{ transform: "translate(-10rem,0)" }}>
+          <CandleAnimation />
+        </span>
+      </div>
     </div>
   );
 };
