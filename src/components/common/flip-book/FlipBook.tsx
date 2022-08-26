@@ -42,8 +42,7 @@ const FlipBook: React.FC<FlipBookProps> = ({ paragraph }) => {
   };
   // use effect to render the svg component according to the selected value switch case
   useEffect(() => {
-    outPutSelectedSVG(selectedValue, setPageSimbole,true);
-    console.log(typeof pageSimbole);
+    outPutSelectedSVG(selectedValue, setPageSimbole, false);
   }, [selectedValue]);
 
   const openModal = () => {
@@ -76,12 +75,24 @@ const FlipBook: React.FC<FlipBookProps> = ({ paragraph }) => {
                 onClick={openSVGMode}
                 imgFloatDirection={true}
               >
-                {pageSimbole}
+                {!pageSimbole ? (
+                  <div className="symbol-massage">
+                    <p>לחץ להוסיף סמל</p>
+                  </div>
+                ) : (
+                  pageSimbole
+                )}
               </PageSymbolContainer>
 
-              <pre onClick={openModal}>
-                <p className="page-text-align">{paragraph}</p>
-              </pre>
+              {paragraph ? (
+                <pre onClick={openModal}>
+                  <p className="page-text-align">{paragraph}</p>
+                </pre>
+              ) : (
+                <div onClick={openModal} className="paragraph-massege">
+                  <p>לחץ כדי להוסיף טקסט</p>
+                </div>
+              )}
             </div>
           </div>
         </PageContainer>

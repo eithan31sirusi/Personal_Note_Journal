@@ -8,32 +8,33 @@ import { ModalContext } from "../../../setup/context/modalContext";
 import { UserPageContext } from "../../../setup/context/userPageContext";
 
 import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonContext";
+import FeatherQuil from "../../../assets/svg/page-decrations/bottom-decration/FeatherQuil";
 
 interface IProps {}
 
 const WorkShop: React.FC<IProps> = ({}) => {
   // textarea context
-  const { userWirtingData, setUserWirtingData, inputValue } =
+  const { userWirtingData, setUserWirtingData, inputValue, setInputValue } =
     useContext(UserPageContext);
 
   // use the context to get the value of the context with type script
   const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
   // context of selecteddropdown
-  const { selectedValue } = useContext(SelectDropDwonContext);
+  const { selectedValue, setSelectedValue } = useContext(SelectDropDwonContext);
 
   // state to get the text area value from child component
   const [textAreaValue, setTextAreaValue] = useState("");
 
   // state to get the text area value from child component
   const [Text, setText] = useState<any>("");
+  // state to get the page title from child component
+  const [pageTitle, setPageTitle] = useState<any>(inputValue);
 
   // state for the alert bubble
   const [isAlertBuble, setIsAlertBuble] = useState(false);
 
   // state for getting the page number of the page
   const [pageNumber, setPageNumber] = useState<any>(userWirtingData.length);
-
-  // function to add new page to the user wirting data
 
   const addNewPage = () => {
     setUserWirtingData([
@@ -47,9 +48,14 @@ const WorkShop: React.FC<IProps> = ({}) => {
         date: new Date().toDateString(),
       },
     ]);
-    console.log(userWirtingData);
+
     localStorage.setItem("userWirtingData", JSON.stringify(userWirtingData));
     console.log(localStorage.getItem("userWirtingData"), "local");
+    setSelectedValue("");
+    setText("");
+    // reset the title inputValue of the page
+    setInputValue("");
+    console.log(inputValue, "inputValue");
   };
 
   const closeModal = () => {
@@ -59,17 +65,17 @@ const WorkShop: React.FC<IProps> = ({}) => {
   // use effect to set the page number to the state
   useEffect(() => {
     setPageNumber(userWirtingData.length + 1);
+    // load the data from the local storage
+    localStorage.setItem("userWirtingData", JSON.stringify(userWirtingData));
 
     console.log(userWirtingData, "userWirtingData");
   }, [userWirtingData]);
 
-  // use effect to render all the data from the userWirtingData
-  useEffect(() => {
-    console.log(userWirtingData, "userWirtingData2");
-  }, [userWirtingData]);
-
   return (
     <div>
+      <div style={{width:"100px", borderRadius:"50%",transform:"translate(10rem,12rem)"}}>
+        <FeatherQuil />
+      </div>
       <button onClick={addNewPage}>add page</button>
       <FlipBook paragraph={Text} />
 

@@ -24,7 +24,6 @@ const JurnalSinglePage: React.FC<IProps> = ({
   symbole,
 }) => {
 
-  const { userWirtingData } = useContext(UserPageContext);
 
 
 // state to render the svg component according to the selected value switch case
@@ -32,7 +31,7 @@ const JurnalSinglePage: React.FC<IProps> = ({
 
     useEffect(() => {
         outPutSelectedSVG(symbole, setPageSimbole,false);
-      }, [userWirtingData]);
+      }, [symbole]);
     
   return (
     <FlipBookContainer>

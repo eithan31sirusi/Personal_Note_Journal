@@ -157,7 +157,7 @@ export const outPutSelectedSVG = (
 
     default:
       if (defaultSVG) {
-        setState(defaultSVG);
+        setState(DefaultSVG);
       } else {
         setState("");
       }

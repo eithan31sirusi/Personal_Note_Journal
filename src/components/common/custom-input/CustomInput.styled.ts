@@ -12,6 +12,8 @@ export const LabelContainer = styled.div`
     padding: 0.5rem;
     width: fit-content;
     margin-right: 0.5rem;
+    cursor: pointer;
+    transition: ease-in-out 0.5s;
 
     ::placeholder {
       color: rgba(0, 0, 0, 0.5);
@@ -22,6 +24,13 @@ export const LabelContainer = styled.div`
       border: 0px solid rgb(10, 50, 80);
       border-radius: 5px;
       box-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
+    }
+
+    :hover {
+      background: rgba(10, 50, 250, 0.2);
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0px 0px 30px rgba(30, 50, 80, 1);
     }
   }
 `;

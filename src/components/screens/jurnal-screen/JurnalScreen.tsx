@@ -5,65 +5,47 @@ import { useHistory } from "react-router-dom";
 import JurnalSinglePage from "../../common/jurnal-single-page/JurnalSinglePage";
 
 import UserPageContext from "../../../setup/context/userPageContext";
+import FeatherQuil from "../../../assets/svg/page-decrations/bottom-decration/FeatherQuil";
 
 interface IProps {}
 
 const JurnalScreen: React.FC<IProps> = ({}) => {
   const { userWirtingData } = useContext(UserPageContext);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(
+    JSON.parse(localStorage.getItem("userWirtingData") || "[]")
+  );
   let history = useHistory();
 
   // useeffect to get all data from the userWirtingData
   useEffect(() => {
     console.log(userWirtingData, "jurnal");
-    const items = JSON.parse(localStorage.getItem("userWirtingData") || "[]");
-    if (items !== null) {
+    const items = JSON.parse(localStorage.getItem("userWirtingData") || "null");
+    if (items) {
       setItems(items);
     }
-
     console.log(items, "items");
   }, [userWirtingData]);
 
   return (
     <>
-      {
-        // if the userWirtingData is empty render the message else render the data
-        items.length === 0 ? (
-          <>
-            <h1 style={{ fontSize: "5rem", color: "red" }}>התחל לכתוב</h1>
-            <button
-              style={{
-                backgroundColor: "green",
-                color: "white",
-                fontSize: "2rem",
-                padding: "1rem",
-                borderRadius: "5px",
-                margin: "1rem",
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                // use react router dom to navigate to the workshop screen
-                history.push("/workshop");
-              }}
-            >
-              התחל לכתוב
-            </button>
-          </>
-        ) : (
-          items.map((item: any, index: number) => {
-            return (
-              <JurnalSinglePage
-                key={index}
-                paragraph={item.paragraph}
-                date={item.date}
-                title={item.title}
-                pageNumber={item.pageNumber}
-                symbole={item.symbole}
-              />
-            );
-          })
-        )
-      }
+      {items.length > 0 ? (
+        items.map((item: any, index: any) => (
+          <JurnalSinglePage
+            key={index}
+            pageNumber={item.pageNumber}
+            title={item.title}
+            paragraph={item.paragraph}
+            symbole={item.symbole}
+            date={item.date}
+          />
+        ))
+      ) : (
+        <>
+          <h1>אין עמודים להצגה</h1>
+
+        
+        </>
+      )}
     </>
   );
 };

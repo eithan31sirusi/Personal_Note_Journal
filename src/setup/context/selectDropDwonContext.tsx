@@ -5,7 +5,7 @@ interface IProps {
   // the selected value
   selectedValue?: any;
   // on change function
-  setSelectedValue?: (e: any) => void;
+  setSelectedValue?: any;
   // is the dropdown open
   isOpen?: any;
   setIsOpen?: any;
