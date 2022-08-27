@@ -50,11 +50,11 @@ export const CandleBody = styled.div`
   height: 45em;
   font-size: 7px;
   background: linear-gradient(
-    White,
-    SeaShell,
-    WhiteSmoke,
-    Silver 50%,
-    rgba(0, 0, 0, 1)
+    #dcd07a,
+    #dcd07a,
+    #c9c083,
+    #c9c083 50%,
+    #c9c083
   );
   box-shadow: inset 2em -3em 5em rgba(0, 0, 0, 0.4), inset 2em 0em 5em;
   border-radius: 10em /4em;
@@ -68,10 +68,9 @@ export const CandleBody = styled.div`
     position: absolute;
     width: inherit;
     height: 5em;
-    border: 0.2em solid WhiteSmoke;
     border-radius: 50%;
     box-sizing: border-box;
-    background: radial-gradient(#444444, White, SeaShell, WhiteSmoke, Silver);
+    background: radial-gradient(#444444, #dcd07a, SeaShell, #dcd07a, Silver);
     filter: opacity(0.6);
   }
 `;

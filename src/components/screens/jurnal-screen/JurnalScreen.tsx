@@ -42,8 +42,6 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
       ) : (
         <>
           <h1>אין עמודים להצגה</h1>
-
-        
         </>
       )}
     </>
