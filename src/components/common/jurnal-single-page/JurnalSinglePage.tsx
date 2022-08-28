@@ -1,10 +1,12 @@
-
 import BlackArrowBtnLeft from "../../../assets/svg/buttons/BlackArrowBtnLeft";
-import BlackArrowBtnRight from "../../../assets/svg/buttons/BlackArrowBtnRight";
+
 import { outPutSelectedSVG } from "../../../setup/config/svgParagraphDecortion";
-import { useContext, useEffect, useState } from "react";
-import { FlipBookContainer, PageContainer, PageSymbolContainer } from "./JurnalSinglePage.styled";
-import UserPageContext from "../../../setup/context/userPageContext";
+import { useEffect, useState } from "react";
+import {
+  FlipBookContainer,
+  PageContainer,
+  PageSymbolContainer,
+} from "./JurnalSinglePage.styled";
 
 interface IProps {
   paragraph?: string;
@@ -23,21 +25,15 @@ const JurnalSinglePage: React.FC<IProps> = ({
   pageNumber,
   symbole,
 }) => {
+  // state to render the svg component according to the selected value switch case
+  const [pageSimbole, setPageSimbole] = useState<any>("");
 
+  useEffect(() => {
+    outPutSelectedSVG(symbole, setPageSimbole, false);
+  }, [symbole]);
 
-
-// state to render the svg component according to the selected value switch case
-    const [pageSimbole, setPageSimbole] = useState<any>("");
-
-    useEffect(() => {
-        outPutSelectedSVG(symbole, setPageSimbole,false);
-      }, [symbole]);
-    
   return (
     <FlipBookContainer>
-      <span style={{ width: "80px", cursor: "pointer" }}>
-        <BlackArrowBtnRight />
-      </span>
       <div id="book" className="book">
         <PageContainer>
           <div className="page-header">
@@ -59,9 +55,6 @@ const JurnalSinglePage: React.FC<IProps> = ({
         </PageContainer>
       </div>
       ;
-      <span style={{ width: "80px", cursor: "pointer" }}>
-        <BlackArrowBtnLeft />
-      </span>
     </FlipBookContainer>
   );
 };

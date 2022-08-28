@@ -28,8 +28,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
 
   // state to get the text area value from child component
   const [Text, setText] = useState<any>("");
-  // state to get the page title from child component
-  const [pageTitle, setPageTitle] = useState<any>(inputValue);
+  // state to get the title of the page
 
   // state for the alert bubble
   const [isAlertBuble, setIsAlertBuble] = useState(false);
@@ -42,7 +41,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
       ...userWirtingData,
       {
         id: userWirtingData.length,
-        pageNumber: pageNumber + 1,
+        pageNumber: pageNumber,
         title: inputValue,
         paragraph: Text,
         symbole: selectedValue,
@@ -54,6 +53,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
     console.log(localStorage.getItem("userWirtingData"), "local");
     setSelectedValue("");
     setText("");
+    setTextAreaValue("");
     // reset the title inputValue of the page
     setInputValue("");
     console.log(inputValue, "inputValue");
@@ -75,7 +75,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
   return (
     <div>
       <button onClick={addNewPage}>add page</button>
-      <FlipBook paragraph={Text} />
+      <FlipBook paragraph={Text} setPageTitleValue={inputValue} />
 
       {isModalOpen ? (
         <ModalBox

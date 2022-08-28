@@ -23,11 +23,15 @@ interface FlipBookProps {
   openModal?: () => void;
   setPageSimbole?: (simbole: React.FC) => void;
   getValue?: (value: string) => void;
+  setPageTitleValue?: any;
 }
 
-const FlipBook: React.FC<FlipBookProps> = ({ paragraph }) => {
+const FlipBook: React.FC<FlipBookProps> = ({
+  paragraph,
+  setPageTitleValue,
+}) => {
   // state for getting the title of the page
-  const [pageTitleVal, setPageTitleVal] = useState<any>(false);
+  const [pageTitleVal, setPageTitleVal] = useState<any>("");
   // state for getting the title of the page
 
   const [pageSimbole, setPageSimbole] = useState<any>("");
@@ -64,9 +68,9 @@ const FlipBook: React.FC<FlipBookProps> = ({ paragraph }) => {
               maxLength={25}
               type="text"
               placeholder="הכנס כותרת"
-              getValue={(textAreaValue) => {
-                setPageTitleVal(textAreaValue);
-                console.log(textAreaValue, "workShop");
+              getValue={(inputValue) => {
+                setPageTitleVal(inputValue);
+                console.log(inputValue, "workShop");
               }}
             />
 
