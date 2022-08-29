@@ -21,8 +21,7 @@ interface IProps {
   // label
 }
 
-const SelectionDropDown: React.FC<IProps> = ({
-}) => {
+const SelectionDropDown: React.FC<IProps> = ({}) => {
   // context for select drop down
   const { selectedValue, setSelectedValue, setIsOpen } = useContext(
     SelectDropDwonContext

@@ -11,6 +11,10 @@ import { UserPageContext } from "../../../setup/context/userPageContext";
 import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonContext";
 import FeatherQuil from "../../../assets/svg/buttons/FeatherQuil";
 
+import { PageContainer } from "../../layout/PageContainer";
+import DeleteBtn from "../../../assets/svg/buttons/DeleteBtn";
+import AddPageBtn from "../../../assets/svg/buttons/AddPageBtn";
+
 interface IProps {}
 
 const WorkShop: React.FC<IProps> = ({}) => {
@@ -54,7 +58,6 @@ const WorkShop: React.FC<IProps> = ({}) => {
     setSelectedValue("");
     setText("");
     setTextAreaValue("");
-    // reset the title inputValue of the page
     setInputValue("");
     console.log(inputValue, "inputValue");
   };
@@ -62,6 +65,16 @@ const WorkShop: React.FC<IProps> = ({}) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+
+  // function for reset page content
+  const resetPageContent = () => {
+    setText("");
+    setTextAreaValue("");
+    setInputValue("");
+    setSelectedValue("");
+  }
+
 
   // use effect to set the page number to the state
   useEffect(() => {
@@ -74,53 +87,60 @@ const WorkShop: React.FC<IProps> = ({}) => {
 
   return (
     <div>
-      <button onClick={addNewPage}>add page</button>
-      <FlipBook paragraph={Text} setPageTitleValue={inputValue} />
+      <PageContainer flexDir="row" flexX="flex-start" flexY="flex-start">
+        <span style={{ width: "70px", cursor: "pointer" }}>
+          <AddPageBtn ClickHnadler={addNewPage} />
+          <DeleteBtn ClickHnadler={resetPageContent} />
+        </span>
 
-      {isModalOpen ? (
-        <ModalBox
-          clickMode={true}
-          onSave={() => {
-            if (isAlertBuble) return;
-            setText(textAreaValue);
-            closeModal();
-          }}
-          onCancel={() => {
-            if (!textAreaValue) {
+        <FlipBook paragraph={Text} setPageTitleValue={inputValue} />
+
+        {isModalOpen ? (
+          <ModalBox
+            clickMode={true}
+            onSave={() => {
+              if (isAlertBuble) return;
+              setText(textAreaValue);
               closeModal();
-              setTextAreaValue(textAreaValue);
-
-              setIsAlertBuble(false);
-            } else {
-              setIsAlertBuble(true);
-            }
-          }}
-          onClose={() => {
-            if (isAlertBuble) return;
-            closeModal();
-          }}
-        >
-          <CustomTextArea
-            getValue={(textAreaValue) => {
-              setTextAreaValue(textAreaValue);
             }}
-            value={textAreaValue}
-          />
-          {isAlertBuble ? (
-            <AllertBuble
-              onCancel={() => {
-                setIsAlertBuble(false);
-              }}
-              text="ייתכן ויש שינויים שלא ישמרו, האם לסגור?"
-              onDiscard={() => {
-                setTextAreaValue(Text);
-                setIsAlertBuble(false);
+            onCancel={() => {
+              if (!textAreaValue) {
                 closeModal();
+                setTextAreaValue(textAreaValue);
+
+                setIsAlertBuble(false);
+              } else {
+                setIsAlertBuble(true);
+              }
+            }}
+            onClose={() => {
+              if (isAlertBuble) return;
+              closeModal();
+            }}
+          >
+            <CustomTextArea
+            maxLength={1449}
+              getValue={(textAreaValue) => {
+                setTextAreaValue(textAreaValue);
               }}
+              value={textAreaValue}
             />
-          ) : null}
-        </ModalBox>
-      ) : null}
+            {isAlertBuble ? (
+              <AllertBuble
+                onCancel={() => {
+                  setIsAlertBuble(false);
+                }}
+                text="ייתכן ויש שינויים שלא ישמרו, האם לסגור?"
+                onDiscard={() => {
+                  setTextAreaValue(Text);
+                  setIsAlertBuble(false);
+                  closeModal();
+                }}
+              />
+            ) : null}
+          </ModalBox>
+        ) : null}
+      </PageContainer>
       <div
         style={{
           display: "flex",
@@ -129,7 +149,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
           transform: "translateY(-10rem)",
         }}
       >
-        <span style={{ transform: "translate(10rem,0)" }}>
+        <span style={{ transform: "translate(5.5rem,0)" }}>
           <CandleAnimation />
         </span>
         <span style={{ transform: "translate(-10rem,0)" }}>

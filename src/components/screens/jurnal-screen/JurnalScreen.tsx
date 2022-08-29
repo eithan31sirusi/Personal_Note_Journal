@@ -9,6 +9,7 @@ import FeatherQuil from "../../../assets/svg/buttons/FeatherQuil";
 import BlackArrowBtnRight from "../../../assets/svg/buttons/BlackArrowBtnRight";
 import BlackArrowBtnLeft from "../../../assets/svg/buttons/BlackArrowBtnLeft";
 import { PageContainer } from "../../layout/PageContainer";
+import CustomTitle from "../../common/custom-title/CustomTitle";
 
 interface IProps {}
 
@@ -32,8 +33,6 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
     console.log(items, "items");
   }, [userWirtingData]);
 
-  // function to render one book page each time acoording to the page number and page id
-  const renderPage = (pageNumber: number, pageId: number) => {};
 
   return (
     <PageContainer flexDir="row">
@@ -78,7 +77,7 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
           ))
       ) : (
         <>
-          <h1>אין עמודים להצגה</h1>
+          <CustomTitle titleText="אין עמודים להצגה" fontSize="3rem" fontWeight="300" textColor="red"/>
         </>
       )}
     </PageContainer>

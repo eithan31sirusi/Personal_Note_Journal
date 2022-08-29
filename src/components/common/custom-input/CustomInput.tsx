@@ -1,4 +1,4 @@
-import {  useState ,useContext} from "react";
+import { useState, useContext } from "react";
 
 import { getKeyBoardClick } from "../../../helpers/getKeyBoardClick";
 import UserPageContext from "../../../setup/context/userPageContext";
@@ -22,12 +22,8 @@ const CustomInput: React.FC<IProps> = ({
   type,
   placeholder,
 }) => {
-
-// context for user context
-const { setInputValue } = useContext(UserPageContext);
-
-
-  
+  // context for user context
+  const { setInputValue } = useContext(UserPageContext);
 
   const onInputChange = (inputValue: string): void => {
     setInputValue(inputValue);
