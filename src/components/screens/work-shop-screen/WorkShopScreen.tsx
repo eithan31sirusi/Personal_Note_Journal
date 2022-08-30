@@ -9,7 +9,6 @@ import { ModalContext } from "../../../setup/context/modalContext";
 import { UserPageContext } from "../../../setup/context/userPageContext";
 
 import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonContext";
-import FeatherQuil from "../../../assets/svg/buttons/FeatherQuil";
 
 import { PageContainer } from "../../layout/PageContainer";
 import DeleteBtn from "../../../assets/svg/buttons/DeleteBtn";
@@ -41,6 +40,9 @@ const WorkShop: React.FC<IProps> = ({}) => {
   const [pageNumber, setPageNumber] = useState<any>(userWirtingData.length);
 
   const addNewPage = () => {
+    // check if the text area is empty
+    if (textAreaValue === "") return alert("יש לכתוב טקסט לעמוד");
+
     setUserWirtingData([
       ...userWirtingData,
       {
@@ -66,20 +68,20 @@ const WorkShop: React.FC<IProps> = ({}) => {
     setIsModalOpen(false);
   };
 
-
   // function for reset page content
   const resetPageContent = () => {
     setText("");
     setTextAreaValue("");
     setInputValue("");
     setSelectedValue("");
-  }
-
+  };
 
   // use effect to set the page number to the state
   useEffect(() => {
     setPageNumber(userWirtingData.length + 1);
     // load the data from the local storage
+    
+    
     localStorage.setItem("userWirtingData", JSON.stringify(userWirtingData));
 
     console.log(userWirtingData, "userWirtingData");
@@ -119,7 +121,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
             }}
           >
             <CustomTextArea
-            maxLength={1449}
+              maxLength={1449}
               getValue={(textAreaValue) => {
                 setTextAreaValue(textAreaValue);
               }}

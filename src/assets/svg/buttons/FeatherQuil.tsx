@@ -1,8 +1,45 @@
-import React from "react";
+import { useState } from "react";
 
-const FeatherQuil = () => {
+interface IProps {
+  children?: React.ReactNode;
+  SVGwidth?: string;
+  positionX?: string;
+  positionY?: string;
+  clickHandler?: any;
+}
+
+const FeatherQuil: React.FC<IProps> = ({
+  SVGwidth,
+  positionX,
+  positionY,
+  clickHandler,
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   return (
-    <svg viewBox="0 0 2400.12 237.12">
+    <svg
+      viewBox="0 0 237.12 237.12"
+      style={{
+        width: SVGwidth ? SVGwidth : "350px",
+        transform: `translate(0,-10rem )`,
+        cursor: "pointer",
+        borderRadius: "50%",
+        // box shadwo effect
+        boxShadow: isHovered ? "0px 0px 10px rgba(255, 255, 255, 1)" : "none",
+        transition: "all 0.3s ease-in-out",
+      }}
+      onClick={clickHandler}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <defs>
         <clipPath id="clipPath" transform="translate(-3.82 -3.6)">
           <circle cx="122.3" cy="122.29" r="113.43" fill="none" />
@@ -11,7 +48,7 @@ const FeatherQuil = () => {
           <rect x="3.88" y="3.86" width="236.85" height="236.86" fill="none" />
         </clipPath>
       </defs>
-      <title>feather quill</title>
+      <title>start wirting</title>
       <g clipPath="url(#clipPath)">
         <g clipPath="url(#clipPath-2)">
           <image

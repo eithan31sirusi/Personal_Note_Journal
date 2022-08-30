@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { MainContainer } from "./components/layout/MainContainer";
 
-import WorkShop from "./components/screens/work-shop/WorkShop";
+import WorkShop from "./components/screens/work-shop-screen/WorkShopScreen";
 import JurnalScreen from "./components/screens/jurnal-screen/JurnalScreen";
 import { UserPageContext } from "./setup/context/userPageContext";
 import Nav from "./components/static/header/Nav";

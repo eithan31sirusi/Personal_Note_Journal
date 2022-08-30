@@ -12,12 +12,15 @@ interface PageTextContainerProps {
 }
 
 export const TitleContainer = styled.div<PageTextContainerProps>`
-  transform: translate(0, 28%);
-  border: ${({ borderColor }) => (borderColor ? borderColor : "1px solid green")};
+  transform: translate(0, -15rem);
+  border: ${({ borderColor }) =>
+    borderColor ? borderColor : "3px solid black"};
   height: 5rem;
   padding: 0.5rem;
-  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "10px")};
-  background-color: ${({ backgroundColor }) => (backgroundColor ? backgroundColor : "green")};
+  border-radius: ${({ borderRadius }) =>
+    borderRadius ? borderRadius : "10px"};
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor ? backgroundColor : "rgba(0, 0, 0, 0.5)"};
   /* chiled input */
   h1 {
     font-family: ${({ fontFamily }) =>
@@ -30,25 +33,8 @@ export const TitleContainer = styled.div<PageTextContainerProps>`
     width: fit-content;
     min-width: 20%;
     min-height: 3rem;
-    cursor: pointer;
     transition: ease-in-out 0.5s;
     margin: 0;
-    margin-bottom: 3rem;
     color: ${({ textColor }) => textColor || "black"};
-
-    /* focus */
-    :focus {
-      outline: none;
-      border: 0px solid rgb(10, 50, 80);
-      border-radius: 5px;
-      box-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
-    }
-
-    :hover {
-      background: rgba(10, 50, 250, 0.2);
-      border-radius: 10px;
-      cursor: pointer;
-      box-shadow: 0px 0px 30px rgba(30, 50, 80, 1);
-    }
   }
 `;

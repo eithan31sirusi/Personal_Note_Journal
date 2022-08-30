@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface IProps {
   children?: React.ReactNode;
@@ -6,12 +6,29 @@ interface IProps {
 }
 
 const DeleteBtn: React.FC<IProps> = ({ ClickHnadler }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
   return (
     <svg
       id="Layer_1"
       data-name="Layer 1"
       viewBox="0 0 341.62 341.62"
       onClick={ClickHnadler}
+      style={{
+        cursor: "pointer",
+        // box shadwo effect
+        boxShadow: isHovered ? "0px 0px 10px rgba(255, 255, 255, 1)" : "none",
+        transition: "all 0.5s ease-in-out",
+      }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <title>Delete</title>
       <rect

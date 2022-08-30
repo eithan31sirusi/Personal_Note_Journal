@@ -12,7 +12,7 @@ export const AllertBubleContainer = styled.div`
 
   position: absolute;
   bottom: 55%;
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(3.5px);
   border-radius: 20%;
   transform-origin: left;
   transition: transform 0.5s;

@@ -30,12 +30,13 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
     if (items) {
       setItems(items);
     }
+
+    
     console.log(items, "items");
   }, [userWirtingData]);
 
-
   return (
-    <PageContainer flexDir="row">
+    <PageContainer flexDir="row" minHeight="98vh">
       {items.length > 0 ? (
         items
           .filter((item: any) => item.pageNumber === currentPageNumber)
@@ -76,9 +77,27 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
             </>
           ))
       ) : (
-        <>
-          <CustomTitle titleText="אין עמודים להצגה" fontSize="3rem" fontWeight="300" textColor="red"/>
-        </>
+        <span
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <CustomTitle
+            titleText="אין עמודים להצגה"
+            fontSize="3rem"
+            fontWeight="300"
+            textColor="rgba(255, 255, 220, 1)"
+          />
+          <FeatherQuil
+            SVGwidth="5rem"
+            clickHandler={() => {
+              history.push("/workshop");
+            }}
+          />
+        </span>
       )}
     </PageContainer>
   );

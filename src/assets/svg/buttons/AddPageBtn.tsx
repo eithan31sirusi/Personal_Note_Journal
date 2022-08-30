@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface IProps {
   children?: React.ReactNode;
@@ -6,6 +6,15 @@ interface IProps {
 }
 
 const AddPageBtn: React.FC<IProps> = ({ ClickHnadler }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
   return (
     <svg
       id="svg2"
@@ -13,6 +22,14 @@ const AddPageBtn: React.FC<IProps> = ({ ClickHnadler }) => {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 340 340"
       onClick={ClickHnadler}
+      style={{
+        cursor: "pointer",
+        // box shadwo effect
+        boxShadow: isHovered ? "0px 0px 10px rgba(255, 255, 255, 1)" : "none",
+        transition: "all 0.5s ease-in-out",
+      }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <defs>
         <linearGradient
@@ -35,7 +52,7 @@ const AddPageBtn: React.FC<IProps> = ({ ClickHnadler }) => {
           xlinkHref="#linear-gradient"
         />
       </defs>
-      <title>ddd</title>
+      <title>Add Page</title>
       <rect
         id="rect3755"
         x="15"
