@@ -1,5 +1,3 @@
-import BlackArrowBtnLeft from "../../../assets/svg/buttons/BlackArrowBtnLeft";
-
 import { outPutSelectedSVG } from "../../../setup/config/svgParagraphDecortion";
 import { useEffect, useState } from "react";
 import {

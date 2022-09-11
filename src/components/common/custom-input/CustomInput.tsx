@@ -17,22 +17,21 @@ interface IProps {
 
 const CustomInput: React.FC<IProps> = ({
   maxLength,
-  getValue,
   id,
   type,
   placeholder,
 }) => {
   // context for user context
-  const { setInputValue } = useContext(UserPageContext);
+  const { setInputValue, inputValue } = useContext(UserPageContext);
 
   const onInputChange = (inputValue: string): void => {
     setInputValue(inputValue);
-    getValue && getValue(inputValue);
   };
 
   return (
     <LabelContainer aria-label="הכנס כותרת">
       <input
+        value={inputValue}
         id={id}
         maxLength={maxLength}
         type={type}

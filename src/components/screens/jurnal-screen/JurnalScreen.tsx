@@ -14,48 +14,88 @@ import CustomTitle from "../../common/custom-title/CustomTitle";
 interface IProps {}
 
 const JurnalScreen: React.FC<IProps> = ({}) => {
-  const { userWirtingData } = useContext(UserPageContext);
+  const { userWirtingData, setUserWirtingData } = useContext(UserPageContext);
   const [items, setItems] = useState(
     JSON.parse(localStorage.getItem("userWirtingData") || "[]")
   );
   // state to set the page number for the filter func
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  // state to not showing the arrow btn when the page is 1 or the last page
+  const [isArrowBtn, setIsArrowBtn] = useState("");
 
   let history = useHistory();
 
+  // functio for edit the page
+  const editPage = (id: number) => {
+    history.push(`/edit-page/${id}`);
+
+    console.log(id, "id");
+  };
+  // function for delete the page
+  const deletePage = (id: number) => {
+    setItems(items.filter((item: any) => item.id !== id));
+    setUserWirtingData(items);
+
+    localStorage.setItem("userWirtingData", JSON.stringify(items));
+
+    // after delete the page we need to set the page number to 1
+    setCurrentPageNumber(1);
+  };
+
   // useeffect to get all data from the userWirtingData
+
   useEffect(() => {
-    console.log(userWirtingData, "jurnal");
-    const items = JSON.parse(localStorage.getItem("userWirtingData") || "null");
     if (items) {
-      setItems(items);
+      setUserWirtingData(items);
     }
 
-    
+    localStorage.setItem("userWirtingData", JSON.stringify(items));
     console.log(items, "items");
-  }, [userWirtingData]);
+    console.log(userWirtingData, "userWirtingData jurnal");
+  }, [items, setUserWirtingData, userWirtingData]);
+
+  // useeffect for showing the arrow btn when the page is 1 or the last page
+  useEffect(() => {
+    if (currentPageNumber === 1) {
+      setIsArrowBtn("left");
+    } else if (currentPageNumber === userWirtingData.length) {
+      setIsArrowBtn("right");
+    } else {
+      setIsArrowBtn("");
+    }
+  }, [currentPageNumber, userWirtingData.length]);
+
 
   return (
     <PageContainer flexDir="row" minHeight="98vh">
-      {items.length > 0 ? (
-        items
+      {userWirtingData.length ? (
+        userWirtingData
           .filter((item: any) => item.pageNumber === currentPageNumber)
-          .map((item: any, index: any) => (
+          .map((item: any) => (
             <>
               <span
                 onClick={() => {
                   // if the page number is 1 then the left arrow is disabled
                   if (item.pageNumber === 1) {
+                 
                     return;
                   }
                   setCurrentPageNumber(item.pageNumber - 1);
                 }}
                 style={{ width: "80px", cursor: "pointer" }}
               >
-                <BlackArrowBtnRight />
+                {isArrowBtn === "right" ? <BlackArrowBtnRight /> : null}
+                {isArrowBtn === "" ? <BlackArrowBtnRight /> : null}
               </span>
+              <button
+                onClick={() => {
+                  deletePage(item.id);
+                }}
+              >
+                edit page
+              </button>
               <JurnalSinglePage
-                key={index}
+                key={item.id}
                 pageNumber={item.pageNumber}
                 title={item.title}
                 paragraph={item.paragraph}
@@ -66,13 +106,16 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
                 onClick={() => {
                   // if the page number is the last page then the right arrow is disabled
                   if (item.pageNumber === items.length) {
+                    setIsArrowBtn("left");
                     return;
                   }
+
                   setCurrentPageNumber(item.pageNumber + 1);
                 }}
                 style={{ width: "80px", cursor: "pointer" }}
               >
-                <BlackArrowBtnLeft />
+                {isArrowBtn === "left" ? <BlackArrowBtnLeft /> : null}
+                {isArrowBtn === "" ? <BlackArrowBtnLeft /> : null}
               </span>
             </>
           ))

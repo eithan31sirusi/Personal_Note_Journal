@@ -12,8 +12,6 @@ import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonCont
 import { getCurrentDate } from "../../../helpers/getCurrentDate";
 import { outPutSelectedSVG } from "../../../setup/config/svgParagraphDecortion";
 
-import BlackArrowBtnRight from "../../../assets/svg/buttons/BlackArrowBtnRight";
-import BlackArrowBtnLeft from "../../../assets/svg/buttons/BlackArrowBtnLeft";
 import SelectionDropDown from "../selection-drop-down/SelectionDropDown";
 import CustomInput from "../custom-input/CustomInput";
 
@@ -22,18 +20,9 @@ interface FlipBookProps {
   onPageChange?: (page: number) => void;
   openModal?: () => void;
   setPageSimbole?: (simbole: React.FC) => void;
-  getValue?: (value: string) => void;
-  setPageTitleValue?: any;
 }
 
-const FlipBook: React.FC<FlipBookProps> = ({
-  paragraph,
-  setPageTitleValue,
-}) => {
-  // state for getting the title of the page
-  const [pageTitleVal, setPageTitleVal] = useState<any>("");
-  // state for getting the title of the page
-
+const FlipBook: React.FC<FlipBookProps> = ({ paragraph }) => {
   const [pageSimbole, setPageSimbole] = useState<any>("");
 
   const { setIsModalOpen } = useContext(ModalContext);
@@ -68,10 +57,6 @@ const FlipBook: React.FC<FlipBookProps> = ({
               maxLength={25}
               type="text"
               placeholder="הכנס כותרת"
-              getValue={(inputValue) => {
-                setPageTitleVal(inputValue);
-                console.log(inputValue, "workShop");
-              }}
             />
 
             <div>

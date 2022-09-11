@@ -39,6 +39,8 @@ const WorkShop: React.FC<IProps> = ({}) => {
   // state for getting the page number of the page
   const [pageNumber, setPageNumber] = useState<any>(userWirtingData.length);
 
+
+
   const addNewPage = () => {
     // check if the text area is empty
     if (textAreaValue === "") return alert("יש לכתוב טקסט לעמוד");
@@ -56,12 +58,11 @@ const WorkShop: React.FC<IProps> = ({}) => {
     ]);
 
     localStorage.setItem("userWirtingData", JSON.stringify(userWirtingData));
-    console.log(localStorage.getItem("userWirtingData"), "local");
+
     setSelectedValue("");
     setText("");
     setTextAreaValue("");
     setInputValue("");
-    console.log(inputValue, "inputValue");
   };
 
   const closeModal = () => {
@@ -80,11 +81,12 @@ const WorkShop: React.FC<IProps> = ({}) => {
   useEffect(() => {
     setPageNumber(userWirtingData.length + 1);
     // load the data from the local storage
-    
-    
+    // setUserWirtingData(JSON.parse(localStorage.getItem("userWirtingData")!));
     localStorage.setItem("userWirtingData", JSON.stringify(userWirtingData));
+    // get the data from the local storage
 
-    console.log(userWirtingData, "userWirtingData");
+    console.log(userWirtingData, "userWirtingData workshop");
+    // log for items
   }, [userWirtingData]);
 
   return (
@@ -95,7 +97,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
           <DeleteBtn ClickHnadler={resetPageContent} />
         </span>
 
-        <FlipBook paragraph={Text} setPageTitleValue={inputValue} />
+        <FlipBook paragraph={Text} />
 
         {isModalOpen ? (
           <ModalBox
