@@ -36,28 +36,29 @@ const WorkShop: React.FC<IProps> = ({}) => {
   // state for the alert bubble
   const [isAlertBuble, setIsAlertBuble] = useState(false);
 
-/*   // state for getting the page number of the page
-  const [pageNumber, setPageNumber] = useState<any>(userWirtingData.length); */
-
-
+  // state for the userwriting data
+  const [pagesList, setPagesList] = useState<any>(
+    JSON.parse(localStorage.getItem("userWirtingData") || "[]")
+  );
 
   const addNewPage = () => {
     // check if the text area is empty
     if (textAreaValue === "") return alert("יש לכתוב טקסט לעמוד");
 
-    setUserWirtingData([
-      ...userWirtingData,
+    setPagesList([
+      ...pagesList,
       {
         id: userWirtingData.length,
-      //  pageNumber: pageNumber,
+        //  pageNumber: pageNumber,
         title: inputValue,
         paragraph: Text,
         symbole: selectedValue,
         date: new Date().toDateString(),
       },
     ]);
+    setUserWirtingData(pagesList);
 
-    localStorage.setItem("userWirtingData", JSON.stringify(userWirtingData));
+    localStorage.setItem("userWirtingData", JSON.stringify(pagesList));
 
     setSelectedValue("");
     setText("");
@@ -77,17 +78,26 @@ const WorkShop: React.FC<IProps> = ({}) => {
     setSelectedValue("");
   };
 
-  // use effect to set the page number to the state
+  /*   // use effect to set the page number to the state
   useEffect(() => {
- //   setPageNumber(userWirtingData.length + 1);
+    //   setPageNumber(userWirtingData.length + 1);
     // load the data from the local storage
-    // setUserWirtingData(JSON.parse(localStorage.getItem("userWirtingData")!));
-    localStorage.setItem("userWirtingData", JSON.stringify(userWirtingData));
+
+    // JSON.parse(localStorage.getItem("userWirtingData")!);
+
     // get the data from the local storage
 
-    console.log(userWirtingData, "userWirtingData workshop");
+    console.log(userWirtingData, "userWirtingData workshop1");
     // log for items
-  }, [userWirtingData]);
+  }, []);
+ */
+  useEffect(() => {
+    if (pagesList) {
+      setUserWirtingData(pagesList);
+    }
+    localStorage.setItem("userWirtingData", JSON.stringify(pagesList));
+    console.log(userWirtingData, "userWirtingData workshop2");
+  }, [pagesList, userWirtingData, setUserWirtingData]);
 
   return (
     <div>
