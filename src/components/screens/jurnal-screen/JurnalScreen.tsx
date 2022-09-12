@@ -19,7 +19,7 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
     JSON.parse(localStorage.getItem("userWirtingData") || "[]")
   );
   // state to set the page number for the filter func
-  const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  const [currentPageNumber, setCurrentPageNumber] = useState(0);
   // state to not showing the arrow btn when the page is 1 or the last page
   const [isArrowBtn, setIsArrowBtn] = useState("");
 
@@ -39,7 +39,7 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
     localStorage.setItem("userWirtingData", JSON.stringify(items));
 
     // after delete the page we need to set the page number to 1
-    setCurrentPageNumber(1);
+    setCurrentPageNumber(0);
   };
 
   // useeffect to get all data from the userWirtingData
@@ -56,31 +56,29 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
 
   // useeffect for showing the arrow btn when the page is 1 or the last page
   useEffect(() => {
-    if (currentPageNumber === 1) {
+    if (currentPageNumber === 0) {
       setIsArrowBtn("left");
-    } else if (currentPageNumber === userWirtingData.length) {
+    } else if (currentPageNumber === userWirtingData.length - 1) {
       setIsArrowBtn("right");
     } else {
       setIsArrowBtn("");
     }
   }, [currentPageNumber, userWirtingData.length]);
 
-
   return (
     <PageContainer flexDir="row" minHeight="98vh">
       {userWirtingData.length ? (
         userWirtingData
-          .filter((item: any) => item.pageNumber === currentPageNumber)
+          .filter((item: any, index: any) => index === currentPageNumber)
           .map((item: any) => (
             <>
               <span
                 onClick={() => {
                   // if the page number is 1 then the left arrow is disabled
-                  if (item.pageNumber === 1) {
-                 
+                  if (currentPageNumber === 0) {
                     return;
                   }
-                  setCurrentPageNumber(item.pageNumber - 1);
+                  setCurrentPageNumber(currentPageNumber - 1);
                 }}
                 style={{ width: "80px", cursor: "pointer" }}
               >
@@ -96,7 +94,7 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
               </button>
               <JurnalSinglePage
                 key={item.id}
-                pageNumber={item.pageNumber}
+                pageNumber={currentPageNumber}
                 title={item.title}
                 paragraph={item.paragraph}
                 symbole={item.symbole}
@@ -105,12 +103,13 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
               <span
                 onClick={() => {
                   // if the page number is the last page then the right arrow is disabled
-                  if (item.pageNumber === items.length) {
+                  if (currentPageNumber === items.length - 1) {
                     setIsArrowBtn("left");
+
                     return;
                   }
 
-                  setCurrentPageNumber(item.pageNumber + 1);
+                  setCurrentPageNumber(currentPageNumber + 1);
                 }}
                 style={{ width: "80px", cursor: "pointer" }}
               >

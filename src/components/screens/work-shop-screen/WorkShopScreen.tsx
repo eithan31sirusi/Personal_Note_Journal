@@ -36,8 +36,8 @@ const WorkShop: React.FC<IProps> = ({}) => {
   // state for the alert bubble
   const [isAlertBuble, setIsAlertBuble] = useState(false);
 
-  // state for getting the page number of the page
-  const [pageNumber, setPageNumber] = useState<any>(userWirtingData.length);
+/*   // state for getting the page number of the page
+  const [pageNumber, setPageNumber] = useState<any>(userWirtingData.length); */
 
 
 
@@ -49,7 +49,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
       ...userWirtingData,
       {
         id: userWirtingData.length,
-        pageNumber: pageNumber,
+      //  pageNumber: pageNumber,
         title: inputValue,
         paragraph: Text,
         symbole: selectedValue,
@@ -79,7 +79,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
 
   // use effect to set the page number to the state
   useEffect(() => {
-    setPageNumber(userWirtingData.length + 1);
+ //   setPageNumber(userWirtingData.length + 1);
     // load the data from the local storage
     // setUserWirtingData(JSON.parse(localStorage.getItem("userWirtingData")!));
     localStorage.setItem("userWirtingData", JSON.stringify(userWirtingData));
