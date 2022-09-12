@@ -59,11 +59,8 @@ const FlipBook: React.FC<FlipBookProps> = ({ paragraph }) => {
               placeholder="הכנס כותרת"
             />
 
-            <div>
-              <PageSymbolContainer
-                onClick={openSVGMode}
-                imgFloatDirection={true}
-              >
+            <div onClick={openSVGMode}>
+              <PageSymbolContainer imgFloatDirection={true}>
                 {!pageSimbole ? (
                   <div className="symbol-massage">
                     <p>לחץ להוסיף סמל</p>

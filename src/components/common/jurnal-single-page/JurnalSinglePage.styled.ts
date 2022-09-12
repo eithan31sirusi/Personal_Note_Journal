@@ -5,6 +5,7 @@ import animalSkinImg from "../../../assets/images/animal_skin1.jpg";
 export interface PageTextContainerProps {
   children: React.ReactNode;
   imgFloatDirection: boolean;
+  showSymbol?: boolean;
 }
 
 export const PageContainer = styled.div`
@@ -65,7 +66,6 @@ export const FlipBookContainer = styled.div`
     min-width: 650px;
     min-height: 700px;
     border-radius: 50px;
-
   }
 
   .current-page {
@@ -82,8 +82,6 @@ export const FlipBookContainer = styled.div`
     align-items: center;
     margin: 0 1rem;
   }
-
-
 `;
 
 export const PageSymbolContainer = styled.div<PageTextContainerProps>`
@@ -93,6 +91,6 @@ export const PageSymbolContainer = styled.div<PageTextContainerProps>`
   max-width: fit-content;
   float: ${({ imgFloatDirection }) => (imgFloatDirection ? "right" : "left")};
   margin: 0 0 5px 5px;
-
+  display: ${({ showSymbol }) => (showSymbol ? "block" : "none")};
   border-radius: 50px;
 `;

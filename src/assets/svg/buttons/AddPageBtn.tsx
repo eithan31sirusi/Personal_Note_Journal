@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 interface IProps {
   children?: React.ReactNode;
-  ClickHnadler?: () => void;
+  ClickHandler?: (e: any) => void;
 }
 
-const AddPageBtn: React.FC<IProps> = ({ ClickHnadler }) => {
+const AddPageBtn: React.FC<IProps> = ({ ClickHandler }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -21,7 +21,7 @@ const AddPageBtn: React.FC<IProps> = ({ ClickHnadler }) => {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 340 340"
-      onClick={ClickHnadler}
+      onClick={ClickHandler}
       style={{
         cursor: "pointer",
         // box shadwo effect

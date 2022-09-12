@@ -41,7 +41,10 @@ const JurnalSinglePage: React.FC<IProps> = ({
           <div id="f1" className="page-content">
             <h1>{title}</h1>
             <div>
-              <PageSymbolContainer imgFloatDirection={true}>
+              <PageSymbolContainer
+                imgFloatDirection={true}
+                showSymbol={pageSimbole}
+              >
                 {pageSimbole}
               </PageSymbolContainer>
               <pre>

@@ -13,6 +13,7 @@ import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonCont
 import { PageContainer } from "../../layout/PageContainer";
 import DeleteBtn from "../../../assets/svg/buttons/DeleteBtn";
 import AddPageBtn from "../../../assets/svg/buttons/AddPageBtn";
+import ResetBtn from "../../../assets/svg/buttons/ResetBtn";
 
 interface IProps {}
 
@@ -103,8 +104,8 @@ const WorkShop: React.FC<IProps> = ({}) => {
     <div>
       <PageContainer flexDir="row" flexX="flex-start" flexY="flex-start">
         <span style={{ width: "70px", cursor: "pointer" }}>
-          <AddPageBtn ClickHnadler={addNewPage} />
-          <DeleteBtn ClickHnadler={resetPageContent} />
+          <AddPageBtn ClickHandler={addNewPage} />
+          <ResetBtn ClickHandler={resetPageContent} />
         </span>
 
         <FlipBook paragraph={Text} />
@@ -133,7 +134,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
             }}
           >
             <CustomTextArea
-              maxLength={1449}
+              maxLength={1700}
               getValue={(textAreaValue) => {
                 setTextAreaValue(textAreaValue);
               }}

@@ -10,6 +10,9 @@ import BlackArrowBtnRight from "../../../assets/svg/buttons/BlackArrowBtnRight";
 import BlackArrowBtnLeft from "../../../assets/svg/buttons/BlackArrowBtnLeft";
 import { PageContainer } from "../../layout/PageContainer";
 import CustomTitle from "../../common/custom-title/CustomTitle";
+import AddPageBtn from "../../../assets/svg/buttons/AddPageBtn";
+import DeleteBtn from "../../../assets/svg/buttons/DeleteBtn";
+import { FlexContainer } from "../../layout/FlexContainer";
 
 interface IProps {}
 
@@ -72,26 +75,30 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
           .filter((item: any, index: any) => index === currentPageNumber)
           .map((item: any) => (
             <>
-              <span
-                onClick={() => {
-                  // if the page number is 1 then the left arrow is disabled
-                  if (currentPageNumber === 0) {
-                    return;
-                  }
-                  setCurrentPageNumber(currentPageNumber - 1);
-                }}
-                style={{ width: "80px", cursor: "pointer" }}
-              >
-                {isArrowBtn === "right" ? <BlackArrowBtnRight /> : null}
-                {isArrowBtn === "" ? <BlackArrowBtnRight /> : null}
-              </span>
-              <button
-                onClick={() => {
-                  deletePage(item.id);
-                }}
-              >
-                edit page
-              </button>
+    
+                <span style={{ transform:"translate(-5rem,-23.5rem)", width: "70px", cursor: "pointer" }}>
+                  <AddPageBtn ClickHandler={editPage} />
+                  <DeleteBtn
+                    ClickHandler={() => {
+                      deletePage(item.id);
+                    }}
+                  />
+                </span>
+                <span
+                  onClick={() => {
+                    // if the page number is 1 then the left arrow is disabled
+                    if (currentPageNumber === 0) {
+                      return;
+                    }
+                    setCurrentPageNumber(currentPageNumber - 1);
+                  }}
+                  style={{ width: "80px", cursor: "pointer" }}
+                >
+                  {isArrowBtn === "right" ? <BlackArrowBtnRight /> : null}
+                  {isArrowBtn === "" ? <BlackArrowBtnRight /> : null}
+                </span>
+       
+
               <JurnalSinglePage
                 key={item.id}
                 pageNumber={currentPageNumber}

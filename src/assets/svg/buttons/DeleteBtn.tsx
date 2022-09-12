@@ -2,10 +2,12 @@ import React, { useState } from "react";
 
 interface IProps {
   children?: React.ReactNode;
-  ClickHnadler?: () => void;
+  // function that returns any value
+
+  ClickHandler?: (item: any) => any;
 }
 
-const DeleteBtn: React.FC<IProps> = ({ ClickHnadler }) => {
+const DeleteBtn: React.FC<IProps> = ({ ClickHandler }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -20,7 +22,7 @@ const DeleteBtn: React.FC<IProps> = ({ ClickHnadler }) => {
       id="Layer_1"
       data-name="Layer 1"
       viewBox="0 0 341.62 341.62"
-      onClick={ClickHnadler}
+      onClick={ClickHandler}
       style={{
         cursor: "pointer",
         // box shadwo effect
