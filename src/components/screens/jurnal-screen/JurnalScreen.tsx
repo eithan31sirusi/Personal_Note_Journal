@@ -6,18 +6,21 @@ import JurnalSinglePage from "../../common/jurnal-single-page/JurnalSinglePage";
 
 import UserPageContext from "../../../setup/context/userPageContext";
 import FeatherQuil from "../../../assets/svg/buttons/FeatherQuil";
+import CustomTitle from "../../common/custom-title/CustomTitle";
+
+import AllertBuble from "../../common/allert-buble/AllertBuble";
 import BlackArrowBtnRight from "../../../assets/svg/buttons/BlackArrowBtnRight";
 import BlackArrowBtnLeft from "../../../assets/svg/buttons/BlackArrowBtnLeft";
-import { PageContainer } from "../../layout/PageContainer";
-import CustomTitle from "../../common/custom-title/CustomTitle";
 import AddPageBtn from "../../../assets/svg/buttons/AddPageBtn";
 import DeleteBtn from "../../../assets/svg/buttons/DeleteBtn";
-import { FlexContainer } from "../../layout/FlexContainer";
 
+import { PageContainer } from "../../layout/PageContainer";
+import EditBtn from "../../../assets/svg/buttons/EditBtn";
 interface IProps {}
 
 const JurnalScreen: React.FC<IProps> = ({}) => {
   const { userWirtingData, setUserWirtingData } = useContext(UserPageContext);
+
   const [items, setItems] = useState(
     JSON.parse(localStorage.getItem("userWirtingData") || "[]")
   );
@@ -25,6 +28,9 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
   const [currentPageNumber, setCurrentPageNumber] = useState(0);
   // state to not showing the arrow btn when the page is 1 or the last page
   const [isArrowBtn, setIsArrowBtn] = useState("");
+
+  // state for the alert bubble
+  const [isAlertBuble, setIsAlertBuble] = useState(false);
 
   let history = useHistory();
 
@@ -75,29 +81,33 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
           .filter((item: any, index: any) => index === currentPageNumber)
           .map((item: any) => (
             <>
-    
-                <span style={{ transform:"translate(-5rem,-23.5rem)", width: "70px", cursor: "pointer" }}>
-                  <AddPageBtn ClickHandler={editPage} />
-                  <DeleteBtn
-                    ClickHandler={() => {
-                      deletePage(item.id);
-                    }}
-                  />
-                </span>
-                <span
-                  onClick={() => {
-                    // if the page number is 1 then the left arrow is disabled
-                    if (currentPageNumber === 0) {
-                      return;
-                    }
-                    setCurrentPageNumber(currentPageNumber - 1);
+              <span
+                style={{
+                  transform: "translate(-5rem,-23.5rem)",
+                  width: "70px",
+                  cursor: "pointer",
+                }}
+              >
+                <EditBtn ClickHandler={editPage} />
+                <DeleteBtn
+                  ClickHandler={() => {
+                    setIsAlertBuble(true);
                   }}
-                  style={{ width: "80px", cursor: "pointer" }}
-                >
-                  {isArrowBtn === "right" ? <BlackArrowBtnRight /> : null}
-                  {isArrowBtn === "" ? <BlackArrowBtnRight /> : null}
-                </span>
-       
+                />
+              </span>
+              <span
+                onClick={() => {
+                  // if the page number is 1 then the left arrow is disabled
+                  if (currentPageNumber === 0) {
+                    return;
+                  }
+                  setCurrentPageNumber(currentPageNumber - 1);
+                }}
+                style={{ width: "80px", cursor: "pointer" }}
+              >
+                {isArrowBtn === "right" ? <BlackArrowBtnRight /> : null}
+                {isArrowBtn === "" ? <BlackArrowBtnRight /> : null}
+              </span>
 
               <JurnalSinglePage
                 key={item.id}
@@ -123,6 +133,21 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
                 {isArrowBtn === "left" ? <BlackArrowBtnLeft /> : null}
                 {isArrowBtn === "" ? <BlackArrowBtnLeft /> : null}
               </span>
+              {isAlertBuble ? (
+                <AllertBuble
+                  title="למחוק? הדף לא יהיה ניתן לשחזור לאחר שנמחק"
+                  closeBtnText="מחק"
+                  approveBtnText="ביטול"
+                  fontSize="1.1rem"
+                  onClose={() => {
+                    deletePage(item.id);
+                    setIsAlertBuble(false);
+                  }}
+                  onApprove={() => {
+                    setIsAlertBuble(false);
+                  }}
+                />
+              ) : null}
             </>
           ))
       ) : (
@@ -147,7 +172,7 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
             }}
           />
         </span>
-      )}
+      )}{" "}
     </PageContainer>
   );
 };

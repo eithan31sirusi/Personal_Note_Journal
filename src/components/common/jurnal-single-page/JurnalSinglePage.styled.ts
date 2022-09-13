@@ -31,7 +31,7 @@ export const FlipBookContainer = styled.div`
   justify-content: center;
   align-items: center;
   font-family: sans-serif;
-
+  z-index: 1;
   .book {
     margin: 0 1rem 0 1rem;
     position: relative;

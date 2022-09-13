@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import {
   FlipBookContainer,
-  PageContainer,
+  SinglePageContainer,
   PageSymbolContainer,
 } from "./FlipBook.styled";
 
@@ -45,7 +45,7 @@ const FlipBook: React.FC<FlipBookProps> = ({ paragraph }) => {
   return (
     <FlipBookContainer>
       <div id="book" className="book">
-        <PageContainer>
+        <SinglePageContainer>
           <div className="page-header">
             <p className="page-date">{getCurrentDate()}</p>
           </div>
@@ -81,7 +81,7 @@ const FlipBook: React.FC<FlipBookProps> = ({ paragraph }) => {
               )}
             </div>
           </div>
-        </PageContainer>
+        </SinglePageContainer>
       </div>
     </FlipBookContainer>
   );

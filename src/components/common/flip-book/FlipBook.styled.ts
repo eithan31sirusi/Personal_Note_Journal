@@ -7,7 +7,7 @@ export interface PageTextContainerProps {
   imgFloatDirection: boolean;
 }
 
-export const PageContainer = styled.div`
+export const SinglePageContainer = styled.div`
   background-image: url(${animalSkinImg});
   background-size: cover;
   position: absolute;

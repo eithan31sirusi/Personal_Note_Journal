@@ -4,34 +4,45 @@ import {
   BtnContainer,
   AllertBubleApprovalBtn,
   AllertBubleCloseBtn,
+  AllertBubleTitle,
+  AlertDarkBackground,
 } from "./AllertBuble.styled";
 
 interface IProps {
   children?: React.ReactNode;
-  text?: string;
-  onDiscard?: () => void;
-  onCancel?: () => void;
+  title?: string;
+  approveBtnText?: string;
+  closeBtnText?: string;
+  fontSize?: string;
+  onApprove?: () => void;
+  onClose?: () => void;
 }
 
 const AllertBuble: React.FC<IProps> = ({
   children,
-  text,
-  onDiscard,
-  onCancel,
+  title,
+  onApprove,
+  onClose,
+  approveBtnText,
+  closeBtnText,
+  fontSize,
 }) => {
   return (
     <>
       <AllertBubleContainer>
         <span style={{ textAlign: "center" }}>
-          <p>{text}</p>
+          <AllertBubleTitle fontSize={fontSize}>{title}</AllertBubleTitle>
         </span>
         <BtnContainer>
-          <AllertBubleApprovalBtn onClick={onDiscard}>
-            השלך
+          <AllertBubleApprovalBtn onClick={onApprove}>
+            {approveBtnText}
           </AllertBubleApprovalBtn>
-          <AllertBubleCloseBtn onClick={onCancel}>ביטול</AllertBubleCloseBtn>
-        </BtnContainer>{" "}
+          <AllertBubleCloseBtn onClick={onClose}>
+            {closeBtnText}
+          </AllertBubleCloseBtn>
+        </BtnContainer>
       </AllertBubleContainer>{" "}
+      <AlertDarkBackground onClick={onClose} />
     </>
   );
 };

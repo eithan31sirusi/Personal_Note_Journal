@@ -142,15 +142,17 @@ const WorkShop: React.FC<IProps> = ({}) => {
             />
             {isAlertBuble ? (
               <AllertBuble
-                onCancel={() => {
+                onClose={() => {
                   setIsAlertBuble(false);
                 }}
-                text="ייתכן ויש שינויים שלא ישמרו, האם לסגור?"
-                onDiscard={() => {
+                title="ייתכן ויש שינויים שלא ישמרו, האם לסגור?"
+                onApprove={() => {
                   setTextAreaValue(Text);
                   setIsAlertBuble(false);
                   closeModal();
                 }}
+                closeBtnText="ביטול"
+                approveBtnText="השלך"
               />
             ) : null}
           </ModalBox>

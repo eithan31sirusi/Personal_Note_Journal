@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-
+interface AllertBubleProps {
+  children: React.ReactNode;
+  fontSize?: string;
+}
 
 export const AllertBubleContainer = styled.div`
   width: 450px;
@@ -12,28 +15,28 @@ export const AllertBubleContainer = styled.div`
 
   position: absolute;
   bottom: 55%;
-  backdrop-filter: blur(3.5px);
+  backdrop-filter: blur(4.8px);
   border-radius: 20%;
   transform-origin: left;
   transition: transform 0.5s;
   /* shadow box */
   border: 2px solid rgba(0, 0, 30, 0.5);
   box-shadow: 0px 0px 40px rgba(0, 0, 30, 1);
-  z-index: 5;
+  z-index: 20;
+`;
 
-  p {
-    font-size: 1.3rem;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    font-weight: 600;
-    margin: 1rem 0 0 0;
-  }
+export const AllertBubleTitle = styled.p<AllertBubleProps>`
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "1.2rem")};
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  margin: 1rem 0 0 0;
+  z-index: 20;
 `;
 
 export const BtnContainer = styled.div`
   width: 100%;
   height: 64px;
-
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -83,4 +86,17 @@ export const AllertBubleCloseBtn = styled.button`
     border: 0px solid rgb(230, 1, 20);
     box-shadow: 0px 0px 30px rgba(230, 1, 20, 1);
   }
+`;
+
+export const AlertDarkBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 `;
