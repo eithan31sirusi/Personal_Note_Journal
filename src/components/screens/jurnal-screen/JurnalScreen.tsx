@@ -16,6 +16,8 @@ import DeleteBtn from "../../../assets/svg/buttons/DeleteBtn";
 
 import { PageContainer } from "../../layout/PageContainer";
 import EditBtn from "../../../assets/svg/buttons/EditBtn";
+import EditPageForm from "../../common/edit-page-form/EditPageForm";
+import ModalBox from "../../common/modal-box/ModalBox";
 interface IProps {}
 
 const JurnalScreen: React.FC<IProps> = ({}) => {
@@ -35,10 +37,27 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
   let history = useHistory();
 
   // functio for edit the page
-  const editPage = (id: number) => {
-    history.push(`/edit-page/${id}`);
+  const editPage = (
+    id: number,
+    newTitle: string,
+    newParagraph: string,
+    newSymbol: any
+  ) => {
+    const newEditPage = items.map((item: any) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          title: newTitle,
+          paragraph: newParagraph,
+          symbole: newSymbol,
+        };
+      }
 
-    console.log(id, "id");
+      return item;
+    });
+    setItems(newEditPage);
+    localStorage.setItem("userWirtingData", JSON.stringify(newEditPage));
+    console.log(newEditPage, "newEditPage");
   };
   // function for delete the page
   const deletePage = (id: number) => {
@@ -76,6 +95,9 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
 
   return (
     <PageContainer flexDir="row" minHeight="98vh">
+      <ModalBox ClickMode={false} setLeft="48%" setTop="50%">
+        <EditPageForm />
+      </ModalBox>
       {userWirtingData.length ? (
         userWirtingData
           .filter((item: any, index: any) => index === currentPageNumber)
@@ -88,7 +110,11 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
                   cursor: "pointer",
                 }}
               >
-                <EditBtn ClickHandler={editPage} />
+                <EditBtn
+                  ClickHandler={() => {
+                    editPage(item.id, "1", "1", <AddPageBtn />);
+                  }}
+                />
                 <DeleteBtn
                   ClickHandler={() => {
                     setIsAlertBuble(true);

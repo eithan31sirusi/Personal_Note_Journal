@@ -7,6 +7,7 @@ export interface FlexContainerProps {
     flexX?: string;
     flexY?: string;
     minHeight?: string;
+    margin?: string;
 }
 
 // main container
@@ -18,6 +19,7 @@ export const FlexContainer = styled.div<FlexContainerProps>`
     width: fit-content;
     height: 100%;
     min-height: ${({ minHeight }) => (minHeight ? minHeight : "")};
+    margin: ${({ margin }) => (margin ? margin : "")};
 `;
     
 

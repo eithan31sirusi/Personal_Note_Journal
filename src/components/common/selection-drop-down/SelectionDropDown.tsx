@@ -19,16 +19,19 @@ interface IProps {
   // placeholder
   placeholder?: string;
   // label
+  setTop?: string;
+  setRight?: string;
+  position?: string;
 }
 
-const SelectionDropDown: React.FC<IProps> = ({}) => {
+const SelectionDropDown: React.FC<IProps> = ({ setTop, setRight,position }) => {
   // context for select drop down
   const { selectedValue, setSelectedValue, setIsOpen } = useContext(
     SelectDropDwonContext
   );
 
   return (
-    <DropDownContainer>
+    <DropDownContainer setTop={setTop} setRight={setRight} position={position}>
       <DropDownSelect
         name="text decoration"
         id="textdecoration"

@@ -20,38 +20,35 @@ import {
 interface ModalBoxProps {
   children: React.ReactNode;
   title?: string;
-  body?: any;
-  footer?: any;
   onClose?: () => void;
   onOpen?: () => void;
   onCancel?: () => void;
-  // SAVE PARAGRAH GREE NBUTTON
   onSave?: () => void;
-  isOpen?: boolean;
-  // click mode to open the isClickMode
+  ClickMode?: boolean;
   clickMode?: boolean;
+  setTop?: string;
+  setLeft?: string;
 }
 
 const ModalBox: React.FC<ModalBoxProps> = ({
   title,
-  body,
-  footer,
   onClose,
-  onOpen,
   onCancel,
   children,
   onSave,
   clickMode,
+  setTop,
+  setLeft,
 }) => {
   // state to add custombutton group to the modal footer
   const [isClickMode, setIsClickMode] = useState(false);
 
   return (
     <div>
-      <ModalBoxContainer>
+      <ModalBoxContainer setTop={setTop} setLeft={setLeft}>
         <ModalHeader>
           <span>{title}</span>
-          {!clickMode ? (
+          {isClickMode ? (
             <span
               onClick={onClose}
               style={{ width: "22px", cursor: "pointer" }}

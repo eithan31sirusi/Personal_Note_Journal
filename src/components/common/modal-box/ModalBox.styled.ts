@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+interface ModalBoxProps {
+  setTop?: string;
+  setLeft?: string;
+}
+
 // modal dark background
 export const ModalDarkBackground = styled.div`
   position: fixed;
@@ -12,23 +17,24 @@ export const ModalDarkBackground = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  z-index: 2;
 `;
 
 // container for modal box
-export const ModalBoxContainer = styled.div`
+export const ModalBoxContainer = styled.div<ModalBoxProps>`
   width: 600px;
   height: 700px;
-  overflow: hidden;
+  overflow: unset;
   position: absolute;
-  top: 40%;
-  left: 50%;
+  top: ${({ setTop }) => (setTop ? setTop : "40%")};
+  left: ${({ setLeft }) => (setLeft ? setLeft : "50%")};
   transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   border-radius: 5px;
-  z-index: 2;
+  z-index: 3;
 `;
 
 // ModalHeader
@@ -48,7 +54,7 @@ export const ModalHeader = styled.div`
 // ModalBody
 export const ModalBody = styled.div`
   width: 100%;
- 
+
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,10 +1,17 @@
 import styled from "styled-components";
 
+interface DropDownContainerProps {
+  children?: React.ReactNode;
+  setTop?: string;
+  setRight?: string;
+  position?: string;
+}
+
 // selection dropdown container
-export const DropDownContainer = styled.div`
-  position: absolute;
-  top: 150px;
-  right: -220px;
+export const DropDownContainer = styled.div<DropDownContainerProps>`
+  position: ${({ position }) => (position ? position : "absolute")};
+  top: ${({ setTop }) => (setTop ? setTop : "150px")};
+  right: ${({ setRight }) => (setRight ? setRight : "-220px")};
   width: 200px;
   height: 64px;
   display: flex;

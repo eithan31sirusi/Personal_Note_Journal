@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 
 import { getKeyBoardClick } from "../../../helpers/getKeyBoardClick";
 import UserPageContext from "../../../setup/context/userPageContext";
-import { LabelContainer } from "./CustomInput.styled";
+import { CustomInp } from "./CustomInput.styled";
 
 interface IProps {
   label?: string;
@@ -10,8 +10,12 @@ interface IProps {
   placeholder?: string;
   maxLength?: number;
   type?: string;
-  id: string;
+  id?: string;
   disabled?: boolean;
+  ariaLabel?: string;
+  bgColor?: string;
+  setBorder?: boolean;
+  setFocusBorderColor?: boolean;
   error?: string;
 }
 
@@ -20,6 +24,10 @@ const CustomInput: React.FC<IProps> = ({
   id,
   type,
   placeholder,
+  ariaLabel,
+  bgColor,
+  setBorder,
+  setFocusBorderColor,
 }) => {
   // context for user context
   const { setInputValue, inputValue } = useContext(UserPageContext);
@@ -29,8 +37,10 @@ const CustomInput: React.FC<IProps> = ({
   };
 
   return (
-    <LabelContainer aria-label="הכנס כותרת">
-      <input
+    <label aria-label={ariaLabel}>
+      <CustomInp
+        bgColor={bgColor}
+        setBorder={setBorder}
         value={inputValue}
         id={id}
         maxLength={maxLength}
@@ -40,8 +50,9 @@ const CustomInput: React.FC<IProps> = ({
         onKeyDown={(e) => {
           getKeyBoardClick(e, "Enter", "title");
         }}
+        focusBorderColor={setFocusBorderColor}
       />
-    </LabelContainer>
+    </label>
   );
 };
 

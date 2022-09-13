@@ -228,7 +228,7 @@ const EditBtn: React.FC<IProps> = ({ ClickHandler }) => {
           xlinkHref="#linear-gradient-15"
         />
       </defs>
-      <title>a</title>
+      <title>Edit Page</title>
       <rect
         id="rect3755"
         x="15.81"
