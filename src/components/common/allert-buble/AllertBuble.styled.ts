@@ -3,9 +3,11 @@ import styled from "styled-components";
 interface AllertBubleProps {
   children: React.ReactNode;
   fontSize?: string;
+  translateX?: string;
+  translateY?: string;
 }
 
-export const AllertBubleContainer = styled.div`
+export const AllertBubleContainer = styled.div<AllertBubleProps>`
   width: 450px;
   color: #000000;
   display: flex;
@@ -17,7 +19,7 @@ export const AllertBubleContainer = styled.div`
   bottom: 55%;
   backdrop-filter: blur(4.8px);
   border-radius: 20%;
-  transform-origin: left;
+  transform: translate(${({translateX}) => translateX? translateX:"50%"}, ${({translateY}) => translateY? translateY:"50%"});
   transition: transform 0.5s;
   /* shadow box */
   border: 2px solid rgba(0, 0, 30, 0.5);
@@ -99,4 +101,5 @@ export const AlertDarkBackground = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  z-index: 0;
 `;

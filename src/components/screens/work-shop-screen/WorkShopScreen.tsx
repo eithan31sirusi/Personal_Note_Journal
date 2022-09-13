@@ -11,7 +11,6 @@ import { UserPageContext } from "../../../setup/context/userPageContext";
 import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonContext";
 
 import { PageContainer } from "../../layout/PageContainer";
-import DeleteBtn from "../../../assets/svg/buttons/DeleteBtn";
 import AddPageBtn from "../../../assets/svg/buttons/AddPageBtn";
 import ResetBtn from "../../../assets/svg/buttons/ResetBtn";
 
@@ -79,19 +78,6 @@ const WorkShop: React.FC<IProps> = ({}) => {
     setSelectedValue("");
   };
 
-  /*   // use effect to set the page number to the state
-  useEffect(() => {
-    //   setPageNumber(userWirtingData.length + 1);
-    // load the data from the local storage
-
-    // JSON.parse(localStorage.getItem("userWirtingData")!);
-
-    // get the data from the local storage
-
-    console.log(userWirtingData, "userWirtingData workshop1");
-    // log for items
-  }, []);
- */
   useEffect(() => {
     if (pagesList) {
       setUserWirtingData(pagesList);
@@ -140,22 +126,25 @@ const WorkShop: React.FC<IProps> = ({}) => {
               }}
               value={textAreaValue}
             />
-            {isAlertBuble ? (
-              <AllertBuble
-                onClose={() => {
-                  setIsAlertBuble(false);
-                }}
-                title="ייתכן ויש שינויים שלא ישמרו, האם לסגור?"
-                onApprove={() => {
-                  setTextAreaValue(Text);
-                  setIsAlertBuble(false);
-                  closeModal();
-                }}
-                closeBtnText="ביטול"
-                approveBtnText="השלך"
-              />
-            ) : null}
           </ModalBox>
+        ) : null}
+        {isAlertBuble ? (
+          <AllertBuble
+            onClose={() => {
+              setIsAlertBuble(false);
+            }}
+            title="ייתכן ויש שינויים שלא ישמרו, האם לסגור?"
+            onApprove={() => {
+              setTextAreaValue(Text);
+              setIsAlertBuble(false);
+              closeModal();
+            }}
+            closeBtnText="ביטול"
+            approveBtnText="השלך"
+            translateX="-10.2rem"
+            translateY="-2.5rem"
+        
+          />
         ) : null}
       </PageContainer>
       <div

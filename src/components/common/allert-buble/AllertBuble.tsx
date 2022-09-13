@@ -14,6 +14,8 @@ interface IProps {
   approveBtnText?: string;
   closeBtnText?: string;
   fontSize?: string;
+  translateX?: string;
+  translateY?: string;
   onApprove?: () => void;
   onClose?: () => void;
 }
@@ -26,10 +28,12 @@ const AllertBuble: React.FC<IProps> = ({
   approveBtnText,
   closeBtnText,
   fontSize,
+  translateX,
+  translateY,
 }) => {
   return (
     <>
-      <AllertBubleContainer>
+      <AllertBubleContainer translateX={translateX} translateY={translateY}>
         <span style={{ textAlign: "center" }}>
           <AllertBubleTitle fontSize={fontSize}>{title}</AllertBubleTitle>
         </span>
@@ -42,7 +46,7 @@ const AllertBuble: React.FC<IProps> = ({
           </AllertBubleCloseBtn>
         </BtnContainer>
       </AllertBubleContainer>{" "}
-      <AlertDarkBackground onClick={onClose} />
+      <AlertDarkBackground />
     </>
   );
 };

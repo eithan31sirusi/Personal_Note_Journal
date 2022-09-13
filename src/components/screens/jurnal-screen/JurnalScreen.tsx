@@ -146,6 +146,7 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
                   onApprove={() => {
                     setIsAlertBuble(false);
                   }}
+                  translateX="0"
                 />
               ) : null}
             </>
