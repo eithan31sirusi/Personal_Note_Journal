@@ -57,6 +57,7 @@ const FlipBook: React.FC<FlipBookProps> = ({ paragraph }) => {
               maxLength={25}
               type="text"
               placeholder="הכנס כותרת"
+              bgImage={false}
             />
 
             <div onClick={openSVGMode}>

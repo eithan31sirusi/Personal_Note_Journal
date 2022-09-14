@@ -16,6 +16,8 @@ interface IProps {
   bgColor?: string;
   setBorder?: boolean;
   setFocusBorderColor?: boolean;
+  bgImage?: boolean;
+  hoverBgColor?: boolean;
   error?: string;
 }
 
@@ -28,6 +30,8 @@ const CustomInput: React.FC<IProps> = ({
   bgColor,
   setBorder,
   setFocusBorderColor,
+  bgImage,
+  hoverBgColor,
 }) => {
   // context for user context
   const { setInputValue, inputValue } = useContext(UserPageContext);
@@ -39,6 +43,8 @@ const CustomInput: React.FC<IProps> = ({
   return (
     <label aria-label={ariaLabel}>
       <CustomInp
+        hoverBgColor={hoverBgColor}
+        bgImage={bgImage}
         bgColor={bgColor}
         setBorder={setBorder}
         value={inputValue}

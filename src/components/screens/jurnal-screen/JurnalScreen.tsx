@@ -34,6 +34,9 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
   // state for the alert bubble
   const [isAlertBuble, setIsAlertBuble] = useState(false);
 
+  //state for the modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   let history = useHistory();
 
   // functio for edit the page
@@ -60,6 +63,10 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
     console.log(newEditPage, "newEditPage");
   };
   // function for delete the page
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
   const deletePage = (id: number) => {
     setItems(items.filter((item: any) => item.id !== id));
     setUserWirtingData(items);
@@ -95,14 +102,24 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
 
   return (
     <PageContainer flexDir="row" minHeight="98vh">
-      <ModalBox ClickMode={false} setLeft="48%" setTop="50%">
-        <EditPageForm />
-      </ModalBox>
       {userWirtingData.length ? (
         userWirtingData
           .filter((item: any, index: any) => index === currentPageNumber)
           .map((item: any) => (
             <>
+              {isModalOpen && (
+                <ModalBox ClickMode={false} setLeft="48.5%" setTop="50%">
+                  <EditPageForm
+                    onCencel={() => {
+                      setIsModalOpen(false);
+                    }}
+                    onApproval={() => {
+                      editPage(item.id, "7", "7", EditBtn);
+                      setIsModalOpen(false);
+                    }}
+                  />
+                </ModalBox>
+              )}
               <span
                 style={{
                   transform: "translate(-5rem,-23.5rem)",
@@ -111,9 +128,10 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
                 }}
               >
                 <EditBtn
-                  ClickHandler={() => {
+                  /*     ClickHandler={() => {
                     editPage(item.id, "1", "1", <AddPageBtn />);
-                  }}
+                  }} */
+                  ClickHandler={openModal}
                 />
                 <DeleteBtn
                   ClickHandler={() => {
