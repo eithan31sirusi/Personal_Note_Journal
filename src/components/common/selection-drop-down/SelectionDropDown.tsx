@@ -24,7 +24,11 @@ interface IProps {
   position?: string;
 }
 
-const SelectionDropDown: React.FC<IProps> = ({ setTop, setRight,position }) => {
+const SelectionDropDown: React.FC<IProps> = ({
+  setTop,
+  setRight,
+  position,
+}) => {
   // context for select drop down
   const { selectedValue, setSelectedValue, setIsOpen } = useContext(
     SelectDropDwonContext
@@ -37,7 +41,7 @@ const SelectionDropDown: React.FC<IProps> = ({ setTop, setRight,position }) => {
         id="textdecoration"
         onChange={(e: any) => {
           setSelectedValue && setSelectedValue(e.target.value);
-          console.log(selectedValue);
+          console.log(selectedValue, "from here");
           setIsOpen && setIsOpen(false);
         }}
         value={selectedValue}

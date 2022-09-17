@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState,useContext } from "react";
+import UserPageContext from "../../../setup/context/userPageContext";
 import { TextAreaContainer } from "./CustomTextArea.styled";
 
 interface IProps {
@@ -20,6 +21,7 @@ const CustomTextArea: React.FC<IProps> = ({
   getValue,
   value,
 }) => {
+  const { textAreaVlaue, setTextAreaVlaue } = useContext(UserPageContext);
   const inputRef: any = useRef(null);
 
   const [inpValue, setInpValue] = useState<string>("");
@@ -31,7 +33,7 @@ const CustomTextArea: React.FC<IProps> = ({
   }, [value]);
 
   const onInputChange = (inputValue: string): void => {
-    setInpValue(inputValue);
+    setTextAreaVlaue(inputValue);
     getValue && getValue(inputValue);
   };
 
@@ -45,7 +47,7 @@ const CustomTextArea: React.FC<IProps> = ({
   return (
     <TextAreaContainer textDirection={true}>
       <textarea
-        value={value}
+        value={textAreaVlaue}
         onChange={(e) => onInputChange(e.target.value)}
         ref={inputRef}
         rows={rows}

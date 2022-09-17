@@ -8,7 +8,7 @@ const HandsTree = () => {
       x="0px"
       y="0px"
       viewBox="0 0 1538 1721.54"
-      enable-background="new 0 0 1538 1721.54"
+      enableBackground="new 0 0 1538 1721.54"
     >
       <g>
         <g>

@@ -41,10 +41,10 @@ const ResetBtn: React.FC<IProps> = ({ ClickHandler }) => {
           gradientTransform="matrix(1.06, 0.09, 0.13, -1.51, -101.54, 580.73)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#897353" />
-          <stop offset="0.15" stop-color="#9e8967" />
-          <stop offset="0.67" stop-color="#dbd0ab" />
-          <stop offset="1" stop-color="#c5ae70" />
+          <stop offset="0" stopColor="#897353" />
+          <stop offset="0.15" stopColor="#9e8967" />
+          <stop offset="0.67" stopColor="#dbd0ab" />
+          <stop offset="1" stopColor="#c5ae70" />
         </linearGradient>
         <linearGradient
           id="linear-gradient-2"
@@ -64,10 +64,10 @@ const ResetBtn: React.FC<IProps> = ({ ClickHandler }) => {
           gradientTransform="matrix(0.4, 0.04, 0.05, -0.59, 340.66, 660.96)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#c6b380" />
-          <stop offset="0.28" stop-color="#dad3b8" />
-          <stop offset="0.59" stop-color="#d1c79f" />
-          <stop offset="1" stop-color="#a38f6b" />
+          <stop offset="0" stopColor="#c6b380" />
+          <stop offset="0.28" stopColor="#dad3b8" />
+          <stop offset="0.59" stopColor="#d1c79f" />
+          <stop offset="1" stopColor="#a38f6b" />
         </linearGradient>
         <linearGradient
           id="linear-gradient-4"
@@ -78,10 +78,10 @@ const ResetBtn: React.FC<IProps> = ({ ClickHandler }) => {
           gradientTransform="matrix(1.06, 0.09, 0.13, -1.51, -101.54, 580.73)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#bdaa80" />
-          <stop offset="0.28" stop-color="#ccc39d" />
-          <stop offset="0.59" stop-color="#cdc296" />
-          <stop offset="1" stop-color="#927e5b" />
+          <stop offset="0" stopColor="#bdaa80" />
+          <stop offset="0.28" stopColor="#ccc39d" />
+          <stop offset="0.59" stopColor="#cdc296" />
+          <stop offset="1" stopColor="#927e5b" />
         </linearGradient>
         <linearGradient
           id="linear-gradient-5"
@@ -92,10 +92,10 @@ const ResetBtn: React.FC<IProps> = ({ ClickHandler }) => {
           gradientTransform="matrix(1, 0, 0, -1, -22.09, 176.91)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#dfd5b8" />
-          <stop offset="0.34" stop-color="#ebe3c2" />
-          <stop offset="0.64" stop-color="#e2d9bb" />
-          <stop offset="1" stop-color="#ccbc92" />
+          <stop offset="0" stopColor="#dfd5b8" />
+          <stop offset="0.34" stopColor="#ebe3c2" />
+          <stop offset="0.64" stopColor="#e2d9bb" />
+          <stop offset="1" stopColor="#ccbc92" />
         </linearGradient>
         <linearGradient
           id="linear-gradient-6"
@@ -106,10 +106,10 @@ const ResetBtn: React.FC<IProps> = ({ ClickHandler }) => {
           gradientTransform="matrix(1, 0, 0, -1, -22.09, 176.91)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#ede7e7" />
-          <stop offset="1" stop-color="#e7e0e0" stop-opacity="0" />
+          <stop offset="0" stopColor="#ede7e7" />
+          <stop offset="1" stopColor="#e7e0e0" stopOpacity="0" />
         </linearGradient>
-        <clipPath id="clip-path">
+        <clipPath id="clipPath">
           <path
             id="SVGID"
             d="M152,72.24l-47.2,16.21c-4.66,9.29-11.52,23.38-19,39.9h190.6c5.18-11,10.12-20.75,14.36-28.43a63.35,63.35,0,0,0,7.35-27.68Z"
@@ -125,8 +125,8 @@ const ResetBtn: React.FC<IProps> = ({ ClickHandler }) => {
           gradientTransform="matrix(1, 0.09, 0.07, -1.33, -18.58, 94.05)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#694f33" />
-          <stop offset="1" stop-color="#694f33" stop-opacity="0" />
+          <stop offset="0" stopColor="#694f33" />
+          <stop offset="1" stopColor="#694f33" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="linear-gradient-8"
@@ -146,10 +146,10 @@ const ResetBtn: React.FC<IProps> = ({ ClickHandler }) => {
           gradientTransform="matrix(1, 0, 0, -1, -22.09, 176.91)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#baa877" />
-          <stop offset="0.34" stop-color="#a38f6b" />
-          <stop offset="0.55" stop-color="#d5c89d" />
-          <stop offset="1" stop-color="#c2af7d" />
+          <stop offset="0" stopColor="#baa877" />
+          <stop offset="0.34" stopColor="#a38f6b" />
+          <stop offset="0.55" stopColor="#d5c89d" />
+          <stop offset="1" stopColor="#c2af7d" />
         </linearGradient>
         <linearGradient
           id="linear-gradient-10"
@@ -177,7 +177,7 @@ const ResetBtn: React.FC<IProps> = ({ ClickHandler }) => {
           gradientTransform="matrix(1.05, 0, 0, -0.15, -54.44, 114.81)"
           xlinkHref="#linear-gradient-6"
         />
-        <clipPath id="clip-path-2">
+        <clipPath id="clipPath-2">
           <path
             id="SVGID-2"
             data-name="SVGID"
@@ -194,8 +194,8 @@ const ResetBtn: React.FC<IProps> = ({ ClickHandler }) => {
           gradientTransform="matrix(0.99, 0.02, 0, 0.15, -88.62, 755.04)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#beae82" />
-          <stop offset="1" stop-color="#d9cece" stop-opacity="0" />
+          <stop offset="0" stopColor="#beae82" />
+          <stop offset="1" stopColor="#d9cece" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="linear-gradient-14"
@@ -226,8 +226,8 @@ const ResetBtn: React.FC<IProps> = ({ ClickHandler }) => {
         rx="26.55"
         fill="none"
         stroke="#010101"
-        stroke-miterlimit="10"
-        stroke-width="10"
+        strokeMiterlimit="10"
+        strokeWidth="10"
       />
       <g id="layer1">
         <path
@@ -327,7 +327,7 @@ const ResetBtn: React.FC<IProps> = ({ ClickHandler }) => {
           d="M146.08,100.26c-41.1,16.25-41.46,50.8-51.37,93.87-5.61,24.38-34,64.3-9.44,59.64,33.76-6.41,50.92,2.31,94.46,17.12,25.23,8.58,23.66-45.91,28.93-72,6.2-30.71,26.56-49.14,8.86-75-16-23.31-45.16-34-71.44-23.61Z"
           fill="url(#linear-gradient-6)"
         />
-        <g clip-path="url(#clip-path)">
+        <g clipPath="url(#clipPath)">
           <path
             id="rect13642"
             d="M101.64,74.15,280.48,65.9c6.75,15.12-.09,35.33-18.86,33.5L101.33,96.69Z"
@@ -412,7 +412,7 @@ const ResetBtn: React.FC<IProps> = ({ ClickHandler }) => {
           d="M82.51,42.81c-3.92,5-12.24,12.59-6,21.07,31.08-4.46,102.72-3.67,156.58,2.64-4.09-5.94-4-19.83,2-25.36-41.19,4.13-114,5.9-152.61,1.65Z"
           fill="url(#linear-gradient-12)"
         />
-        <g clip-path="url(#clip-path-2)">
+        <g clipPath="url(#clipPath-2)">
           <path
             id="path13153-8-1"
             d="M60.25,292.38c-3.59-5.11-14.9-15.07-8.83-23.4,29.19,5.16,105.51,15.8,156.41,10.71-4,5.85.73,14.58,6.24,20.24-39.39-.4-117.49-4.37-153.81-7.55Z"
@@ -459,7 +459,7 @@ const ResetBtn: React.FC<IProps> = ({ ClickHandler }) => {
         d="M247.09,275c-2.12-28.66,32.74-44.59,53.24-22.87l7.47-7,6.14,29.82-30-7.43,7.71-7.25c-14.54-16.4-38.12-7.8-44.6,14.75Z"
         fill="#ef2929"
         stroke="#ef2929"
-        stroke-width="4"
+        strokeWidth="4"
       />
       <path
         id="path1432-2"
@@ -467,7 +467,7 @@ const ResetBtn: React.FC<IProps> = ({ ClickHandler }) => {
         d="M314.75,282.1c2.12,28.66-32.74,44.59-53.24,22.87L254,312l-6.14-29.82,30,7.43-7.7,7.25c14.54,16.4,38.12,7.8,44.6-14.75Z"
         fill="#ef2929"
         stroke="#ef2929"
-        stroke-width="4"
+        strokeWidth="4"
       />
     </svg>
   );

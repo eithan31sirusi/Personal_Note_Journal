@@ -13,3 +13,15 @@ export const EditPageFormContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
 `;
+
+export const SymbolContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 250px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 0.2rem;
+transform:translate(0,-1.2rem)
+`;

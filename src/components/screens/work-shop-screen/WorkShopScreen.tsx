@@ -36,6 +36,9 @@ const WorkShop: React.FC<IProps> = ({}) => {
   // state for the alert bubble
   const [isAlertBuble, setIsAlertBuble] = useState(false);
 
+  // state for the alert in the add page
+  const [isAlertBubleAddPage, setIsAlertBubleAddPage] = useState(false);
+
   // state for the userwriting data
   const [pagesList, setPagesList] = useState<any>(
     JSON.parse(localStorage.getItem("userWirtingData") || "[]")
@@ -90,9 +93,33 @@ const WorkShop: React.FC<IProps> = ({}) => {
     <div>
       <PageContainer flexDir="row" flexX="flex-start" flexY="flex-start">
         <span style={{ width: "70px", cursor: "pointer" }}>
-          <AddPageBtn ClickHandler={addNewPage} />
+          <AddPageBtn
+            ClickHandler={() => {
+              setIsAlertBubleAddPage(true);
+            }}
+          />
           <ResetBtn ClickHandler={resetPageContent} />
         </span>
+        {isAlertBubleAddPage && (
+          <AllertBuble
+            onClose={() => {
+              setIsAlertBubleAddPage(false);
+            }}
+            title="האם לשמור את העמוד ?"
+            onApprove={() => {
+              addNewPage();
+              setText("");
+              setTextAreaValue("");
+              setInputValue("");
+              setSelectedValue("");
+              setIsAlertBubleAddPage(false);
+            }}
+            closeBtnText="ביטול"
+            approveBtnText="שמור"
+            translateX="-10.2rem"
+            translateY="-2.5rem"
+          />
+        )}
 
         <FlipBook paragraph={Text} />
 
@@ -128,6 +155,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
             />
           </ModalBox>
         ) : null}
+
         {isAlertBuble ? (
           <AllertBuble
             onClose={() => {
@@ -143,7 +171,6 @@ const WorkShop: React.FC<IProps> = ({}) => {
             approveBtnText="השלך"
             translateX="-10.2rem"
             translateY="-2.5rem"
-        
           />
         ) : null}
       </PageContainer>

@@ -5,23 +5,32 @@ import { useHistory } from "react-router-dom";
 import JurnalSinglePage from "../../common/jurnal-single-page/JurnalSinglePage";
 
 import UserPageContext from "../../../setup/context/userPageContext";
+import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonContext";
 import FeatherQuil from "../../../assets/svg/buttons/FeatherQuil";
 import CustomTitle from "../../common/custom-title/CustomTitle";
 
 import AllertBuble from "../../common/allert-buble/AllertBuble";
 import BlackArrowBtnRight from "../../../assets/svg/buttons/BlackArrowBtnRight";
 import BlackArrowBtnLeft from "../../../assets/svg/buttons/BlackArrowBtnLeft";
-import AddPageBtn from "../../../assets/svg/buttons/AddPageBtn";
 import DeleteBtn from "../../../assets/svg/buttons/DeleteBtn";
 
 import { PageContainer } from "../../layout/PageContainer";
 import EditBtn from "../../../assets/svg/buttons/EditBtn";
 import EditPageForm from "../../common/edit-page-form/EditPageForm";
 import ModalBox from "../../common/modal-box/ModalBox";
+import { FlexContainer } from "../../layout/FlexContainer";
 interface IProps {}
 
 const JurnalScreen: React.FC<IProps> = ({}) => {
-  const { userWirtingData, setUserWirtingData } = useContext(UserPageContext);
+  const {
+    userWirtingData,
+    setUserWirtingData,
+    deletePage,
+    editPage,
+    inputValue,
+    textAreaVlaue,
+  } = useContext(UserPageContext);
+  const { selectedValue, setSelectedValue } = useContext(SelectDropDwonContext);
 
   const [items, setItems] = useState(
     JSON.parse(localStorage.getItem("userWirtingData") || "[]")
@@ -33,51 +42,20 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
 
   // state for the alert bubble
   const [isAlertBuble, setIsAlertBuble] = useState(false);
+  // state for the alert in the edit modal
+  const [isAlertBubleEdit, setIsAlertBubleEdit] = useState(false);
+  // state for the alert in the delete modal
+  const [isAlertBubleCancelEdit, setIsAlertBubleCancelEdit] = useState(false);
 
   //state for the modal
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   let history = useHistory();
 
-  // functio for edit the page
-  const editPage = (
-    id: number,
-    newTitle: string,
-    newParagraph: string,
-    newSymbol: any
-  ) => {
-    const newEditPage = items.map((item: any) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          title: newTitle,
-          paragraph: newParagraph,
-          symbole: newSymbol,
-        };
-      }
-
-      return item;
-    });
-    setItems(newEditPage);
-    localStorage.setItem("userWirtingData", JSON.stringify(newEditPage));
-    console.log(newEditPage, "newEditPage");
-  };
   // function for delete the page
   const openModal = () => {
     setIsModalOpen(true);
   };
-
-  const deletePage = (id: number) => {
-    setItems(items.filter((item: any) => item.id !== id));
-    setUserWirtingData(items);
-
-    localStorage.setItem("userWirtingData", JSON.stringify(items));
-
-    // after delete the page we need to set the page number to 1
-    setCurrentPageNumber(0);
-  };
-
-  // useeffect to get all data from the userWirtingData
 
   useEffect(() => {
     if (items) {
@@ -106,16 +84,23 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
         userWirtingData
           .filter((item: any, index: any) => index === currentPageNumber)
           .map((item: any) => (
-            <>
+            <FlexContainer key={item.id}>
               {isModalOpen && (
                 <ModalBox ClickMode={false} setLeft="48.5%" setTop="50%">
                   <EditPageForm
                     onCencel={() => {
-                      setIsModalOpen(false);
+                      setIsAlertBubleEdit(true);
                     }}
                     onApproval={() => {
-                      editPage(item.id, "7", "7", EditBtn);
-                      setIsModalOpen(false);
+                      editPage(
+                        item.id,
+                        items,
+                        setItems,
+                        inputValue,
+                        textAreaVlaue,
+                        selectedValue
+                      );
+                      setIsAlertBubleCancelEdit(true);
                     }}
                   />
                 </ModalBox>
@@ -184,7 +169,7 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
                   approveBtnText="ביטול"
                   fontSize="1.1rem"
                   onClose={() => {
-                    deletePage(item.id);
+                    deletePage(item.id, items, setItems, setCurrentPageNumber);
                     setIsAlertBuble(false);
                   }}
                   onApprove={() => {
@@ -193,7 +178,39 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
                   translateX="0"
                 />
               ) : null}
-            </>
+              {isAlertBubleEdit ? (
+                <AllertBuble
+                  onClose={() => {
+                    setIsAlertBubleEdit(false);
+                  }}
+                  onApprove={() => {
+                    setIsAlertBubleEdit(false);
+                    setIsModalOpen(false);
+                  }}
+                  title="ייתכן ויש שינויים שלא ישמרו, האם לסגור?"
+                  closeBtnText="ביטול"
+                  approveBtnText="השלך"
+                  translateX="-2.2rem"
+                  translateY="1rem"
+                />
+              ) : null}
+              {isAlertBubleCancelEdit ? (
+                <AllertBuble
+                  onClose={() => {
+                    setIsAlertBubleCancelEdit(false);
+                  }}
+                  onApprove={() => {
+                    setIsAlertBubleCancelEdit(false);
+                    setIsModalOpen(false);
+                  }}
+                  title="האם לשמור את השינויים?"
+                  closeBtnText="ביטול"
+                  approveBtnText="שמור"
+                  translateX="-2.2rem"
+                  translateY="1rem"
+                />
+              ) : null}
+            </FlexContainer>
           ))
       ) : (
         <span

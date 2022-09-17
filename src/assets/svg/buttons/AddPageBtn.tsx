@@ -40,7 +40,7 @@ const AddPageBtn: React.FC<IProps> = ({ ClickHandler }) => {
           y2="128.99"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#fff" />
+          <stop offset="0" stopColor="#fff" />
           <stop offset="1" />
         </linearGradient>
         <linearGradient
@@ -67,8 +67,8 @@ const AddPageBtn: React.FC<IProps> = ({ ClickHandler }) => {
         id="path3761"
         d="M101,231s10-90,40-120S301,31,301,31s-40,110-60,130-80,20-80,20l30,20s-30,10-40,20-40,0-40,0"
         transform="translate(4 4)"
-        stroke-miterlimit="10"
-        stroke-width="5"
+        strokeMiterlimit="10"
+        strokeWidth="5"
         stroke="url(#linear-gradient)"
       />
       <path
@@ -76,8 +76,8 @@ const AddPageBtn: React.FC<IProps> = ({ ClickHandler }) => {
         d="M51,301s60-90,130-170S301,31,301,31"
         transform="translate(4 4)"
         fill="none"
-        stroke-miterlimit="10"
-        stroke-width="6"
+        strokeMiterlimit="10"
+        strokeWidth="6"
         stroke="url(#linear-gradient-2)"
       />
       <rect
@@ -89,7 +89,7 @@ const AddPageBtn: React.FC<IProps> = ({ ClickHandler }) => {
         rx="27.14"
         fill="none"
         stroke="#000"
-        stroke-width="10"
+        strokeWidth="10"
       />
       <g id="g3">
         <path
