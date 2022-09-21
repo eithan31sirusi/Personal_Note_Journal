@@ -9,6 +9,7 @@ interface userPageContextInterface {
   textAreaVlaue?: any;
   setTextAreaVlaue?: any;
   resetInputValue?: any;
+  resetTextAreaValue?: any;
   deletePage?: any;
   editPage?: any;
   // user wirting data object
@@ -29,6 +30,7 @@ export const UserPageContext = createContext<userPageContextInterface>({
   textAreaVlaue: "",
   setTextAreaVlaue: () => {},
   resetInputValue: () => {},
+  resetTextAreaValue: () => {},
   deletePage: () => {},
   editPage: () => {},
 });
@@ -63,6 +65,10 @@ export const UserPageContextProvider = ({
   const resetInputValue = () => {
     setInputValue("");
   };
+
+  const resetTextAreaValue = () => {
+    setTextAreaVlaue("");
+  };
   /////////////////////////////////////////////////////////////////////////
 
   // functio for edit the page //////////////////////////////////////
@@ -96,10 +102,10 @@ export const UserPageContextProvider = ({
     setUserWirtingData,
     setInputValue,
     inputValue,
-  textAreaVlaue,
-  setTextAreaVlaue,
-
+    textAreaVlaue,
+    setTextAreaVlaue,
     resetInputValue,
+    resetTextAreaValue,
     deletePage,
     editPage,
   };

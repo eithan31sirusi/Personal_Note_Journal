@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   AllertBubleContainer,
   BtnContainer,
@@ -18,6 +18,7 @@ interface IProps {
   translateY?: string;
   onApprove?: () => void;
   onClose?: () => void;
+  BtnsSwitched?: boolean;
 }
 
 const AllertBuble: React.FC<IProps> = ({
@@ -30,7 +31,10 @@ const AllertBuble: React.FC<IProps> = ({
   fontSize,
   translateX,
   translateY,
+  BtnsSwitched,
 }) => {
+  const [isBtnsSwitched, setIsBtnsSwitched] = useState(BtnsSwitched);
+
   return (
     <>
       <AllertBubleContainer translateX={translateX} translateY={translateY}>
@@ -38,12 +42,25 @@ const AllertBuble: React.FC<IProps> = ({
           <AllertBubleTitle fontSize={fontSize}>{title}</AllertBubleTitle>
         </span>
         <BtnContainer>
-          <AllertBubleApprovalBtn onClick={onApprove}>
-            {approveBtnText}
-          </AllertBubleApprovalBtn>
-          <AllertBubleCloseBtn onClick={onClose}>
-            {closeBtnText}
-          </AllertBubleCloseBtn>
+          {isBtnsSwitched ? (
+            <>
+              <AllertBubleApprovalBtn onClick={onApprove}>
+                {approveBtnText}
+              </AllertBubleApprovalBtn>
+              <AllertBubleCloseBtn onClick={onClose}>
+                {closeBtnText}
+              </AllertBubleCloseBtn>
+            </>
+          ) : (
+            <>
+              <AllertBubleCloseBtn onClick={onClose}>
+                {closeBtnText}
+              </AllertBubleCloseBtn>
+              <AllertBubleApprovalBtn onClick={onApprove}>
+                {approveBtnText}
+              </AllertBubleApprovalBtn>
+            </>
+          )}
         </BtnContainer>
       </AllertBubleContainer>{" "}
       <AlertDarkBackground />

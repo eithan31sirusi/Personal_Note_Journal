@@ -8,6 +8,7 @@ import {
 // modal context
 import { ModalContext } from "../../../setup/context/modalContext";
 import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonContext";
+import { UserPageContext } from "../../../setup/context/userPageContext";
 
 import { getCurrentDate } from "../../../helpers/getCurrentDate";
 import { outPutSelectedSVG } from "../../../setup/config/svgParagraphDecortion";
@@ -23,12 +24,13 @@ interface FlipBookProps {
 }
 
 const FlipBook: React.FC<FlipBookProps> = ({ paragraph }) => {
-  const [pageSimbole, setPageSimbole] = useState<any>("");
-
   const { setIsModalOpen } = useContext(ModalContext);
   const { selectedValue, isOpen, setIsOpen } = useContext(
     SelectDropDwonContext
   );
+  const { setTextAreaVlaue } = useContext(UserPageContext);
+
+  const [pageSimbole, setPageSimbole] = useState<any>("");
 
   const openSVGMode = () => {
     setIsOpen(true);
@@ -72,7 +74,12 @@ const FlipBook: React.FC<FlipBookProps> = ({ paragraph }) => {
               </PageSymbolContainer>
 
               {paragraph ? (
-                <pre onClick={openModal}>
+                <pre
+                  onClick={() => {
+                    setTextAreaVlaue(paragraph);
+                    openModal();
+                  }}
+                >
                   <p className="page-text-align">{paragraph}</p>
                 </pre>
               ) : (

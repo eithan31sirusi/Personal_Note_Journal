@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 interface NavProps {
   imgFloatDirection?: boolean;
@@ -51,7 +51,7 @@ export const RightNavContainer = styled.div<NavProps>`
 `;
 
 // Link styled component
-export const LinkStyled = styled(Link)<NavProps>`
+export const LinkStyled = styled(NavLink)<NavProps>`
   text-decoration: none;
   color: ${({ textColor }) =>
     textColor ? textColor : "rgba(255, 255, 255, 1)"};

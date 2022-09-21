@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext, useState } from "react";
 
 import { getKeyBoardClick } from "../../../helpers/getKeyBoardClick";
 import UserPageContext from "../../../setup/context/userPageContext";
@@ -41,7 +41,7 @@ const CustomInput: React.FC<IProps> = ({
   };
 
   return (
-    <label aria-label={ariaLabel}>
+    <label htmlFor={id ? id : ""} aria-label={ariaLabel}>
       <CustomInp
         hoverBgColor={hoverBgColor}
         bgImage={bgImage}

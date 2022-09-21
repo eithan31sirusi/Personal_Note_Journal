@@ -18,8 +18,13 @@ interface IProps {}
 
 const WorkShop: React.FC<IProps> = ({}) => {
   // textarea context
-  const { userWirtingData, setUserWirtingData, inputValue, setInputValue } =
-    useContext(UserPageContext);
+  const {
+    userWirtingData,
+    setUserWirtingData,
+    inputValue,
+    setInputValue,
+    resetTextAreaValue,
+  } = useContext(UserPageContext);
 
   // use the context to get the value of the context with type script
   const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
@@ -46,7 +51,6 @@ const WorkShop: React.FC<IProps> = ({}) => {
 
   const addNewPage = () => {
     // check if the text area is empty
-    if (textAreaValue === "") return alert("יש לכתוב טקסט לעמוד");
 
     setPagesList([
       ...pagesList,
@@ -65,7 +69,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
 
     setSelectedValue("");
     setText("");
-    setTextAreaValue("");
+    resetTextAreaValue();
     setInputValue("");
   };
 
@@ -95,6 +99,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
         <span style={{ width: "70px", cursor: "pointer" }}>
           <AddPageBtn
             ClickHandler={() => {
+              if (textAreaValue === "") return alert("יש לכתוב טקסט לעמוד");
               setIsAlertBubleAddPage(true);
             }}
           />
@@ -108,12 +113,13 @@ const WorkShop: React.FC<IProps> = ({}) => {
             title="האם לשמור את העמוד ?"
             onApprove={() => {
               addNewPage();
-              setText("");
               setTextAreaValue("");
+              setText("");
               setInputValue("");
               setSelectedValue("");
               setIsAlertBubleAddPage(false);
             }}
+            BtnsSwitched={true}
             closeBtnText="ביטול"
             approveBtnText="שמור"
             translateX="-10.2rem"
@@ -163,7 +169,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
             }}
             title="ייתכן ויש שינויים שלא ישמרו, האם לסגור?"
             onApprove={() => {
-              setTextAreaValue(Text);
+              resetTextAreaValue();
               setIsAlertBuble(false);
               closeModal();
             }}
@@ -171,6 +177,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
             approveBtnText="השלך"
             translateX="-10.2rem"
             translateY="-2.5rem"
+            BtnsSwitched={true}
           />
         ) : null}
       </PageContainer>

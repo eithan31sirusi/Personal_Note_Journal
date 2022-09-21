@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState,useContext } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import UserPageContext from "../../../setup/context/userPageContext";
 import { TextAreaContainer } from "./CustomTextArea.styled";
 
@@ -24,14 +24,6 @@ const CustomTextArea: React.FC<IProps> = ({
   const { textAreaVlaue, setTextAreaVlaue } = useContext(UserPageContext);
   const inputRef: any = useRef(null);
 
-  const [inpValue, setInpValue] = useState<string>("");
-  // state to set the value of the text area
-  useEffect(() => {
-    if (value) {
-      setInpValue(value);
-    }
-  }, [value]);
-
   const onInputChange = (inputValue: string): void => {
     setTextAreaVlaue(inputValue);
     getValue && getValue(inputValue);
@@ -53,8 +45,7 @@ const CustomTextArea: React.FC<IProps> = ({
         rows={rows}
         cols={cols}
         maxLength={maxLength}
-      >
-      </textarea>
+      ></textarea>
     </TextAreaContainer>
   );
 };

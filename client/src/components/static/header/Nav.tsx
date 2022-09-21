@@ -1,5 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
+
+import { AuthContext } from "../../../setup/context/authContext";
 
 import {
   NavContainer,
@@ -9,6 +11,8 @@ import {
 } from "./Nav.styled";
 
 const Nav = () => {
+  const { isLoggedIn, login, logout } = useContext(AuthContext);
+
   return (
     <NavContainer>
       <RightNavContainer>
@@ -21,17 +25,28 @@ const Nav = () => {
           <span>שולחן כתיבה</span>
         </LinkStyled>{" "}
         {/* jurnal screen navlink */}
-        <LinkStyled to="/jurnal-screen">
-          <span>יומן</span>
-        </LinkStyled>
+        {isLoggedIn && (
+          <LinkStyled to="/:uid/pages">
+            <span>יומן</span>
+          </LinkStyled>
+        )}
       </RightNavContainer>
       <LeftNavContainer>
-        <LinkStyled fontWeight="300" to="/">
-          התחברות
-        </LinkStyled>
-        <LinkStyled fontWeight="300" to="/">
-          הרשמה
-        </LinkStyled>
+        {!isLoggedIn ? (
+          <>
+            {" "}
+            <LinkStyled onClick={login} fontWeight="300" to="/workshop">
+              התחברות
+            </LinkStyled>
+            <LinkStyled fontWeight="300" to="/auth">
+              הרשמה
+            </LinkStyled>
+          </>
+        ) : (
+          <LinkStyled onClick={logout} fontWeight="300" to="/">
+            התנתק
+          </LinkStyled>
+        )}
       </LeftNavContainer>
     </NavContainer>
   );

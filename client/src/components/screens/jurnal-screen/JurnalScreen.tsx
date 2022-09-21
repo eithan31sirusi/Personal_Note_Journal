@@ -29,6 +29,7 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
     editPage,
     inputValue,
     textAreaVlaue,
+    setTextAreaVlaue,
   } = useContext(UserPageContext);
   const { selectedValue, setSelectedValue } = useContext(SelectDropDwonContext);
 
@@ -89,7 +90,12 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
                 <ModalBox ClickMode={false} setLeft="48.5%" setTop="50%">
                   <EditPageForm
                     onCencel={() => {
-                      setIsAlertBubleEdit(true);
+                      if (!textAreaVlaue) {
+                        setIsAlertBubleEdit(false);
+                        setIsModalOpen(false);
+                      } else {
+                        setIsAlertBubleEdit(true);
+                      }
                     }}
                     onApproval={() => {
                       editPage(
@@ -165,17 +171,18 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
               {isAlertBuble ? (
                 <AllertBuble
                   title="למחוק? הדף לא יהיה ניתן לשחזור לאחר שנמחק"
-                  closeBtnText="מחק"
-                  approveBtnText="ביטול"
+                  closeBtnText="ביטול"
+                  approveBtnText="מחק"
                   fontSize="1.1rem"
                   onClose={() => {
-                    deletePage(item.id, items, setItems, setCurrentPageNumber);
                     setIsAlertBuble(false);
                   }}
                   onApprove={() => {
+                    deletePage(item.id, items, setItems, setCurrentPageNumber);
                     setIsAlertBuble(false);
                   }}
                   translateX="0"
+                  BtnsSwitched={true}
                 />
               ) : null}
               {isAlertBubleEdit ? (
@@ -186,6 +193,8 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
                   onApprove={() => {
                     setIsAlertBubleEdit(false);
                     setIsModalOpen(false);
+                    // set the setTextAreaVlaue to prev state
+                    setTextAreaVlaue(item.paragraph);
                   }}
                   title="ייתכן ויש שינויים שלא ישמרו, האם לסגור?"
                   closeBtnText="ביטול"
@@ -208,6 +217,7 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
                   approveBtnText="שמור"
                   translateX="-2.2rem"
                   translateY="1rem"
+                  BtnsSwitched={true}
                 />
               ) : null}
             </FlexContainer>
