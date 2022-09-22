@@ -1,15 +1,36 @@
+import { useEffect, useState } from "react";
+import { useHttpClient } from "../../../hooks/http-hook";
+
 import UsersList from "../../users/UsersList";
-const USERS = [
-  {
-    id: "u1",
-    name: "Max Schwarz",
-    image:
-      "https://images.unsplash.com/photo-1542732270-4a23a9b8f93c?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8YmFja2dyb3VuZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
-    pages: 3,
-  },
-];
+
+import LoadingFireRing from "../../common/UI-elements/loaders/fire-ring/LoadingFireRing";
+
 const UsersScreen = () => {
-  return <UsersList items={USERS} />;
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+  const [loadedUsers, setLoadedUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:3001/api/users"
+        );
+
+        console.log(responseData);
+        setLoadedUsers(responseData.users);
+      } catch (err: any) {}
+    };
+    fetchUsers();
+  }, [sendRequest]);
+
+  return (
+    <>
+      <h1>{error}</h1>
+      {isLoading && <LoadingFireRing />}
+      {!isLoading && loadedUsers && <UsersList items={loadedUsers} />}
+    </>
+  );
 };
 
 export default UsersScreen;

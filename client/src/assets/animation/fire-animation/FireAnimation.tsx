@@ -15,6 +15,7 @@ const FireAnimation: React.FC<IProps> = ({ width, translateX, translateY }) => {
         transform: `translate(${translateX ? translateX : ""}, ${
           translateY ? translateY : ""
         })`,
+        zIndex: 99999999,
       }}
     >
       <svg

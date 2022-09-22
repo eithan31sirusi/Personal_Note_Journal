@@ -6,6 +6,7 @@ import JurnalSinglePage from "../../common/jurnal-single-page/JurnalSinglePage";
 
 import UserPageContext from "../../../setup/context/userPageContext";
 import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonContext";
+import { AuthContext } from "../../../setup/context/authContext";
 import FeatherQuil from "../../../assets/svg/buttons/FeatherQuil";
 import CustomTitle from "../../common/custom-title/CustomTitle";
 
@@ -13,15 +14,22 @@ import AllertBuble from "../../common/allert-buble/AllertBuble";
 import BlackArrowBtnRight from "../../../assets/svg/buttons/BlackArrowBtnRight";
 import BlackArrowBtnLeft from "../../../assets/svg/buttons/BlackArrowBtnLeft";
 import DeleteBtn from "../../../assets/svg/buttons/DeleteBtn";
+import LoadingFireRing from "../../common/UI-elements/loaders/fire-ring/LoadingFireRing";
 
 import { PageContainer } from "../../layout/PageContainer";
 import EditBtn from "../../../assets/svg/buttons/EditBtn";
 import EditPageForm from "../../common/edit-page-form/EditPageForm";
 import ModalBox from "../../common/modal-box/ModalBox";
 import { FlexContainer } from "../../layout/FlexContainer";
+
+import { useHttpClient } from "../../../hooks/http-hook";
 interface IProps {}
 
 const JurnalScreen: React.FC<IProps> = ({}) => {
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+  const { userId } = useContext(AuthContext);
+
   const {
     userWirtingData,
     setUserWirtingData,
@@ -81,6 +89,7 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
 
   return (
     <PageContainer flexDir="row" minHeight="98vh">
+      {isLoading && <LoadingFireRing />}
       {userWirtingData.length ? (
         userWirtingData
           .filter((item: any, index: any) => index === currentPageNumber)

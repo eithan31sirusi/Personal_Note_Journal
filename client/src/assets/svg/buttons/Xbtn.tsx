@@ -7,6 +7,7 @@ const Xbtn = () => {
       data-name="Layer 1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 116.34 116.99"
+      style={{ width: "100%", height: "100%" }}
     >
       <title>Xbtn</title>
       <line

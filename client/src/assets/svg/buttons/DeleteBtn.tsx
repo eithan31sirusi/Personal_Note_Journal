@@ -28,6 +28,8 @@ const DeleteBtn: React.FC<IProps> = ({ ClickHandler }) => {
         // box shadwo effect
         boxShadow: isHovered ? "0px 0px 10px rgba(255, 255, 255, 1)" : "none",
         transition: "all 0.5s ease-in-out",
+        width: "100%",
+        height: "100%",
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

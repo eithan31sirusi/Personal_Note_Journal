@@ -35,7 +35,7 @@ const Nav = () => {
         {!isLoggedIn ? (
           <>
             {" "}
-            <LinkStyled onClick={login} fontWeight="300" to="/workshop">
+            <LinkStyled fontWeight="300" to="/workshop">
               התחברות
             </LinkStyled>
             <LinkStyled fontWeight="300" to="/auth">

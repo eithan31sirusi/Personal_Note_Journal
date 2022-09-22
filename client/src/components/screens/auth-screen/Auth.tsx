@@ -1,7 +1,10 @@
 import { useState, useContext } from "react";
+
+import { useHttpClient } from "../../../hooks/http-hook";
+
 import { FlexContainer } from "../../layout/FlexContainer";
 import { AuthContext } from "../../../setup/context/authContext";
-import LoadingSpinner from "../../common/UI-elements/loading-spinner/LoadingSpinner";
+import LoadingFireRing from "../../common/UI-elements/loaders/fire-ring/LoadingFireRing";
 
 interface IFormInput {
   email?: string;
@@ -10,45 +13,60 @@ interface IFormInput {
 }
 
 const Auth: React.FC<IFormInput> = () => {
-  const { login } = useContext(AuthContext);
+  const { login, isLoggedIn } = useContext(AuthContext);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [isLogin, setIsLogin] = useState(false);
-  const [error, setError] = useState("");
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(isLoggedIn);
 
-    try {
-      setIsLogin(true);
-      const response = await fetch("http://localhost:3001/api/users/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-        }),
-      });
-
-      const responseData = await response.json();
-      console.log(responseData);
-      setIsLogin(false);
-      login();
-    } catch (err: any) {
-      setError(err.message || "Something went wrong, please try again.");
-      setIsLogin(false);
+    if (isLoggedIn) {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:3001/api/users/login",
+          "POST",
+          JSON.stringify({
+            email,
+            password,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        login(responseData.user.id);
+      } catch (err: any) {
+        console.log(err);
+      }
+    } else {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:3001/api/users/signup",
+          "POST",
+          JSON.stringify({
+            name,
+            email,
+            password,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        login(responseData.user.id);
+      } catch (err: any) {
+        console.log(err);
+      }
     }
   };
 
   return (
     <form onSubmit={submitHandler}>
-  <LoadingSpinner asOverlay/>
+      <h1>{error}</h1>
+      {isLoading && <LoadingFireRing />}
       <FlexContainer flexDir="column">
         <h2>Login Required</h2>
         <label htmlFor="name">Name</label>

@@ -1,4 +1,7 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, FormEvent } from "react";
+
+// use history
+import { useHistory } from "react-router-dom";
 import FlipBook from "../../common/flip-book/FlipBook";
 import CustomTextArea from "../../common/custom-textArea/CustomTextArea";
 import ModalBox from "../../common/modal-box/ModalBox";
@@ -7,12 +10,15 @@ import CandleAnimation from "../../../assets/animation/candle-nimation/CandleAni
 
 import { ModalContext } from "../../../setup/context/modalContext";
 import { UserPageContext } from "../../../setup/context/userPageContext";
+import { AuthContext } from "../../../setup/context/authContext";
 
 import { SelectDropDwonContext } from "../../../setup/context/selectDropDwonContext";
 
 import { PageContainer } from "../../layout/PageContainer";
 import AddPageBtn from "../../../assets/svg/buttons/AddPageBtn";
 import ResetBtn from "../../../assets/svg/buttons/ResetBtn";
+
+import { useHttpClient } from "../../../hooks/http-hook";
 
 interface IProps {}
 
@@ -25,6 +31,10 @@ const WorkShop: React.FC<IProps> = ({}) => {
     setInputValue,
     resetTextAreaValue,
   } = useContext(UserPageContext);
+
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+  const { userId } = useContext(AuthContext);
 
   // use the context to get the value of the context with type script
   const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
@@ -48,6 +58,8 @@ const WorkShop: React.FC<IProps> = ({}) => {
   const [pagesList, setPagesList] = useState<any>(
     JSON.parse(localStorage.getItem("userWirtingData") || "[]")
   );
+
+  const history = useHistory();
 
   const addNewPage = () => {
     // check if the text area is empty
@@ -75,6 +87,29 @@ const WorkShop: React.FC<IProps> = ({}) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const submitPageHandler = async () => {
+    try {
+      await sendRequest(
+        "http://localhost:3001/api/jurnal",
+        "POST",
+        JSON.stringify({
+          title: inputValue,
+          description: Text,
+          pageSymbol: selectedValue,
+          creator: userId,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      history.push("/jurnal");
+    } catch (err: any) {
+      console.log(err);
+    }
+
+    console.log("submit page");
   };
 
   // function for reset page content
@@ -112,7 +147,8 @@ const WorkShop: React.FC<IProps> = ({}) => {
             }}
             title="האם לשמור את העמוד ?"
             onApprove={() => {
-              addNewPage();
+              // the submithandler function with typescript event
+              submitPageHandler();
               setTextAreaValue("");
               setText("");
               setInputValue("");

@@ -7,6 +7,7 @@ const BlackArrowBtnLeft = () => {
       data-name="Layer 1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 476.47 825.55"
+      style={{ width: "100%", height: "100%" }}
     >
       <title>Fantasy-Bow-1</title>
       <path

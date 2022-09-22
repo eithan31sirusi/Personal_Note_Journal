@@ -18,7 +18,7 @@ import Nav from "./components/static/header/Nav";
 import Footer from "./components/static/footer/Footer";
 import { PageContainer } from "./components/layout/PageContainer";
 import HomeScreen from "./components/screens/home-screen/HomeScreen";
-import Users from "./components/users/UsersList";
+import UsersScreen from "./components/screens/users-screen/UsersScreen";
 import Auth from "./components/screens/auth-screen/Auth";
 
 function App() {
@@ -36,11 +36,14 @@ function App() {
         <Route path="/workshop">
           <WorkShop />
         </Route>
+        <Route path="/auth">
+          <Auth />
+        </Route>
         <Route path="/:uid/pages">
           <JurnalScreen />
         </Route>
         <Route path="/users">
-          <Users />
+          <UsersScreen />
         </Route>
       </Switch>
     );
@@ -49,6 +52,9 @@ function App() {
       <Switch>
         <Route exact path="/">
           <HomeScreen />
+        </Route>{" "}
+        <Route path="/users">
+          <UsersScreen />
         </Route>
         <Route path="/auth">
           <Auth />

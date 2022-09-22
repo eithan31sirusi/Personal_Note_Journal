@@ -1,34 +1,39 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useCallback } from "react";
 
 interface IAuthContext {
   children?: React.ReactNode;
-  token?: string;
-  setToken?: (token: string) => void;
-  userId?: string;
-  setUserId?: (userId: string) => void;
-  isAuth?: boolean;
+  userId?: string | null;
+  setUserId?: (userId: string | null) => void;
   setIsAuth?: (isAuth: boolean) => void;
-  login?: (token: string, userId: string, isAuth: boolean) => void;
+  login?: (userId: any) => void;
   logout?: () => void;
 }
 
 export const AuthContext = createContext({
   isLoggedIn: false,
-  login: () => {},
+  userId: null,
+  login: (userId: string | null) => {},
   logout: () => {},
 });
 
 export const AuthContextProvider: React.FC<IAuthContext> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const loginHandler = () => {
+  const [userId, setUserId] = useState<any>(null);
+
+  const loginHandler = useCallback((uid: string | null) => {
     setIsLoggedIn(true);
-  };
-  const logoutHandler = () => {
+    console.log(isLoggedIn);
+    setUserId(uid);
+  }, []);
+
+  const logoutHandler = useCallback(() => {
     setIsLoggedIn(false);
-  };
+    setUserId(null);
+  }, []);
 
   const value = {
     isLoggedIn,
+    userId: userId,
     login: loginHandler,
     logout: logoutHandler,
   };

@@ -7,7 +7,7 @@ const GreenWaxBtn = () => {
       data-name="Layer 1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 129.26 125.25"
-      style={{cursor: "pointer"}}
+      style={{ cursor: "pointer", width: "100%", height: "100%" }}
     >
       <title>305228</title>
       <path

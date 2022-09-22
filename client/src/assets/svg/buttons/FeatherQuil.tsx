@@ -28,13 +28,15 @@ const FeatherQuil: React.FC<IProps> = ({
     <svg
       viewBox="0 0 237.12 237.12"
       style={{
-        width: SVGwidth ? SVGwidth : "350px",
+        width: SVGwidth ? SVGwidth : "100%",
+        height: "auto",
         transform: `translate(0,-10rem )`,
         cursor: "pointer",
         borderRadius: "50%",
         // box shadwo effect
         boxShadow: isHovered ? "0px 0px 10px rgba(255, 255, 255, 1)" : "none",
         transition: "all 0.3s ease-in-out",
+
       }}
       onClick={clickHandler}
       onMouseEnter={handleMouseEnter}
