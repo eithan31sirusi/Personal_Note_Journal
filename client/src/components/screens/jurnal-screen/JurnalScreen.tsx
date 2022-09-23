@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import JurnalSinglePage from "../../common/jurnal-single-page/JurnalSinglePage";
 
@@ -27,8 +27,9 @@ interface IProps {}
 
 const JurnalScreen: React.FC<IProps> = ({}) => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-
-  const { userId } = useContext(AuthContext);
+  // extract the uid with useParams
+  const userId = useParams<{ userId: string }>().userId;
+  console.log(userId, "222");
 
   const {
     userWirtingData,
@@ -59,12 +60,31 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
   //state for the modal
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // state for the loaded pages
+  const [loadedPages, setLoadedPages] = useState<any>([]);
+
   let history = useHistory();
 
   // function for delete the page
   const openModal = () => {
     setIsModalOpen(true);
   };
+
+  // use effect to load the data from the server
+  useEffect(() => {
+    const fetchPages = async () => {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:3001/api/jurnal/user/${userId}`
+        );
+        setLoadedPages(responseData.pages);
+        console.log(responseData.pages, "from jurnal");
+      } catch (err) {}
+    };
+    console.log(userId, "uid");
+
+    fetchPages();
+  }, [sendRequest, userId]);
 
   useEffect(() => {
     if (items) {
@@ -90,8 +110,8 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
   return (
     <PageContainer flexDir="row" minHeight="98vh">
       {isLoading && <LoadingFireRing />}
-      {userWirtingData.length ? (
-        userWirtingData
+      {loadedPages.length ? (
+        loadedPages
           .filter((item: any, index: any) => index === currentPageNumber)
           .map((item: any) => (
             <FlexContainer key={item.id}>

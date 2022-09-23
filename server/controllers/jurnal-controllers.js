@@ -77,7 +77,7 @@ const createPage = async (req, res, next) => {
     user = await User.findById(creator);
   } catch (err) {
     const error = new HttpError("Creating page failed, please try again.", 500);
-    console.log(err);
+    console.log(error);
     return next(error);
   }
 

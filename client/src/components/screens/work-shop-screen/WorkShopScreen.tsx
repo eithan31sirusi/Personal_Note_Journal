@@ -104,7 +104,8 @@ const WorkShop: React.FC<IProps> = ({}) => {
           "Content-Type": "application/json",
         }
       );
-      history.push("/jurnal");
+
+      history.push("/");
     } catch (err: any) {
       console.log(err);
     }

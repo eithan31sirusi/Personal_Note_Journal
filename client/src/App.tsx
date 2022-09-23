@@ -23,7 +23,11 @@ import Auth from "./components/screens/auth-screen/Auth";
 
 function App() {
   const { userWirtingData } = useContext(UserPageContext);
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, userId } = useContext(AuthContext);
+
+  // get the userid from the login context
+  const userIdFromLogin = userId;
+  
 
   let routes;
 
@@ -39,7 +43,7 @@ function App() {
         <Route path="/auth">
           <Auth />
         </Route>
-        <Route path="/:uid/pages">
+        <Route path={`/:${userId}/pages`}>
           <JurnalScreen />
         </Route>
         <Route path="/users">

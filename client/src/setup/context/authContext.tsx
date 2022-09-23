@@ -1,4 +1,5 @@
 import { createContext, useState, useCallback } from "react";
+import { useParams } from "react-router-dom";
 
 interface IAuthContext {
   children?: React.ReactNode;

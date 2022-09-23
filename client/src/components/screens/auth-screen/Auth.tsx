@@ -25,7 +25,7 @@ const Auth: React.FC<IFormInput> = () => {
     e.preventDefault();
     console.log(isLoggedIn);
 
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
       try {
         const responseData = await sendRequest(
           "http://localhost:3001/api/users/login",
@@ -38,6 +38,7 @@ const Auth: React.FC<IFormInput> = () => {
             "Content-Type": "application/json",
           }
         );
+
         login(responseData.user.id);
       } catch (err: any) {
         console.log(err);
