@@ -8,6 +8,7 @@ const FemaleWorker = () => {
       version="1.1"
       y="0px"
       x="0px"
+      style={{ width: "160px", height: "200px" }}
     >
       <g>
         <path d="m126.95 17.57c-0.459 1.165-1.741 1.506-3.247 1.624-0.1-1.675 2.4-2.181 3.25-1.624z" />

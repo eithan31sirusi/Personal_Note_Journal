@@ -12,6 +12,7 @@ const KnightB = () => {
       viewBox="0 0 1582 1657.902"
       enableBackground="new 0 0 1582 1657.902"
       xmlSpace="preserve"
+      style={{ width: "160px", height: "200px" }}
     >
       <g>
         <path

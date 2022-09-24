@@ -12,6 +12,7 @@ const DragonB = () => {
       viewBox="0 0 1062 1424"
       enableBackground="new 0 0 1062 1424"
       xmlSpace="preserve"
+      style={{ width: "160px", height: "200px" }}
     >
       <g>
         <path

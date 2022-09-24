@@ -177,8 +177,8 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
                 key={item.id}
                 pageNumber={currentPageNumber}
                 title={item.title}
-                paragraph={item.paragraph}
-                symbole={item.symbole}
+                paragraph={item.description}
+                symbole={item.pageSymbol}
                 date={item.date}
               />
               <span

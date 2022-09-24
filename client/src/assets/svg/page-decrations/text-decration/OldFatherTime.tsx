@@ -6,6 +6,7 @@ const OldFatherTime = () => {
       id="svg6661"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1593 1805"
+      style={{ width: "160px", height: "200px" }}
     >
       <path
         id="path6673"

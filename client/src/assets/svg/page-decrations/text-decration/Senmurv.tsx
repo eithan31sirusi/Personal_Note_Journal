@@ -9,6 +9,7 @@ const Senmurv = () => {
       y="0px"
       viewBox="0 0 644 645"
       enableBackground="new 0 0 644 645"
+      style={{ width: "160px", height: "200px" }}
     >
       <path
         fill="#231F20"

@@ -12,6 +12,7 @@ const DragonA = () => {
       viewBox="310.3714 362.3526 2957.5979 1865.7185"
       enableBackground="new 310.3714 362.3526 2957.5979 1865.7185"
       xmlSpace="preserve"
+      style={{ width: "160px", height: "200px" }}
     >
       <g id="_x23_000000ff">
         <path

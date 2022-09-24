@@ -12,6 +12,7 @@ const KngihtD = () => {
       viewBox="0 0 1336.021 1666.588"
       enableBackground="new 0 0 1336.021 1666.588"
       xmlSpace="preserve"
+      style={{ width: "160px", height: "200px" }}
     >
       <g>
         <path

@@ -9,6 +9,7 @@ const SwordsWoman = () => {
       y="0px"
       viewBox="0 0 1112.376 1680.4"
       enableBackground="new 0 0 1112.376 1680.4"
+      style={{ width: "160px", height: "200px" }}
     >
       <path
         enableBackground="new    "

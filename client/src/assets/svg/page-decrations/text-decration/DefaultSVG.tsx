@@ -7,6 +7,7 @@ const DefaultSVG = () => {
       data-name="Layer 1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 102.7 117.46"
+      style={{ width: "160px", height: "200px" }}
     >
       <path
         d="M43.47,71.77h.31A.23.23,0,0,0,43.47,71.77Z"
@@ -54,7 +55,7 @@ const DefaultSVG = () => {
         fontSize="12"
         fontFamily="LucidaSansUnicode, Lucida Sans Unicode"
       >
-       לחץ כדי להוסיף סמל
+        לחץ כדי להוסיף סמל
       </text>
     </svg>
   );

@@ -9,6 +9,7 @@ const HandsTree = () => {
       y="0px"
       viewBox="0 0 1538 1721.54"
       enableBackground="new 0 0 1538 1721.54"
+      style={{ width: "160px", height: "200px" }}
     >
       <g>
         <g>

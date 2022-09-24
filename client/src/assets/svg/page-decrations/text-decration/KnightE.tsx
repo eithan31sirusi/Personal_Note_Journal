@@ -8,6 +8,7 @@ const KnightE = () => {
       viewBox="0 0 615 985"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
+      style={{ width: "160px", height: "200px" }}
     >
       <path
         fill="#000000"
