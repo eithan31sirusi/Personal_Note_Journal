@@ -11,7 +11,7 @@ import {
 } from "./Nav.styled";
 
 const Nav = () => {
-  const { isLoggedIn, login, logout } = useContext(AuthContext);
+  const { isLoggedIn, login, logout, userId } = useContext(AuthContext);
 
   return (
     <NavContainer>
@@ -26,7 +26,7 @@ const Nav = () => {
         </LinkStyled>{" "}
         {/* jurnal screen navlink */}
         {isLoggedIn && (
-          <LinkStyled to="/:uid/pages">
+          <LinkStyled to={`/${userId}/pages`}>
             <span>יומן</span>
           </LinkStyled>
         )}

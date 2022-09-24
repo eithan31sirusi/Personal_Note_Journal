@@ -50,7 +50,7 @@ const getPagesByUserId = async (req, res, next) => {
   }
 
   res.json({
-    pages: userWithPages.map((page) => page.toObject({ getters: true })),
+    pages: userWithPages.pages.map((page) => page.toObject({ getters: true })),
   });
 };
 

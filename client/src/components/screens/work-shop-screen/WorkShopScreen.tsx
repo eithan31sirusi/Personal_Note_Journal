@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect, FormEvent } from "react";
 
 // use history
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import FlipBook from "../../common/flip-book/FlipBook";
 import CustomTextArea from "../../common/custom-textArea/CustomTextArea";
 import ModalBox from "../../common/modal-box/ModalBox";
@@ -35,6 +35,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const { userId } = useContext(AuthContext);
+  console.log(userId, "workkkkkkks");
 
   // use the context to get the value of the context with type script
   const { isModalOpen, setIsModalOpen } = useContext(ModalContext);

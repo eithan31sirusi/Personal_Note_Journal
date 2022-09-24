@@ -26,8 +26,6 @@ function App() {
   const { isLoggedIn, userId } = useContext(AuthContext);
 
   // get the userid from the login context
-  const userIdFromLogin = userId;
-  
 
   let routes;
 
@@ -43,7 +41,7 @@ function App() {
         <Route path="/auth">
           <Auth />
         </Route>
-        <Route path={`/:${userId}/pages`}>
+        <Route path='/:userId/pages'>
           <JurnalScreen />
         </Route>
         <Route path="/users">
@@ -56,7 +54,7 @@ function App() {
       <Switch>
         <Route exact path="/">
           <HomeScreen />
-        </Route>{" "}
+        </Route>
         <Route path="/users">
           <UsersScreen />
         </Route>

@@ -29,7 +29,6 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   // extract the uid with useParams
   const userId = useParams<{ userId: string }>().userId;
-  console.log(userId, "222");
 
   const {
     userWirtingData,
@@ -81,12 +80,11 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
         console.log(responseData.pages, "from jurnal");
       } catch (err) {}
     };
-    console.log(userId, "uid");
 
     fetchPages();
   }, [sendRequest, userId]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (items) {
       setUserWirtingData(items);
     }
@@ -94,7 +92,7 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
     localStorage.setItem("userWirtingData", JSON.stringify(items));
     console.log(items, "items");
     console.log(userWirtingData, "userWirtingData jurnal");
-  }, [items, setUserWirtingData, userWirtingData]);
+  }, [items, setUserWirtingData, userWirtingData]); */
 
   // useeffect for showing the arrow btn when the page is 1 or the last page
   useEffect(() => {
@@ -105,6 +103,8 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
     } else {
       setIsArrowBtn("");
     }
+
+    console.log(loadedPages, "loadedPages");
   }, [currentPageNumber, userWirtingData.length]);
 
   return (
