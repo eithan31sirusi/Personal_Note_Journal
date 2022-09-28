@@ -20,10 +20,13 @@ import { PageContainer } from "./components/layout/PageContainer";
 import HomeScreen from "./components/screens/home-screen/HomeScreen";
 import UsersScreen from "./components/screens/users-screen/UsersScreen";
 import Auth from "./components/screens/auth-screen/Auth";
+import EditPageForm from "./components/common/edit-page-form/EditPageForm";
+import UpdatePageScreen from "./components/screens/update-page-screen/UpdatePageScreen";
+
+import { EditFormPortal } from "./components/static/portals/EditFormPortal";
 
 function App() {
-  const { userWirtingData } = useContext(UserPageContext);
-  const { isLoggedIn, userId } = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
 
   // get the userid from the login context
 
@@ -41,7 +44,7 @@ function App() {
         <Route path="/auth">
           <Auth />
         </Route>
-        <Route path='/:userId/pages'>
+        <Route path="/:userId/pages">
           <JurnalScreen />
         </Route>
         <Route path="/users">

@@ -1,5 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 
+import { useHistory, useParams } from "react-router-dom";
+import { useHttpClient } from "../../../hooks/http-hook";
+
 import GreenWaxBtn from "../../../assets/svg/buttons/GreenWaxBtn";
 import RedWaxBtn from "../../../assets/svg/buttons/RedWaxBtn";
 import { FlexContainer } from "../../layout/FlexContainer";
@@ -14,12 +17,12 @@ import { UserPageContext } from "../../../setup/context/userPageContext";
 import { outPutSelectedSVG } from "../../../setup/config/svgParagraphDecortion";
 
 interface EditPageFormProps {
-  paragraph?: string;
+  description?: string;
   title?: string;
   onPageChange?: (page: number) => void;
   openModal?: () => void;
   setPageSimbole?: (simbole: React.FC) => void;
-  onApproval?: () => void;
+  onApproval?: (e: any) => void;
   onCencel?: () => void;
 }
 
@@ -27,26 +30,37 @@ const EditPageForm: React.FC<EditPageFormProps> = ({
   onApproval,
   onCencel,
 }) => {
-  const { selectedValue } = useContext(SelectDropDwonContext);
-  const { editPage, userWirtingData } = useContext(UserPageContext);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+  const { selectedValue, setSelectedValue } = useContext(SelectDropDwonContext);
+  const { pageId, singlePage, setTextAreaVlaue, setInputValue, updatePage } =
+    useContext(UserPageContext);
 
   const [pageSimbole, setPageSimbole] = useState<any>("");
-  const [items, setItems] = useState<any>(userWirtingData);
-  const [title, setTitle] = useState("");
-  const [paragraph, setParagraph] = useState("");
+
+  useEffect(() => {
+    setInputValue(singlePage?.title);
+    setTextAreaVlaue(singlePage?.description);
+    setSelectedValue(singlePage?.pageSymbol);
+  }, [
+    pageId,
+    singlePage?.description,
+    setTextAreaVlaue,
+    setSelectedValue,
+    singlePage?.pageSymbol,
+    singlePage?.title,
+    setInputValue,
+  ]);
 
   useEffect(() => {
     outPutSelectedSVG(selectedValue, setPageSimbole, false);
-    console.log(items, "items");
   }, [selectedValue]);
 
   return (
     <EditPageFormContainer>
       <FlexContainer flexDir="column" flexY="start" flexX="space-around">
         <CustomInput
-          getValue={(value) => {
-            setTitle(value);
-          }}
+          placeholder={singlePage?.title}
           setBorder={true}
           bgColor="rgba(50,50,50,0.6)"
           setFocusBorderColor={true}
@@ -55,12 +69,7 @@ const EditPageForm: React.FC<EditPageFormProps> = ({
         />
         <FlexContainer flexY="start" flexX="space-around" margin="1rem 0 0 0">
           <FlexContainer flexY="start" flexX="space-around" margin="0 0 0 1rem">
-            <CustomTextArea
-              getValue={(value: string) => {
-                setParagraph(value);
-              }}
-              placeholder="כתוב כאן את הטקסט שלך"
-            />
+            <CustomTextArea />
           </FlexContainer>
 
           <FlexContainer flexDir="column" flexX="start">
@@ -84,10 +93,7 @@ const EditPageForm: React.FC<EditPageFormProps> = ({
               </span>
             </FlexContainer>
             <SymbolContainer>
-              <span style={{ width: "80%" }}>
-                {pageSimbole}
-                {console.log(pageSimbole, "pageSimbole")}
-              </span>
+              <span style={{ width: "80%" }}>{pageSimbole}</span>
             </SymbolContainer>
           </FlexContainer>
         </FlexContainer>

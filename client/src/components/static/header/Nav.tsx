@@ -11,7 +11,7 @@ import {
 } from "./Nav.styled";
 
 const Nav = () => {
-  const { isLoggedIn, login, logout, userId } = useContext(AuthContext);
+  const { isLoggedIn, login, logout, userId, pageId } = useContext(AuthContext);
 
   return (
     <NavContainer>

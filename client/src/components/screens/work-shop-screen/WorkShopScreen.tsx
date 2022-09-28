@@ -25,8 +25,6 @@ interface IProps {}
 const WorkShop: React.FC<IProps> = ({}) => {
   // textarea context
   const {
-    userWirtingData,
-    setUserWirtingData,
     inputValue,
     setInputValue,
     resetTextAreaValue,
@@ -55,36 +53,10 @@ const WorkShop: React.FC<IProps> = ({}) => {
   // state for the alert in the add page
   const [isAlertBubleAddPage, setIsAlertBubleAddPage] = useState(false);
 
-  // state for the userwriting data
-  const [pagesList, setPagesList] = useState<any>(
-    JSON.parse(localStorage.getItem("userWirtingData") || "[]")
-  );
 
   const history = useHistory();
 
-  const addNewPage = () => {
-    // check if the text area is empty
 
-    setPagesList([
-      ...pagesList,
-      {
-        id: userWirtingData.length,
-        //  pageNumber: pageNumber,
-        title: inputValue,
-        paragraph: Text,
-        symbole: selectedValue,
-        date: new Date().toDateString(),
-      },
-    ]);
-    setUserWirtingData(pagesList);
-
-    localStorage.setItem("userWirtingData", JSON.stringify(pagesList));
-
-    setSelectedValue("");
-    setText("");
-    resetTextAreaValue();
-    setInputValue("");
-  };
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -122,13 +94,6 @@ const WorkShop: React.FC<IProps> = ({}) => {
     setSelectedValue("");
   };
 
-  useEffect(() => {
-    if (pagesList) {
-      setUserWirtingData(pagesList);
-    }
-    localStorage.setItem("userWirtingData", JSON.stringify(pagesList));
-    console.log(userWirtingData, "userWirtingData workshop2");
-  }, [pagesList, userWirtingData, setUserWirtingData]);
 
   return (
     <div>

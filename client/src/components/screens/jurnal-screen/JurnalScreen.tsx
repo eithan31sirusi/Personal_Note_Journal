@@ -26,24 +26,20 @@ import { useHttpClient } from "../../../hooks/http-hook";
 interface IProps {}
 
 const JurnalScreen: React.FC<IProps> = ({}) => {
+  const { selectedValue } = useContext(SelectDropDwonContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  // extract the uid with useParams
-  const userId = useParams<{ userId: string }>().userId;
-
   const {
-    userWirtingData,
-    setUserWirtingData,
     deletePage,
-    editPage,
+    updatePage,
     inputValue,
     textAreaVlaue,
     setTextAreaVlaue,
+    getPageId,
+    loadedPages,
   } = useContext(UserPageContext);
-  const { selectedValue, setSelectedValue } = useContext(SelectDropDwonContext);
+  // extract the uid with useParams
+  const userId = useParams<{ userId: string }>().userId;
 
-  const [items, setItems] = useState(
-    JSON.parse(localStorage.getItem("userWirtingData") || "[]")
-  );
   // state to set the page number for the filter func
   const [currentPageNumber, setCurrentPageNumber] = useState(0);
   // state to not showing the arrow btn when the page is 1 or the last page
@@ -60,7 +56,6 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // state for the loaded pages
-  const [loadedPages, setLoadedPages] = useState<any>([]);
 
   let history = useHistory();
 
@@ -70,47 +65,33 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
   };
 
   // use effect to load the data from the server
+
+  // use effect to extract pageId from loadedPaes
   useEffect(() => {
-    const fetchPages = async () => {
-      try {
-        const responseData = await sendRequest(
-          `http://localhost:3001/api/jurnal/user/${userId}`
-        );
-        setLoadedPages(responseData.pages);
-        console.log(responseData.pages, "from jurnal");
-      } catch (err) {}
-    };
-
-    fetchPages();
-  }, [sendRequest, userId]);
-
-  /*   useEffect(() => {
-    if (items) {
-      setUserWirtingData(items);
+    if (loadedPages && loadedPages.length) {
+      const pageId = loadedPages[currentPageNumber].id;
+      getPageId && getPageId(pageId);
+      console.log(pageId, "pageId");
     }
+  }, [currentPageNumber, loadedPages, userId, getPageId]);
 
-    localStorage.setItem("userWirtingData", JSON.stringify(items));
-    console.log(items, "items");
-    console.log(userWirtingData, "userWirtingData jurnal");
-  }, [items, setUserWirtingData, userWirtingData]); */
-
-  // useeffect for showing the arrow btn when the page is 1 or the last page
   useEffect(() => {
     if (currentPageNumber === 0) {
       setIsArrowBtn("left");
-    } else if (currentPageNumber === userWirtingData.length - 1) {
+    } else if (currentPageNumber === loadedPages.length - 1) {
       setIsArrowBtn("right");
     } else {
       setIsArrowBtn("");
     }
 
     console.log(loadedPages, "loadedPages");
-  }, [currentPageNumber, userWirtingData.length]);
+  }, [currentPageNumber, loadedPages]);
 
   return (
     <PageContainer flexDir="row" minHeight="98vh">
       {isLoading && <LoadingFireRing />}
-      {loadedPages.length ? (
+      {loadedPages && loadedPages.length ? (
+        loadedPages &&
         loadedPages
           .filter((item: any, index: any) => index === currentPageNumber)
           .map((item: any) => (
@@ -118,6 +99,12 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
               {isModalOpen && (
                 <ModalBox ClickMode={false} setLeft="48.5%" setTop="50%">
                   <EditPageForm
+                    onApproval={(e) => {
+                      updatePage &&
+                        updatePage(e, inputValue, textAreaVlaue, selectedValue);
+                      setIsModalOpen(false);
+                      history.push(`/workshop`);
+                    }}
                     onCencel={() => {
                       if (!textAreaVlaue) {
                         setIsAlertBubleEdit(false);
@@ -125,17 +112,6 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
                       } else {
                         setIsAlertBubleEdit(true);
                       }
-                    }}
-                    onApproval={() => {
-                      editPage(
-                        item.id,
-                        items,
-                        setItems,
-                        inputValue,
-                        textAreaVlaue,
-                        selectedValue
-                      );
-                      setIsAlertBubleCancelEdit(true);
                     }}
                   />
                 </ModalBox>
@@ -184,9 +160,8 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
               <span
                 onClick={() => {
                   // if the page number is the last page then the right arrow is disabled
-                  if (currentPageNumber === items.length - 1) {
-                    setIsArrowBtn("left");
-
+                  if (currentPageNumber === loadedPages.length - 1) {
+                    setIsArrowBtn("right");
                     return;
                   }
 
@@ -207,7 +182,12 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
                     setIsAlertBuble(false);
                   }}
                   onApprove={() => {
-                    deletePage(item.id, items, setItems, setCurrentPageNumber);
+                    deletePage(
+                      item.id,
+                      loadedPages,
+                      //     setLoadedPages,
+                      setCurrentPageNumber
+                    );
                     setIsAlertBuble(false);
                   }}
                   translateX="0"

@@ -1,7 +1,23 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useState,
+  useCallback,
+  useEffect,
+  useContext,
+} from "react";
+
+import { SelectDropDwonContext } from "./selectDropDwonContext";
+
+import { useHistory } from "react-router-dom";
+
+import { AuthContext } from "./authContext";
+
+import { useHttpClient } from "../../hooks/http-hook";
 
 // interface for context for is modal open
 interface userPageContextInterface {
+  pageId?: string | null;
+  getPageId?: (pageId: any) => void;
   userWirtingData?: any;
   setUserWirtingData?: any;
   inputValue?: any;
@@ -12,6 +28,16 @@ interface userPageContextInterface {
   resetTextAreaValue?: any;
   deletePage?: any;
   editPage?: any;
+  singlePage?: any;
+  updatePage?: (
+    event: any,
+    title: string,
+    description: string,
+    pageSymbol: any
+  ) => void;
+  loadedPages?: any;
+  setLoadedPages?: any;
+
   // user wirting data object
 }
 
@@ -32,7 +58,17 @@ export const UserPageContext = createContext<userPageContextInterface>({
   resetInputValue: () => {},
   resetTextAreaValue: () => {},
   deletePage: () => {},
-  editPage: () => {},
+  pageId: null,
+  getPageId: (pageId: any) => {},
+  singlePage: null,
+  updatePage: (
+    event: any,
+    title: string,
+    description: string,
+    pageSymbol: any
+  ) => {},
+  loadedPages: [],
+  setLoadedPages: () => {},
 });
 
 // provider for context for is modal open and exporting the value
@@ -40,26 +76,70 @@ export const UserPageContextProvider = ({
   children,
 }: userPageContextProviderProps) => {
   // user wirting data object
+
+  const { userId } = useContext(AuthContext);
+
+  const { selectedValue, setSelectedValue } = useContext(SelectDropDwonContext);
+
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [pageId, setPageId] = useState<any>(null);
+  const [singlePage, setSinglePage] = useState<any>();
+  const [loadedPages, setLoadedPages] = useState<any>([]);
   const [userWirtingData, setUserWirtingData] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [textAreaVlaue, setTextAreaVlaue] = useState("");
+  const history = useHistory();
+  // function for getting the pageId and store it into state
+  const setPageIdHandler = useCallback((pageId: string | null) => {
+    setPageId(pageId);
+  }, []);
 
-  // delete page function /////////////////////////////////////////////////////
+  // function for geeting all pages from the database with userId
+  const getAllPages = useCallback(
+    async (userId: string) => {
+      try {
+        const response = await sendRequest(
+          `http://localhost:3001/api/jurnal/${userId}`
+        );
+        setUserWirtingData(response.pages);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    [sendRequest]
+  );
 
-  const deletePage = (
-    id: number,
-    items: any,
-    setItems: any,
-    setpageNum: any
-  ) => {
-    setItems(items.filter((item: any) => item.id !== id));
-    setUserWirtingData(items);
+  const editPageHandler = useCallback(
+    async (event: any, title: string, description: string, pageSymbol: any) => {
+      event.preventDefault();
+      console.log("1");
 
-    localStorage.setItem("userWirtingData", JSON.stringify(items));
+      try {
+        console.log("2");
+        await sendRequest(
+          `http://localhost:3001/api/jurnal/${pageId}`,
+          "PATCH",
+          JSON.stringify({
+            title,
+            description,
+            pageSymbol,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        console.log("3");
+        setInputValue("");
+        setTextAreaVlaue("");
+        setSelectedValue("");
+      } catch (err) {
+        console.log(err);
+      }
+      console.log("4");
+    },
+    [pageId, sendRequest, setSelectedValue]
+  );
 
-    // after delete the page we need to set the page number to 1
-    setpageNum(0);
-  };
 
   // function to reset the input value
   const resetInputValue = () => {
@@ -69,33 +149,32 @@ export const UserPageContextProvider = ({
   const resetTextAreaValue = () => {
     setTextAreaVlaue("");
   };
-  /////////////////////////////////////////////////////////////////////////
 
-  // functio for edit the page //////////////////////////////////////
-  const editPage = (
-    id: number,
-    items: any,
-    setItems: any,
-    newTitle: string,
-    newParagraph: string,
-    newSymbol: any
-  ) => {
-    const newEditPage = items.map((item: any) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          title: newTitle,
-          paragraph: newParagraph,
-          symbole: newSymbol,
-        };
-      }
+  useEffect(() => {
+    const fetchPages = async () => {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:3001/api/jurnal/user/${userId}`
+        );
+        setLoadedPages(responseData.pages);
+      } catch (err) {}
+    };
 
-      return item;
-    });
-    setItems(newEditPage);
-    localStorage.setItem("userWirtingData", JSON.stringify(newEditPage));
-    console.log(newEditPage, "newEditPage");
-  };
+    fetchPages();
+  }, [sendRequest, userId, editPageHandler]);
+
+  useEffect(() => {
+    const fetchPage = async () => {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:3001/api/jurnal/${pageId}`
+        );
+        console.log(responseData.page, "page from user context!!!");
+        setSinglePage(responseData.page);
+      } catch (err) {}
+    };
+    fetchPage();
+  }, [pageId, sendRequest, editPageHandler]);
 
   const value = {
     userWirtingData,
@@ -106,8 +185,11 @@ export const UserPageContextProvider = ({
     setTextAreaVlaue,
     resetInputValue,
     resetTextAreaValue,
-    deletePage,
-    editPage,
+    pageId: pageId,
+    getPageId: setPageIdHandler,
+    singlePage,
+    updatePage: editPageHandler,
+    loadedPages,
   };
   return (
     <UserPageContext.Provider value={value}>
