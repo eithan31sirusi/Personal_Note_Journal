@@ -1,8 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 
-import { useHistory, useParams } from "react-router-dom";
-import { useHttpClient } from "../../../hooks/http-hook";
-
 import GreenWaxBtn from "../../../assets/svg/buttons/GreenWaxBtn";
 import RedWaxBtn from "../../../assets/svg/buttons/RedWaxBtn";
 import { FlexContainer } from "../../layout/FlexContainer";
@@ -30,27 +27,39 @@ const EditPageForm: React.FC<EditPageFormProps> = ({
   onApproval,
   onCencel,
 }) => {
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
-
   const { selectedValue, setSelectedValue } = useContext(SelectDropDwonContext);
-  const { pageId, singlePage, setTextAreaVlaue, setInputValue, updatePage } =
+  const { loadedPages, pageId, setTextAreaVlaue, setInputValue } =
     useContext(UserPageContext);
 
   const [pageSimbole, setPageSimbole] = useState<any>("");
 
-  useEffect(() => {
-    setInputValue(singlePage?.title);
-    setTextAreaVlaue(singlePage?.description);
-    setSelectedValue(singlePage?.pageSymbol);
+  /*   useEffect(() => {
+    loadedPages &&
+      loadedPages.map((page: any) => {
+        setInputValue(page?.title);
+        setTextAreaVlaue(page?.description);
+        setSelectedValue(page?.pageSymbol);
+
+        return page;
+      });
   }, [
-    pageId,
-    singlePage?.description,
     setTextAreaVlaue,
     setSelectedValue,
-    singlePage?.pageSymbol,
-    singlePage?.title,
     setInputValue,
-  ]);
+    loadedPages,
+  ]); */
+  useEffect(() => {
+    loadedPages &&
+      loadedPages
+        .filter((item: any, index: any) => item.id === pageId)
+        .map((page: any) => {
+          setInputValue(page?.title);
+          setTextAreaVlaue(page?.description);
+          setSelectedValue(page?.pageSymbol);
+
+          return page;
+        });
+  }, [setTextAreaVlaue, setSelectedValue, setInputValue, loadedPages, pageId]);
 
   useEffect(() => {
     outPutSelectedSVG(selectedValue, setPageSimbole, false);
@@ -60,7 +69,7 @@ const EditPageForm: React.FC<EditPageFormProps> = ({
     <EditPageFormContainer>
       <FlexContainer flexDir="column" flexY="start" flexX="space-around">
         <CustomInput
-          placeholder={singlePage?.title}
+          placeholder={loadedPages?.title}
           setBorder={true}
           bgColor="rgba(50,50,50,0.6)"
           setFocusBorderColor={true}

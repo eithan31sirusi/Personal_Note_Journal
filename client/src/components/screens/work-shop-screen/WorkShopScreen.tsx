@@ -33,7 +33,7 @@ const WorkShop: React.FC<IProps> = ({}) => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const { userId } = useContext(AuthContext);
-  console.log(userId, "workkkkkkks");
+  console.log(userId, "current user id");
 
   // use the context to get the value of the context with type script
   const { isModalOpen, setIsModalOpen } = useContext(ModalContext);

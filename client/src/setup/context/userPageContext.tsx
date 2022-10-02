@@ -94,28 +94,11 @@ export const UserPageContextProvider = ({
     setPageId(pageId);
   }, []);
 
-  // function for geeting all pages from the database with userId
-  const getAllPages = useCallback(
-    async (userId: string) => {
-      try {
-        const response = await sendRequest(
-          `http://localhost:3001/api/jurnal/${userId}`
-        );
-        setUserWirtingData(response.pages);
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    [sendRequest]
-  );
-
   const editPageHandler = useCallback(
     async (event: any, title: string, description: string, pageSymbol: any) => {
       event.preventDefault();
-      console.log("1");
 
       try {
-        console.log("2");
         await sendRequest(
           `http://localhost:3001/api/jurnal/${pageId}`,
           "PATCH",
@@ -128,18 +111,13 @@ export const UserPageContextProvider = ({
             "Content-Type": "application/json",
           }
         );
-        console.log("3");
-        setInputValue("");
-        setTextAreaVlaue("");
-        setSelectedValue("");
       } catch (err) {
         console.log(err);
       }
-      console.log("4");
+      history.push("/workshop");
     },
-    [pageId, sendRequest, setSelectedValue]
+    [sendRequest, pageId, history]
   );
-
 
   // function to reset the input value
   const resetInputValue = () => {
@@ -156,14 +134,16 @@ export const UserPageContextProvider = ({
         const responseData = await sendRequest(
           `http://localhost:3001/api/jurnal/user/${userId}`
         );
+
         setLoadedPages(responseData.pages);
+        console.log("getting pages!", responseData.pages);
       } catch (err) {}
     };
 
     fetchPages();
-  }, [sendRequest, userId, editPageHandler]);
+  }, [sendRequest, userId, setLoadedPages]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const fetchPage = async () => {
       try {
         const responseData = await sendRequest(
@@ -174,7 +154,7 @@ export const UserPageContextProvider = ({
       } catch (err) {}
     };
     fetchPage();
-  }, [pageId, sendRequest, editPageHandler]);
+  }, [sendRequest, pageId]); */
 
   const value = {
     userWirtingData,

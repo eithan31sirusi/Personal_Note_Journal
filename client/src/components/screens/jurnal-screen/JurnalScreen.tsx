@@ -55,16 +55,11 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
   //state for the modal
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // state for the loaded pages
-
   let history = useHistory();
 
-  // function for delete the page
   const openModal = () => {
     setIsModalOpen(true);
   };
-
-  // use effect to load the data from the server
 
   // use effect to extract pageId from loadedPaes
   useEffect(() => {
@@ -83,8 +78,6 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
     } else {
       setIsArrowBtn("");
     }
-
-    console.log(loadedPages, "loadedPages");
   }, [currentPageNumber, loadedPages]);
 
   return (
@@ -103,7 +96,6 @@ const JurnalScreen: React.FC<IProps> = ({}) => {
                       updatePage &&
                         updatePage(e, inputValue, textAreaVlaue, selectedValue);
                       setIsModalOpen(false);
-                      history.push(`/workshop`);
                     }}
                     onCencel={() => {
                       if (!textAreaVlaue) {

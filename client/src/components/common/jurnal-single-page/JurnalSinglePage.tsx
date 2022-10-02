@@ -55,7 +55,6 @@ const JurnalSinglePage: React.FC<IProps> = ({
           <p className="current-page">{pageNumber}</p>
         </PageContainer>
       </div>
-      ;
     </FlipBookContainer>
   );
 };
