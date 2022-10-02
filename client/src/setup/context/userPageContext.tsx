@@ -114,9 +114,16 @@ export const UserPageContextProvider = ({
       } catch (err) {
         console.log(err);
       }
-      history.push("/workshop");
+      try {
+        const newLoadedPages = await sendRequest(
+          `http://localhost:3001/api/jurnal/user/${userId}`
+        );
+
+        setLoadedPages(newLoadedPages.pages);
+        console.log("getting new pages!", newLoadedPages.pages);
+      } catch (err) {}
     },
-    [sendRequest, pageId, history]
+    [sendRequest, pageId, userId, setLoadedPages]
   );
 
   // function to reset the input value
